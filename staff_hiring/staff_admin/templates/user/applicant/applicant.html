@@ -1,0 +1,388 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'base/header.html'%}
+<div class="admin-inner-panel">
+<div class="admin-inner-left">
+   {% include 'base/navbar.html' %}
+</div>
+<div class="admin-inner-right">
+<div class="card">
+<div class="card-body ">
+<h4 class="card-title"> User Management / Applicant / List</h4>
+
+
+
+  <div class="loader text-center" style="margin:auto; display:none; position: absolute; left: 45%;top: 30%;">
+         <img src="{% static '/media/loader2.gif' %}"  width="30px" height="30px"/>
+      </div>
+
+<div class="d-flex">
+  <div>
+    {% if perms.staff_admin.add_user%}
+  <a href="/admin/applicant/add/"
+    class="btn btn-inverse-dark btn-fw"> Create </a>
+  {% endif %}
+  </div>
+  
+  <div class="ml-auto">
+    <div class="input-group ml-auto">
+    <form class="search-form search-form-in" action="/admin/app_search/" method="GET">
+        {% csrf_token %}
+        <input type="search" class="form-control" name="Q_app" placeholder="Search Here" title="Search here">
+        <br>
+        <button class="btn btn-inverse-success btn-fw" > search </button>
+        <a class="btn btn-inverse-danger btn-fw" href="/admin/applicant/">reset</a>
+    </form>
+  </div>
+  </div>
+</div>
+
+<div class="table-responsive">
+
+<table class="table">
+<thead>
+   <tr>
+      <th>  Sr no.      </th>
+      <th>  First name      </th>
+      <th>  Last name      .</th>
+      <th>  Email      </th>
+      <th> Mobile number     </th>
+      <th> Address     </th>
+      <th>  Status      </th>
+      <th>  Action      </th>
+   </tr>
+</thead>
+
+{% if users %}
+<tbody>
+   {% for user in users %}
+   <tr>
+      <td> 
+         {{forloop.counter0|add:users.start_index}}
+      </td>
+      {% comment %} <td>{{user.id }}</td> {% endcomment %}
+      <td>
+         {{user.fname}}
+      </td>
+      <td>
+         {{user.lname}}
+      </td>
+      <td>
+         {{user.email|truncatechars:15}}
+      </td>
+      <td>
+         {{user.mobile_number}}
+      </td>
+      <td>
+         {{user.address|truncatechars:15}}
+      </td>
+      <td>
+         <form style="width:100px;" id="select_id" method="POST">
+            {% csrf_token %}
+            <select style="font-size:15px;" id="status_{{user.id}}" name="status_applicant" class="form-select badge badge-info status"
+               aria-label="Default select example" onchange="select_applicant('status_{{user.id}}','{{user.id}}')">
+               <option style="font-size:15px;" selected disabled> Select Option </option>
+               <option style="font-size:15px;" value="0" {% if user.user_status == 0%} selected {% endif %}>Accepted</option>
+               <option style="font-size:15px;" value="1" {% if user.user_status == 1%} selected {% endif %}>Rejected</option>
+            </select>
+         </form>
+      </td>
+    
+      <td>                                                  
+         {% if perms.staff_admin.view_user%}
+         <a class="btn btn-inverse-success btn-fw" href="/admin/applicant/view/{{user.slug}}">View</a> 
+         {% endif %}
+         {% if perms.staff_admin.change_user%}
+         <a class="btn btn-inverse-info btn-fw"
+            href="/admin/applicant/edit/{{user.slug}}">Edit</a>
+         {% endif %}
+         {% if perms.staff_admin.delete_user%}
+         <a class="btn btn-inverse-danger btn-fw"
+            href="/admin/applicant/del/{{user.id}}" onclick="return confirm('Are you sure you want to delete this item')" >Delete</a>
+         {% endif %}
+         <a class="btn btn-inverse-primary btn-fw"
+            href="/admin/applicant_detail_list/{{user.slug}}">Generate Pdf</a>
+      </td>
+      {% endfor %}
+
+      </tbody>
+      {% else %}
+            <tbody>
+               
+               <tr>
+                  
+                  <td style="justify-content: center;"> 
+                     
+               </td>
+               <td style="justify-content: center;"> 
+                  
+               </td>
+               <td style=""> 
+                  
+               </td>
+               <td style="justify-content: center; ">
+                  {% if u %}
+                  <h3 style="color:lightgrey">{{u}}</h3>
+
+                  {% else %}
+                    <h3 style="color:lightgrey">No data found</h3>
+
+                  {% endif %}
+               </td>
+                  <td > 
+                  
+               </td>
+               </tr>
+         
+      </tbody> 
+                  {% endif %}
+
+            </table>
+                     {% if users.has_other_pages %}
+                    <ul class="pagination" style=" float: right; ">
+                      {% if users.has_previous %}
+                        <li style="margin-right:10px "><a href="?page={{ users.previous_page_number }}"> Previous </a></li>
+                      {% else %}
+                        <li style="margin-right:10px " class="disabled"><span>Previous</span></li>
+                      {% endif %}
+                      {% comment %} {% for i in users.paginator.page_range %}
+                        {% if users.number == i %}
+                          <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                        {% else %}
+                          <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                      {% endfor %} {% endcomment %}
+                      {% if users.has_next %}
+                        <li style="margin-right:10px;  "><a href="?page={{ users.next_page_number }}">Next</a></li>
+                      {% else %}
+                        <li style="margin-right:10px  " class="disabled"><span style="">Next</span></li>
+                      {% endif %}
+                    </ul>
+                  {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+      <script>
+         
+         function select_applicant(id, user_id) {
+
+            $('.loader').show();
+
+           let p = $('#' + id).val();
+           let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+           // $('#select_id').submit();
+           $.ajax({
+             type: "POST",
+             url: "/admin/applicant_user_ajax/" + user_id,
+             headers: { 'X-CSRFToken': csrftoken },
+             
+             data:
+             {
+               select: p ,
+         
+             },
+             success: function (res) {
+                 toastr.success(res.message);
+                  $('.loader').hide();
+             },
+         
+           });
+           
+           // $(this).parent('div').parent('#select_id').submit();
+           // alert(p) 
+         
+         
+         }
+      </script>
+      <script>
+         setTimeout(() => {
+           $('.alert').fadeOut('fast');
+         }, 3000);
+      </script>
+      <style>
+         #toast-container>.toast-success {
+         content: "\f00C";
+         margin-top: 110px;
+         background-color: green;
+         font-size: 15px;
+         }
+      </style>
+      {% comment %} 
+      <div class="container-fluid">
+      <div class="row">
+         <div class="col-md-2" style="margin-top:95px ;">
+            {% include 'base/navbar.html' %}
+         </div>
+         <div class="col-md-10" style="margin-top:120px ;">
+            <div class="card">
+               <div class="card-body">
+                  <h4 class="card-title">Applicant User Table</h4>
+                  <h3 style="color:red">{{u}}</h3>
+                  {% if messages %}
+                  <div class="table-responsive">
+                     {% for message in messages %}
+                     {% if message.tags == 'success'%}
+                     <div class="alert alert-success">
+                        {{message}}
+                        {% elif message.tags == 'error' %}
+                        <div class="alert alert-danger">
+                           {{message}}
+                           {% endif %}
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        {% if perms.staff_admin.add_user%}
+                        <a href="/admin/applicant/add/"
+                           class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                           style="text-align: right; margin-left: 1300px;"> Create </a>
+                        {% endif %}
+                        <div class="input-group">
+                           <form class="search-form" action="/admin/app_search/" method="GET">
+                              {% csrf_token %}
+                              <input type="search" class="form-control" name="Q_app" placeholder="Search Here" title="Search here">
+                              <br>
+                              <button class="btn btn-success"> search </button>
+                              <a class="btn btn-primary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                                 href="/admin/applicant/">reset</a>
+                           </form>
+                           <table class="table table-striped" style="margin-top: 30px;">
+                              <thead>
+                                 <tr>
+                                    <th>
+                                       Sr No.
+                                    </th>
+                                    <th>
+                                       First name
+                                    </th>
+                                    <th>
+                                       Last name
+                                    </th>
+                                    <th>
+                                       Email
+                                    </th>
+                                    <th>
+                                       Moblie Number
+                                    </th>
+                                    <th>
+                                       Address
+                                    </th>
+                                    <th>
+                                       Status
+                                    </th>
+                                    <th>
+                                       Action                  
+                                    </th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 {% for user in app_user %}
+                                 {% if user.soft_del_status == 0 %}
+                                 <tr>
+                                    <td >
+                                       {{forloop.counter}}
+                                    </td>
+                                    <td>
+                                       {{user.first_name}}
+                                    </td>
+                                    <td>
+                                       {{user.last_name}}
+                                    </td>
+                                    <td>
+                                       {{user.email}}
+                                    </td>
+                                    <td>
+                                       {{user.mobile_number}}
+                                    </td>
+                                    <td>
+                                       {{user.address|truncatechars:15}}
+                                    </td>
+                                    <td>
+                                       <form id="select_id" method="POST">
+                                       {% csrf_token %}
+                                       <select id="status_{{user.id}}" name="status_applicant" class="form-select status"
+                                          aria-label="Default select example" onchange="select_applicant('status_{{user.id}}','{{user.id}}')">
+                                          <option selected disabled> Select Option </option>
+                                          <option value="0" {% if user.user_status == 0%} selected {% endif %}>Accepted</option>
+                                          <option value="1" {% if user.user_status == 1%} selected {% endif %}>Rejected</option>
+                                       </select>
+                                    </td>
+                                    <td>                                                  
+                                       {% if perms.staff_admin.view_user%}
+                                       <a class="btn btn-info btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u " href="/admin/applicant/view/{{user.id}}">View</a> 
+                                       {% endif %}
+                                       {% if perms.staff_admin.change_user%}
+                                       <a class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                                          href="/admin/applicant/edit/{{user.slug}}">Edit</a>
+                                       {% endif %}
+                                       {% if perms.staff_admin.delete_user%}
+                                       <a class="btn btn-danger btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                                          href="/admin/applicant/del/{{user.id}}" onclick="return confirm('Are you sure you want to delete this item')" >Delete</a>
+                                       {% endif %}
+                                       <a class="btn btn-primary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                                          href="/admin/applicant_user_data_pdf/{{user.id}}">Generate Pdf</a>
+                                    </td>
+                                    </td>
+                        </div>
+                        </tr>
+                        {% else %}
+                        {% endif %}
+                        {% endfor %}
+                        </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script>
+         function select_applicant(id, user_id) {
+           let p = $('#' + id).val();
+           let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+           // $('#select_id').submit();
+           $.ajax({
+             type: "POST",
+             url: "/admin/applicant_user_ajax/" + user_id,
+             headers: { 'X-CSRFToken': csrftoken },
+             
+             data:
+             {
+               select: p ,
+         
+             },
+             success: function (res) {
+                 toastr.success(res.message);
+             },
+         
+           });
+           
+           // $(this).parent('div').parent('#select_id').submit();
+           // alert(p) 
+         
+         
+         }
+      </script>
+      <script>
+         setTimeout(() => {
+           $('.alert').fadeOut('fast');
+         }, 3000);
+      </script>
+      <style>
+         #toast-container>.toast-success {
+         content: "\f00C";
+         margin-top: 110px;
+         background-color: green;
+         font-size: 15px;
+         }
+      </style>
+      {% endcomment %}
+      {% endblock content %}

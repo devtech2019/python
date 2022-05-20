@@ -1,0 +1,117 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+
+{% include 'base/header.html'%}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2" style="margin-top:95px ;">
+            {% include 'base/navbar.html' %}
+
+        </div>
+        <div class="col-md-10" style="margin-top:120px ;">
+            <div class="card">
+
+                <div class="card-body">
+                    <h4 class="card-title">Edit Web App Intro </h4>
+                  
+                            {% comment %} {% if perms.staff_admin.add_global_setting %} {% endcomment %}
+
+                            {% comment %} <a href="/admin/global/add/"
+                                class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                                style="text-align: right; margin-left: 1300px;"> Create </a>
+                                {% endif %} {% endcomment %}
+                            <table class="table table-striped" style="margin-top: 30px;">
+
+
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Sr No.
+                                        </th>
+                                        <th>
+                                            titel
+                                        </th>
+                                        <th>
+                                            Image
+                                        </th>
+                                       
+                                       
+                                      
+                                        <th>
+                                            discription
+                                        
+                                        </th>
+
+                                        <th>
+                                            Action
+
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for i in intro %}
+
+
+
+                                    <tr>
+
+                                        <td>
+                                            {{ forloop.counter }}
+                                        </td>
+                                        <td>
+                                            {{i.title}}
+
+
+                                        </td>
+                                        <td>
+                                            <img src="/media/{{i.image}}" style="height:auto" alt="">                                     
+                                   </td>
+                                       
+                                        
+                                        <td>
+                                            {{i.textarea|safe|truncatechars:15 }}
+                                        </td>
+
+                                        <td>
+                                    
+
+                                            <a class="btn btn-inverse-info btn-fw"
+                                                href="/admin/introduction/edit/{{i.slug}}">Edit</a> 
+                                       
+                                    
+                                             {% comment %} <a class="btn btn-danger btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                                                href="/admin/global_setting/del/{{global_setting.slug}}"
+                                                onclick="return confirm('Are you sure you want to delete this item')">Delete</a> {% endcomment %}
+                                              
+                                        </td>
+
+
+                                    </tr>
+                               
+                                    {% endfor %}
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+<script>
+    setTimeout(() => {
+        $('.alert').fadeOut('fast');
+    }, 3000);
+</script>
+
+
+
+    {% endblock content %}

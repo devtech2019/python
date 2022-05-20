@@ -1,0 +1,178 @@
+{% extends 'basefile/base.html' %}
+{% load static %}
+{% block content %}
+
+   <div class="wrapper-inner bg-sky">
+    
+      <section class="forms_content_sec from-wrap ptb">
+         <div class="container">
+            <div class="head-line-sd">
+               <h2>Enter your company information</h2>
+            </div>
+            <div class="form-box-out">
+               <form method="POST">
+                 {% csrf_token %}
+                  <div class="row">
+                       <div class="col-md-12">
+                         <div class="form-group">
+                           <label class="form-label">Company Name</label>
+                            <input type="hidden" value="{{company.user_slug}}" name="userid"class="form-control" placeholder="Lorem lipsum">
+
+                           <input type="text" value="{{company.name}}" name="Cname"class="form-control" placeholder="Lorem lipsum">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">Phone Number </label>
+                           <input type="text" value="{{company.phone_number}}" name="mob_num"class="form-control" placeholder="+91 23456 5678">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">Fax</label>
+                           <input type="text" value="{{company.fax}}" name="fax"class="form-control" placeholder="Enter fax">
+                         </div>
+                       </div>
+                       <div class="col-md-12">
+                         <div class="form-group">
+                           <label class="form-label">Email address</label>
+                           <input type="email" disabled value="{{company.email}}" name="email" class="form-control" placeholder="demo@gmail.com">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">Register Company Address</label>
+                           <input id="autocom" value="{{company.address}}" type="text" name="address"  class="form-control" placeholder="Enter register company address">
+                         </div>
+                       </div>
+                        {% comment %} <div  class="col-md-6">
+                          <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">Country</label>
+
+            
+                          <select onchange="select_country()" id="country" name="country" class="form-select"
+                              aria-label="Default select example">
+                              <option selected disabled> Select Option </option>
+                              {% for i in country %}
+                              <option value="{{i.id}}">{{i.name}}</option>
+
+                              {% endfor %}
+                  
+                          </select>
+                        </div>
+                      </div>
+                         <div  class="col-md-6">
+                          <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">State</label>
+
+            
+                         <select id="state" onchange="select_state_id()" name="state" class="form-select" aria-label="Default select example">
+                                    <option selected disabled> Select Option </option>
+                                    <option value="0"></option>
+                                </select>
+                        </div>
+                      </div>
+                         <div  class="col-md-6">
+                          <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">City</label>
+
+            
+                          <select id="city" onchange="select_city_id()" name="city" class="form-select"
+                                    aria-label="Default select example">
+                                    <option selected disabled> Select Option </option>
+                                    <option value="0"></option>
+                                </select>
+                        </div>
+                      </div> {% endcomment %}
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">Number of year in business</label>
+                           <input type="text" value="{{company.year_of_business}}" name="year_in_bussiness" class="form-control" placeholder="Enter number of year in business">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">Sole proprietorship</label>
+                           <input type="text" value="{{company.solo}}" name="sole_proprietorship" class="form-control" placeholder="Enter sole proprietorship">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">Partnership</label>
+                           <input type="text" value="{{company.partnership}}" name="partnership" class="form-control" placeholder="Enter partnership">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">Corporation</label>
+                           <input type="text" value="{{company.corporation}}" name="corporation" class="form-control" placeholder="Enter corporation">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">Other</label>
+                           <input type="text" value="{{company.other}}" name="other" class="form-control" placeholder="Enter other">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">Tax</label>
+                           <input type="text" value="{{company.tax}}" name="tax" class="form-control" placeholder="Enter tax">
+                         </div>
+                       </div>
+                       <div class="col-md-12">
+                           <div class="text-center mt-3">
+                               <button type="submit" class="btn">Submit</button>
+                           </div>
+                       </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </section>
+
+   </div>
+
+{% include "footer.html" %}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlljhS4LLf_864PqbvXtDGXver091jLiI&callback=initMap&libraries=places&v=weekly" async></script>
+
+<script>
+    function initMap()
+    {
+      var input = document.getElementById('autocom');
+      var options =     {
+              types: ['geocode']
+              
+          
+          };
+        var input= document.getElementById('autocom')
+        autocomplete = new google.maps.places.Autocomplete(input, options);
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var place = autocomplete.getPlace();
+        
+        let lat = place.geometry.location.lat()
+        let long = place.geometry.location.lng()
+        console.log(lat,long )
+        $('#latitude').val(lat);
+        $('#longitude').val(long);
+       
+      
+            //alert("This function is working!");
+            //alert(place.name);
+           // alert(place.address_components[0].long_name);
+
+        });
+       //var place = autocomplete.getPlace();
+        //console.log(autocomplete ,'dddddd')
+        //document.getElementById('autocom').value = place.geometry.location.lat();
+
+    }
+    
+   
+</script>
+<script>
+  setTimeout(() => {
+    $('.alert').fadeOut('fast');
+  }, 3000);
+</script>
+{% endblock content %}

@@ -1,0 +1,93 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'base/header.html'%}
+
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-lg-2" style="margin-top:97px ;">
+            {% include 'base/navbar.html' %}
+        </div>
+
+        <div class="col-lg-10" style="margin-top:120px ;">
+
+            <div class="table-responsive">
+                {% for message in messages %}
+
+                <div class="alert alert-primary">
+                    {{message}}
+
+                </div>
+                {% endfor %}
+                <form action="" id="formss" method="POST" >
+
+                    {% csrf_token %}
+
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Add email Details</h4>
+
+                            <div class="col-md-6">
+
+                               
+
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 col-form-label">
+                                         Name </label>
+                                    <div class="col-lg-9 col-xl-9">
+
+                                        <input class="form-control" type="text" value="" name="name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 col-form-label">
+                                        Subjects </label>
+                                    <div class="col-lg-9 col-xl-9">
+                                        <input class="form-control" type="text" value="" name="subject">
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row">
+
+
+                                    <label class="col-xl-3 col-lg-3 col-form-label">
+                                        Content  </label>
+                                    <div class="col-lg-9 col-xl-9">
+
+                                            <input class="form-control" type="text" value="" name="content">
+                                       
+
+                                        <!--  -->
+                                        <!-- <input type="submit" class="btn" value="Verify" /> -->
+                                    </div>
+                                </div>
+                                <div class="kt-form__actions" style="margin-left: 350px; margin-top: 40px;">
+                                
+                                    <button class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u">Submit</button>
+                                
+                                
+                                </div>
+                                 <div class="form-group row">
+         
+
+                            </div>
+                           
+
+
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    </head>
+    {% endblock content %}

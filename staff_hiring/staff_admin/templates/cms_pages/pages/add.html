@@ -1,0 +1,131 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'base/header.html'%}
+
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-lg-2" style="margin-top:97px ;">
+            {% include 'base/navbar.html' %}
+        </div>
+
+        <div class="col-lg-10" style="margin-top:120px ;">
+            <div class="table-responsive">
+                {% for message in messages %}
+
+                <div class="alert alert-primary">
+                    {{message}}
+
+                </div>
+                {% endfor %}
+
+                <form action="" id="termcondition" method="POST">
+
+                    {% csrf_token %}
+
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Add term and condition </h4>
+                            <div class="col-md-6">
+
+                                <input class="form-control" type="hidden" value="" name="id">
+
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 col-form-label">
+                                    Title </label>
+                                    <div class="col-lg-9 col-xl-9">
+
+                                        <input class="form-control" type="text" value="" name="title">
+                                    </div>
+                                </div>
+                                <!-- <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 col-form-label">
+                                        Slug </label>
+                                    <div class="col-lg-9 col-xl-9">
+                                        <input id="email" class="form-control" type="email" value="" name="email">
+                                    </div>
+                                </div> -->
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 col-form-label">
+                                        Content </label>
+                                    <div class="col-lg-9 col-xl-9">
+                                     <textarea name="editor"></textarea>
+                                   
+                                    </div>
+                                </div>
+                                <!-- <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 col-form-label">
+                                        is_deleted </label>
+                                    <div class="col-lg-9 col-xl-9">
+                                        <input class="form-control" type="text" value="" name="address">
+                                    </div>
+                                </div> -->
+                                <div class="form-group row">
+                                    <!-- <label style="padding-top:30px; " for="cars">Choose a User</label> -->
+                                    <!-- <div class="col-lg-9 col-xl-9">
+                                        <input class="form-control" type="hidden" value="employer" name="emp">
+
+
+                                    </div> -->
+                                </div>
+                                <!-- <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">
+                   Applicant user	</label>
+                <div class="col-lg-9 col-xl-9">
+                    <input type="checkbox" id="check" name="app"
+                    >
+                </div>
+            </div> -->
+
+                            </div>
+                            <div class="kt-form__actions" style="margin-left: 350px; margin-top: 40px;">
+
+                                <button
+                                    class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u">Submit</button>
+
+
+                            </div>
+
+{{u.title}}
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+    <!-- <script>
+    
+        $("#email").blur(function () {
+            let p = $('#email').val();
+            let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            console.log(p)
+               
+          $.ajax({
+               type: "POST",
+               url: "/admin/emp_add_userdata/" ,
+                headers: { 'X-CSRFToken': csrftoken },
+                 data: {
+                     select: p,
+                      },
+          })
+
+        }); -->
+<script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('editor');
+</script>
+
+
+    <!-- </script> -->
+
+    {% endblock content %}

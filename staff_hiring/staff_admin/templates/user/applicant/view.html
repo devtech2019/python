@@ -1,0 +1,220 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'base/header.html'%}
+
+
+<body style="background:#f4f5f7">
+<div class="admin-inner-panel">
+    <div class="admin-inner-left">
+        {% include 'base/navbar.html' %}
+    </div>
+<div class="admin-inner-right">
+        {% for message in messages %}
+        <div class="alert alert-primary">
+            {{message}}
+        </div>
+        {% endfor %}
+
+            <form action="" id="formss" method="POST">
+
+                {% csrf_token %}
+
+
+                <div class="card" style="width:95%;">
+                    <div class="card-body">
+
+                        <h4 class="card-title">User Management / Applicant / View</h4>
+                        <div class="col-md-12">
+                            <div class="row">
+
+
+
+                                <input class="form-control" type="hidden" value="{{app_user.slug}}" name="slug" readonly>
+
+
+                                <input class="form-control" type="hidden" value="{{app_user.id}}" name="id">
+
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        First Name </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                
+                                        <input class="form-control" type="text" value="{{app_user.fname}}" name="FName" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Last Name </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                
+                                        <input class="form-control" type="text" value="{{app_user.lname}}" name="LName" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Email </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input readonly class="form-control" type="email" value="{{app_user.email}}" name="email" readonly>
+                                    </div>
+                                </div>
+                               
+                               
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Mobile Number </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                    <input type="tel"  value="{{app_user.mobile_number}} " readonly placeholder="Enter Mobile Number" id="phone_cus_register" class="form-control"
+                                        onblur="test()" pattern="[0-9]+"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength=14>
+                                    <input type="hidden" hidden name="co11" id="co11" value="" >
+                                    <input type="text" id="phone1_cus_register" value="" name="phone" hidden>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Job Position </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input readonly class="form-control"  value="{{app_user.position.name}}" readonly >
+                                    </div>
+                                </div>
+                                
+                                    <div class="form-group row">
+                                        <label class="col-xl-2 col-lg-2 col-form-label">
+                                            Experince (Year & month) </label>
+                                        <div class="col-lg-5 col-xl-5">
+                                            <input class="form-control" placeholder=" 2 year" type="text" value="{{app_user.exp_year }}" readonly>
+                                        </div>
+                                         <div class="col-lg-5 col-xl-5">
+                                            <input class="form-control" placeholder=" 2 year" type="text" value="{{app_user.exp_month }}" readonly>
+                                        </div>
+                                    
+                                       
+                                    </div>
+                        <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Country </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input readonly class="form-control" type="email" value="{{app_user.country}}" readonly>
+                                    </div>
+                                </div>
+                        {% comment %} <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        State </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input readonly class="form-control" type="text" value="{{app_user.state}}" readonly>
+                                    </div>
+                                </div>  {% endcomment %}
+
+                        <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        City </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input readonly class="form-control" type="email" value="{{app_user.city}}" readonly>
+                                    </div>
+                                </div> 
+                        <div class="form-group row">
+                            <label class="col-xl-2 col-lg-2 col-form-label">
+                                Postal Code </label>
+                            <div class="col-lg-10 col-xl-10">
+                                <input onchange="select_postal_code()" placeholder="indra nagar jaipur" id="Postal_code" class="form-control" readonly
+                                    type="text" value="{{app_user.post_code}}" name="Postal_code">
+                            </div>
+                        </div> 
+                        <div class="form-group row">
+                            <label class="col-xl-2 col-lg-2 col-form-label">
+                                Address </label>
+                            <div class="col-lg-10 col-xl-10">
+                                <input placeholder="indra nagar jaipur" id="address" class="form-control" type="text"
+                                    value="{{app_user.address}}" name="address" readonly>
+                            </div>
+                        </div>
+                                <div class="form-group row">
+                                    <!-- <label class="col-xl-3 col-lg-3 col-form-label">
+                   usertype	</label> -->
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input class="form-control" type="hidden" value="{{app_user.roll}}" name="app">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+
+            </form>
+
+
+{% endblock content %}
+
+{% comment %} <div class="admin-inner-panel">
+  <div class="admin-inner-left">{% include 'base/navbar.html' %}</div>
+  <div class="admin-inner-right">
+    <table class="table">
+      <h3> Applicant View Details </h3>
+      <br>
+      <thead>
+        <tr>
+          <th scope="col">Sr No.</th>
+          <td>1</td>
+        </tr>
+        <tr>
+          <th scope="col">First name</th>
+          <td>{{app_user.first_name}}</td>
+        </tr>
+        <tr>
+          <th scope="col">Last name</th>
+          <td>{{app_user.last_name}}</td>
+        </tr>
+        <tr>
+          <th scope="col">Email</th>
+          <td>{{app_user.email}}</td>
+        </tr>
+        <tr>
+          <th scope="col">mobile number</th>
+          <td>{{app_user.mobile_number}}</td>
+        </tr>
+        <tr>
+          <th scope="col">Job Position</th>
+            <td>{{app_user.position.name}}</td>
+        </tr>
+          <tr>
+          <th scope="col">Experince Year</th>
+             <td>{{app_user.exp_year}}</td>
+        </tr>
+          <tr>
+          <th scope="col">Experince month</th>            
+           <td>{{app_user.0.exp_month}}</td>
+        </tr>
+        <tr>
+          <th scope="col">Country</th>
+          <td>{{app_user.0.country.name}}</td>
+        </tr>
+        <tr>
+          <th scope="col">State</th>
+          <td>{{app_user.0.state.name}}</td>
+        </tr>
+        <tr>
+          <th scope="col">City</th>
+          <td>{{app_user.0.city.name}}</td>
+        </tr>
+        <tr>
+          <th scope="col">Postal Code</th>
+          <td>{{app_user.0.post_code}}</td>
+        </tr>
+        <tr>
+          <th scope="col">Address</th>
+          <td>{{app_user.0.address}}</td>
+        </tr>
+      </thead>
+      
+    </table>
+  </div>
+</div> {% endcomment %}
+
+
+
+
+
+
+

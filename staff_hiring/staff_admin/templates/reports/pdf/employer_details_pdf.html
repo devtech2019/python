@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+  text-align: left;
+}
+</style>
+</head>
+
+<body>
+  
+<table>
+  <h2>Employer Pdf details </h2>
+  <thead>
+    <tr>
+    <th>First Name:</th>
+    <td>{{emp_user.fname}}</td>
+  </tr>
+   <tr>
+    <th>Last Name:</th>
+    <td>{{emp_user.lname}}</td>
+  </tr>
+   <tr>
+    <th>Country code</th>
+    <td>{{emp_user.country_code}}</td>
+  </tr>
+   <tr>
+    <th>Mobile number</th>
+    <td>{{emp_user.mobile_number}}</td>
+  </tr>
+   <tr>
+    <th>Address</th>
+    <td>{{emp_user.address}}</td>
+  </tr>
+   <tr>
+    <th>Status</th>
+    {% if emp_user.user_status == False %}      
+        <td data-column="First Name" style="color:green">Accepted</td>
+        {% else %}
+          <td data-column="First Name" style="color:red">Rejected</td>
+          {% endif %}
+  </tr>
+   <tr>
+    <th>Company name</th>
+    <td>{{c.name}}</td>
+  </tr>
+  <tr>
+    <th>Company Phone number</th>
+    <td>{{c.phone_number}}</td>
+  </tr>
+  <tr>
+    <th>Company fax</th>
+    <td>{{c.fax}}</td>
+  </tr>
+  <tr>
+    <th>Company email</th>
+    <td>{{c.email}}</td>
+  </tr>
+    <tr>
+    <th>Company address</th>
+    <td>{{c.address}}</td>
+  </tr>
+    <tr>
+    <th>Company Year of business</th>
+    <td>{{c.year_of_business}}</td>
+  </tr>
+  {% if c.partnership == "1" %}
+    <tr>
+    <th>Solo</th>
+    <td>{{c.about_company}}</td>
+  </tr>
+{% elif c.partnership == "2" %}
+
+    <tr>
+    <th>Partnership</th>
+    <td>{{c.about_company}}</td>
+  </tr>
+  {% else %}
+    <tr>
+    <th>Corporation</th>
+    <td>{{c.about_company}}</td>
+  </tr>
+  {% endif %}
+    <tr>
+    <th>Other</th>
+    <td>{{c.other}}</td>
+  </tr>
+   <tr>
+    <th>Tax</th>
+    <td>{{c.tax}}</td>
+  </tr>
+
+
+
+   
+                                {% comment %} <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                      Sole proprietorship</label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input readonly class="form-control" type="text" value="{{c.about_company}}"
+                                            name="FName">
+                                    </div>
+                                </div>
+                                 <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                     Partnership</label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input readonly class="form-control" type="text" value="{{c.about_company}}"
+                                            name="FName">
+                                    </div>
+                                </div>
+                                {% else %}
+                                 <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                     Corporation</label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input readonly class="form-control" type="text" value="{{c.about_company}}"
+                                            name="FName">
+                                    </div>
+                                </div>
+                                {% endif %} {% endcomment %}
+    {% comment %} <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Country code</th>
+      <th>Mobile number</th>
+      <th>Address</th>
+        <th>Status</th>
+       <th>Company name</th>
+       <th>Company Phone number</th>
+      <th>Company fax</th>
+        <th>Company email</th>
+        <th>Company address</th>
+        <th>Company Year of business</th>
+        <th>Solo</th>
+        <th>Partnership</th>
+         <th>Corporation</th>
+          <th>Other</th>
+          <th>Tax</th>
+
+
+
+
+
+
+
+
+
+    </tr> {% endcomment %}
+  </thead>
+  <tbody>
+    {% comment %} <tr>
+      <td data-column="First Name"> {{emp_user.fname}}</td>
+      <td data-column="First Name"> {{emp_user.lname}}</td>
+      <td data-column="First Name"> {{emp_user.country_code}}</td>
+      <td data-column="First Name"> {{emp_user.mobile_number}}</td>
+      <td data-column="First Name"> {{emp_user.address}}</td>
+          {% if emp_user.user_status == False %}      
+        <td data-column="First Name" style="color:green">Accepted</td>
+        {% else %}
+          <td data-column="First Name" style="color:red">Rejected</td>
+          {% endif %}
+
+      <td data-column="First Name"> {{c.name}}</td>
+      <td data-column="First Name"> {{c.phone_number}}</td>
+      <td data-column="First Name"> {{c.fax}}</td>
+      <td data-column="First Name"> {{c.email}}</td>
+      <td data-column="First Name"> {{c.address}}</td>
+      <td data-column="First Name"> {{c.year_of_business}}</td>
+      <td data-column="First Name"> {{c.solo}}</td>
+      <td data-column="First Name"> {{c.partnership}}</td>
+      <td data-column="First Name"> {{c.corporation}}</td>
+      <td data-column="First Name"> {{c.other}}</td>
+      <td data-column="First Name"> {{c.tax}}</td>
+
+    
+    </tr> {% endcomment %}
+  
+  </tbody>
+</table>
+
+</body>
+</html>

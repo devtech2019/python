@@ -1,0 +1,114 @@
+{% extends 'basefile/base.html' %}
+{% load static %}
+ 
+{% block content %}
+
+
+   <div class="wrapper-inner bg-sky">
+   
+      <section class="outer-table-space">
+            <div class="container">
+               <div class="table-dash-box">
+                  <div class="on-query-bx">
+
+                     <div class="row query-inputfill">
+                        <div class="col-md-3">
+                           <div class="query-profile">
+                              <figure>
+                                 <img src="images/query-profile.png">
+                              </figure>
+                              <h5>{{obj.applicant.fname}} {{obj.applicant.lname}}</h5>
+                           </div>
+                        </div>
+                        <div class="col-md-9">
+                           <div class="row">
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <label class="form-label">Position Worked</label>
+                                    <input type="text" class="form-control"  value="{{obj.app_position.name}}">
+                                 </div>
+                              </div>
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                      <label class="form-label">Date</label>
+                                      <div class="form-group-icon">
+                                        <input type="text" class="form-control"  value="{{obj.date}}">
+                                        
+                                      </div>
+                                 </div>
+                              </div>
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <label class="form-label">Time in</label>
+                                    <input type="text" class="form-control"  value={{obj.time_in}}>
+                                 </div>
+                              </div>
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <label class="form-label">Time Out</label>
+                                    <input type="text" class="form-control"  value="{{obj.time_out}}">
+                                 </div>
+                              </div>
+                              <div class="col-sm-6">
+                                 <div class="form-group">
+                                    <label class="form-label">Break Time</label>
+                                    <input type="text" class="form-control"  value="{{obj.break_time}}">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+
+                     <hr class="gry-bt-line">
+                     <form action="{% url 'querySubmit' obj.id %}" method="POST">
+                        {% csrf_token %}
+                     <div class="row">
+                        <div class="col-md-12">
+                           <div class="form-group">
+                              <label class="form-label">Query About</label>
+                              <textarea type="text" class="form-control" placeholder="Write query" name="query"></textarea>
+                           </div>
+                        </div>
+                        <div class="col-md-4">
+                           <div class="form-group">
+                              <label class="form-label">Name of the Person</label>
+                              <input type="text" class="form-control" placeholder="Enter name" name="name">
+                           </div>
+                        </div>
+                        <div class="col-md-4">
+                           <div class="form-group">
+                
+                              <label class="form-label">Position</label>
+                              <select class="form-select" aria-label="Default select example" name="position">
+                                {% for i in position %}
+                                    <option value="{{i.id}}" {% if i.name == queryView.position %}selected {% endif %}>{{i.name}}</option>
+                                {% endfor %}
+                                </select>
+                           </div>
+                        </div>
+                        <div class="col-md-4">
+                           <div class="form-group">
+                              <label class="form-label">Date</label>
+                              <div class="form-group-icon">
+                                  <input type="date" class="form-control" placeholder=""  name="date">
+                                  <img src="images/date-icon.svg">
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-12">
+                           <div class="text-left mt-1">
+                            <input type="submit" class="btn" value="Submit">
+                              
+                           </div>
+                        </div>
+                    
+                     </div>
+                    </form>
+
+                  </div>
+               </div>
+            </div>
+      </section>
+
+   </div>
+{% endblock content %}

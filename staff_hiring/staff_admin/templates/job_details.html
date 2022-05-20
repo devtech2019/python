@@ -1,0 +1,134 @@
+
+
+  {% extends 'base/base.html' %}
+  {% load static %}
+  {% block content %}
+ 
+
+  {% include 'base/header.html'%}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2" style="margin-top:95px ;">
+        {% include 'base/navbar.html' %}
+
+      </div>
+      <div class="col-md-10" style="margin-top:120px ;">
+        <div class="card">
+
+          <div class="card-body">
+            <h4 class="card-title">Job details Table</h4>
+           
+        {% if messages %}
+        
+        <div class="table-responsive">
+          {% for message in messages %}
+          {% if message.tags == 'success'%}
+          <div class="alert alert-success">
+            {{message}}
+            {% elif message.tags == 'error' %}
+            <div class="alert alert-danger">
+              {{message}}
+              {% endif %}
+            </div>
+        
+            {% endfor %}
+            {% endif %}
+                <a href="/admin/add_job/" class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u " style="text-align: right; margin-left: 1300px;"> Add Job </a>   
+               
+               <table class="table table-striped" style="margin-top: 30px;">
+                         
+    
+                <thead>
+                  <tr >
+                    <th>
+                     Sr.No
+                    </th>
+                    <th>
+                      Job Type               
+                     </th>
+            
+                    
+                  
+                    <th>
+                        Status
+                         </th>
+                        <th>
+                          Created
+                        </th>
+
+                    <th>
+                    Action
+                    </th>
+                   
+                  </tr>
+                </thead>
+            
+                <tbody >
+                    {% for i in job %}
+                    {% if i.soft_del_status == 0 %}
+     
+                  <tr >
+                    
+                    <td >
+                        {{ forloop.counter }}
+ 
+                    </td>
+                    <td>
+                        {{i.Job_title}} 
+                      
+                    </td>
+                    <td>
+                      {{i.limit}} 
+                    
+                  </td>
+                    
+                  
+                  
+                    
+                    
+                    
+                    
+                    </form>
+                    {% if i.is_active == True %}
+                    <td >
+                      <h6 style=" color: green;"> Activate </h6>
+                        
+                    </td>
+                    {% else %}
+                    <td >
+                      <h6 style=" color:red;"> Deactivate </h6>
+                  </td>
+                  {% endif %}
+                    <td>
+                      {{i.created_at}}
+                    </td>
+                    <td>
+                        <a class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u " href="/admin/edit_job/{{i.id}}">Edit</a>             
+                       <a class="btn btn-danger btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                        onclick="return confirm('Are you sure you want to delete this item')"   href="/admin/delete_job/{{i.id}}">Delete</a>
+                      </td>
+                   
+                
+                   
+                    
+                  </tr>
+                 {% else %}
+                 {% endif %}
+                  {% endfor %}
+                </tbody>
+             
+    
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  
+  
+  {% endblock content %}

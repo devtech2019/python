@@ -1,0 +1,47 @@
+{% extends 'basefile/base.html'%}
+{% load static %}
+{% block content %}
+
+   <div class="wrapper-inner bg-sky">
+   
+      <section class="outer-table-space">
+            <div class="container">
+               <div class="table-dash-box max-h-full">
+                     
+                     <div class="inner-noti-setting">
+                        <div class="row">
+                           <div class="col-md-12 noti-text">
+                              <h3>Notification Settings</h3>
+                              <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly believable. If you are going to use a passage of Lorem Ipsum,</p>
+                            </div>  
+                           <div class="col-md-4">
+                              <div class="ot-switch">
+                                <h6>Email notification</h6>
+                                <label class="switch">
+                                  <input type="checkbox">
+                                  <span class="slider round"></span>
+                                </label>
+                              </div>
+                           </div>
+                          
+                           <div class="col-md-4">
+                             <div class="ot-switch">
+                                <h6>Push notification</h6>
+                                <label class="switch">
+                                  <input type="checkbox" checked>
+                                  <span class="slider round"></span>
+                                </label>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+
+               </div>
+            </div>
+      </section>
+
+   </div>
+
+
+{% include 'footer.html' %}
+{% endblock content %}

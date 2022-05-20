@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% extends 'base/base.html' %}
+  {% load static %}
+  {% block content %}
+
+  
+    <div class="container-scroller ">
+      <!-- partial:partials/_navbar.html -->
+      {% include 'base/header.html'%}
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_settings-panel.html -->
+        <div class="theme-setting-wrapper">
+
+        </div>
+
+        <!-- partial -->
+        <!-- partial:partials/_sidebar.html -->
+        {% include 'base/navbar.html' %}
+        <!-- partial -->
+      
+      <div class="admin-inner-panel dashboard-bg">  
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="row">
+
+              <div class="col-md-12">
+                <div class="row">
+                        <!-- <div class="d-sm-flex align-items-center justify-content-between border-bottom">
+                          <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                              <a class="nav-link active ps-0" id="home-tab" data-bs-toggle="tab" href="#overview" role="tab"
+                                aria-controls="overview" aria-selected="true">Overview</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#audiences" role="tab"
+                                aria-selected="false">Audiences</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#demographics" role="tab"
+                                aria-selected="false">Demographics</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link border-0" id="more-tab" data-bs-toggle="tab" href="#more" role="tab"
+                                aria-selected="false">More</a>
+                            </li>
+                          </ul>
+                          </div> -->
+                  <div class="col-md-3">
+                    <div class="statistics-details d-flex align-items-center justify-content-between">
+                      <div>
+                        <p class="statistics-title">Total Employer</p>
+                        <h3 class="rate-percentage">{{count_emp}}</h3>
+                        <p class="text-danger d-flex"><i class="mdi mdi-menu-up"></i><span>Employer</span></p>
+                      </div>
+                     
+                  </div>
+                </div>
+
+
+
+
+                    <div class="col-md-3">
+                      <div class="statistics-details d-flex align-items-center justify-content-between">
+                        
+                        <div>
+                          <p class="statistics-title">Total Applicant</p>
+                          <h3 class="rate-percentage">{{count_app}}</h3>
+                          <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>Applicant</span></p>
+                        </div>
+                       
+                      </div>
+                    </div>
+
+
+                    <div class="col-md-3">
+                      <div class="statistics-details d-flex align-items-center justify-content-between">
+                        <div>
+                          <p class="statistics-title">Total Subadmin</p>
+                          <h3 class="rate-percentage">{{count_sub}}</h3>
+                          <p class="text-danger d-flex"><i class="mdi mdi-menu-up"></i><span>Subadmin</span></p>
+                        </div>
+                    
+                      </div>
+                    </div>
+                      <div class="col-md-3">
+                        <div class="statistics-details d-flex align-items-center justify-content-between">
+                      
+                          
+                          <div>
+                            <p class="statistics-title">Total Jobs</p>
+                            <h3 class="rate-percentage">{{count_job}}</h3>
+                            <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>Jobs</span></p>
+                          </div>
+                          <div class="d-none d-md-block">
+                      
+                          </div>
+                        </div>
+                      </div>
+                   <div class="row" style="margin-top: 50px;"> 
+              <div class="row flex-grow">
+                <div class="col-6 col-sm-4 col-sm-6 grid-margin stretch-card">
+                  <div class="card card-rounded">
+                    <div class="card-body">
+                      <div class="d-sm-flex justify-content-between align-items-start">
+                        <div>
+                          <h4 class="card-title card-title-dash">Employer Performance Line Chart {{dateE}}</h4>
+                        </div>
+                        <div id="performance-line-legend"></div>
+                      </div>
+                      <div class="chartjs-bar-wrapper mt-3">
+                    <canvas id="chart"></canvas>
+                    <script>
+                      const ctx = document.getElementById('chart').getContext('2d');
+                      const myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                          labels: [{% for i in employer_data %} '{{i.month}}', {% endfor %}],
+                          datasets: [{
+                            label: 'total count',
+                            data: [{% for i in employer_data %} {{i.employer_total}},  {% endfor %}],
+                            backgroundColor: [
+                              'rgba(255, 99, 132, 0.2)',
+                              'rgba(54, 162, 235, 0.2)',
+                              'rgba(255, 206, 86, 0.2)',
+                              'rgba(75, 192, 192, 0.2)',
+                              'rgba(153, 102, 255, 0.2)',
+                              'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                              'rgba(255, 99, 132, 1)',
+                              'rgba(54, 162, 235, 1)',
+                              'rgba(255, 206, 86, 1)',
+                              'rgba(75, 192, 192, 1)',
+                              'rgba(153, 102, 255, 1)',
+                              'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                          }]
+                        },
+                        options: {
+                          scales: {
+                            y: {
+                              // beginAtMonth: true
+                            }
+                          }
+                        }
+                      });
+                    </script>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6 col-sm-4 col-sm-6 grid-margin stretch-card">
+                  <div class="card card-rounded">
+                    <div class="card-body">
+                      <div class="d-sm-flex justify-content-between align-items-start">
+                        <div>
+                          <h4 class="card-title card-title-dash">Applicant Performance Line Chart {{dateE}}</h4>
+                        </div>
+                        <div id="performance-line-legend"></div>
+                      </div>
+                      <div class="chartjs-bar-wrapper mt-3">
+                    <canvas id="applicant_chart"></canvas>
+                    <script>
+                      const applicant_ctx = document.getElementById('applicant_chart').getContext('2d');
+                      const applicant_myChart = new Chart(applicant_ctx, {
+                        type: 'bar',
+                        data: {
+                          labels: [{% for i in employer_data %} '{{i.month}}', {% endfor %}],
+                          datasets: [{
+                            label: 'total count',
+                            data: [{% for i in employer_data %} {{i.applicant_total}},  {% endfor %}],
+                            backgroundColor: [
+                              'rgba(255, 99, 132, 0.2)',
+                              'rgba(54, 162, 235, 0.2)',
+                              'rgba(255, 206, 86, 0.2)',
+                              'rgba(75, 192, 192, 0.2)',
+                              'rgba(153, 102, 255, 0.2)',
+                              'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                              'rgba(255, 99, 132, 1)',
+                              'rgba(54, 162, 235, 1)',
+                              'rgba(255, 206, 86, 1)',
+                              'rgba(75, 192, 192, 1)',
+                              'rgba(153, 102, 255, 1)',
+                              'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                          }]
+                        },
+                        options: {
+                          scales: {
+                            y: {
+                              // beginAtMonth: true
+                            }
+                          }
+                        }
+                      });
+                    </script>
+            
+                     </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+              </div>
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:partials/_footer.html -->
+          {% comment %} <footer class="footer">
+            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+              <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Premium <a
+                  href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from
+                BootstrapDash.</span>
+              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2021. All rights
+                reserved.</span>
+            </div>
+          </footer> {% endcomment %}
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+
+    <!-- plugins:js -->
+
+    <!-- End custom js for this page-->
+   
+  </body>
+
+  {% endblock content %}
+
+</html>

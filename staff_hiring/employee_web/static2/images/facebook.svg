@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="140" height="42" viewBox="0 0 140 42">
+  <g id="Group_62" data-name="Group 62" transform="translate(-686 -34)">
+    <rect id="Rectangle_2" data-name="Rectangle 2" width="140" height="42" rx="4" transform="translate(686 34)" fill="#4777ce"/>
+    <g id="Group_66" data-name="Group 66" transform="translate(13)">
+      <g id="Group_63" data-name="Group 63" transform="translate(695 43)">
+        <path id="Path_62" data-name="Path 62" d="M0,0H24V24H0Z" fill="none"/>
+        <path id="Path_63" data-name="Path 63" d="M13,19.938a8.006,8.006,0,1,0-2,0V14H9V12h2V10.346a4.367,4.367,0,0,1,.4-2.311A2.726,2.726,0,0,1,12.536,6.9a3.963,3.963,0,0,1,1.687-.381A6.457,6.457,0,0,1,15.5,6.6V8.5H15a3.626,3.626,0,0,0-1.522.164.727.727,0,0,0-.314.314c-.12.226-.164.45-.164,1.368V12h2.5L15,14H13ZM12,22A10,10,0,1,1,22,12,10,10,0,0,1,12,22Z" fill="#fff"/>
+      </g>
+      <text id="Facebook" transform="translate(726 60)" fill="#fff" font-size="14" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Facebook</tspan></text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,60 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'base/header.html'%}
+
+{% comment %} <body style="background:#f4f5f7"> {% endcomment %}
+<div class="admin-inner-panel">
+    <div class="admin-inner-left">
+        {% include 'base/navbar.html' %}
+    </div>
+    <div class="admin-inner-right">
+     
+  <form action="" id="addjobs" method="POST">
+
+                {% csrf_token %}
+
+
+                <div class="card" style="width:95%;">
+                    <div class="card-body">
+                        <div class="col-md-12">
+                            <h4 class="card-title">Term And Condition</h4>
+
+                            <input class="form-control" type="hidden" value="{{term.slug}}" name="slug">
+
+                            <div class="form-group row">
+                                <label class="col-xl-2 col-lg-2 col-form-label">
+                                    Name </label>
+                                <div class="col-lg-10 col-xl-10">
+                                    <textarea  name="editor" class="form-control">{{term.title}}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xl-2 col-lg-2 col-form-label">
+                                    Content </label>
+                                <div class="col-lg-10 col-xl-10">
+                                    <textarea name="editor1" class="form-control">{{term.desc}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    
+                          
+
+                            
+                        <button type="submit" class="btn btn-inverse-success btn-fw" >Submit</button>
+                             <a href="/admin/content/management/term-condtion" class="btn btn-inverse-dark btn-fw">Cancel</a>
+
+                    </div>
+                </div>
+
+            </form>
+
+            <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+        <script>
+            CKEDITOR.replace('editor');
+        </script>
+        <script>
+            CKEDITOR.replace('editor1');
+        </script>
+{% endblock content %}

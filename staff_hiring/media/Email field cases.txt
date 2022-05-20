@@ -1,0 +1,77 @@
+    Verify the field by entering the valid email address.
+    Verify the field With Email contains dot in the address field
+    Verify With Email contains dot with subdomain
+    Verify the email id filed With Plus sign is considered valid character.
+    Verify With Square bracket around IP address is considered valid.
+    Verify the email id filed With Quotes around email is considered valid
+    Verify email id field With Digits in address are valid
+    Verify email id With Digits in address are valid
+    Verify the email id filed With Underscore in the address field is valid
+    Verify the email id filed With .name is valid Top Level Domain name
+    Verify With Dot in Top Level Domain name also considered valid (use co.jp as example here)
+    Verify With Dash in address field is valid
+   
+
+
+List of Valid Email Addresses
+List of valid email given below.
+
+    email@example.com
+    firstname.lastname@example.com
+    email@subdomain.example.com
+    firstname+lastname@example.com
+    email@123.123.123.123
+    email@[123.123.123.123]
+    "email"@example.com
+    1234567890@example.com
+    email@example-one.com
+    _______@example.com
+    email@example.name
+    email@example.museum
+    email@example.co.jp
+    firstname-lastname@example.com
+    List of Strange Valid Email Addresses
+    much.”more\ unusual”@example.com
+    very.unusual.”@”.unusual.com@example.com
+    very.”(),:;<>[]”.VERY.”very@\\ "very”.unusual@strange.example.com
+
+ Negative Test Cases for email id field
+    Verify the email id filed With Missing @ sign and domain
+    Verify the email id text box With Garbage
+    Verify the email id filed With Missing username
+    Verify the email address field With Encoded html within email is invalid
+    Verify  the email id field With Missing @
+    Verify the email id filed With Two @ sign
+    Verify  the email id text box With Leading dot in address is not allowed
+    Verify the email id filed With Trailing dot in address is not allowed
+    Verify email address field With Multiple dots
+    Verify the email id filed With Unicode char as address
+    Verify  the email id text box With Text followed email is not allowed
+    Verify the email id text box  With Missing top level domain (.com/.net/.org/etc)
+    Verify the email id filed With .web is not a valid top level domain
+    Verify  the email id text box With Invalid IP format
+    Verify  the email id text box With Multiple dot in the domain portion is invalid
+List of Invalid Email id
+List of all invalid email id format given below 
+
+    plainaddress
+    #@%^%#$@#$@#.com
+    @example.com
+    Joe Smith <email@example.com>
+    email.example.com
+    email@example@example.com
+    .email@example.com
+    email.@example.com
+    email..email@example.com
+    あいうえお@example.com
+    email@example.com (Joe Smith)
+    email@example
+    email@-example.com
+    email@example.web
+    email@111.222.333.44444
+    email@example..com
+    Abc..123@example.com
+    List of Strange Invalid Email Addresses
+    ”(),:;<>[\]@example.com
+    just”not”right@example.com
+    this\ is"really"not\allowed@example.com

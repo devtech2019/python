@@ -1,0 +1,24 @@
+{% extends 'basefile/base.html'%}
+{% load static %}
+{% block content %}
+   <div class="wrapper-inner bg-sky">
+    
+      <section class="noti_content_sec">
+         <div class="container">
+            <div class="head-line-sd">
+               <h2>Notifications</h2>
+            </div>
+            <div class="form-box-out none-notification">
+                <div class="notification_fresh_sec">
+                   <img src="{% static 'images/undraw_fresh.svg' %}">
+                   <h5>There are no notification</h5>
+                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                </div>
+            </div>
+         </div>
+      </section>
+
+   </div>
+
+{% include 'footer.html' %}
+{% endblock content %}

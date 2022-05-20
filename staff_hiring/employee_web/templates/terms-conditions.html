@@ -1,0 +1,35 @@
+{% extends 'basefile/base.html' %}
+{% load static %}
+{% block content %}
+   <div class="wrapper-inner">
+      <section class="breadcrumb-banner-bg">
+           <img src="{% static 'images/breadcrumb-bg3.jpg' %}">
+         <!-- -------------Background-img-breadcrumb------------- -->
+         <div class="container">
+            <div class="inner-breadcrumb-sec">
+               <div class="in-breadcrumb-sec">
+                  <h1>Terms And Conditions</h1>
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="#">Home</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Terms And Conditions</li>
+                    </ol>
+                  </nav>
+               </div>
+            </div>
+         </div>
+      </section>
+   
+      <section class="policy-terms-text">
+            <div class="container">
+               
+               <h1>{{term.0.title|safe}}</h1>
+                  <p>{{term.0.desc|safe}}</p>
+            </div>
+      </section>
+
+
+   </div>
+
+{% include 'footer.html' %}
+{% endblock content %}

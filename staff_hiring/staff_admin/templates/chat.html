@@ -1,0 +1,236 @@
+{% extends 'base/base.html' %}
+{% block content %}
+{% include 'base/header.html'%}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2" style="margin-top:95px ;">
+        {% include 'base/navbar.html' %}
+
+      </div>
+      <div class="col-md-10" style="margin-top:120px ;">
+        <div class="card">
+
+          <div class="card-body" style="background-color:azure" >
+            <h4 class="card-title" >Chat with {{chat_with}}
+              <select style="cursor:pointer;" class="" id="users">
+                  {% for thread in threads %}
+                          <option value="{{thread.id}}" data-src="{{thread.second_person.id}}">
+                          {% if thread.first_person == user %}
+                            {% if thread.second_person.username %}
+                              {{thread.second_person.username}}
+                            {% else %}
+                              {{thread.second_person}}
+                            {% endif %}
+                          {% else %}
+                            {% if thread.first_person.username %}
+                              {{ thread.first_person.username }}
+                            {% else %}
+                              {{thread.first_person}}
+                            {% endif %}
+                          {% endif %}
+                          </option>
+                  {% endfor %}
+                </select>
+            </h4>
+            <div id="messages" class="chat_message form-control bg-white" style=" height:600px;position:relative; overflow:scroll; background-image:url('/media/media/child.jpg') ; background-size: cover; ">
+            {% if threads %}
+              {% for thread in threads %}
+                {% for chat in thread.chatmessage_thread.all %}
+                  {% if chat.user == user %}
+                    <div class="d-flex mb-4 justify-content-end align-items-end">
+                        <div class="msg_cotainer_send card px-3 py-3"style="background-color:aquamarine;">
+                          <h4>You</h4>
+                            {{ chat.message }}
+                          <div class="mt-2">
+                            <small class="msg_time_send">
+                              {{ chat.timestamp|date:"d D" }}, 
+                              {{ chat.timestamp|time:"H:i" }}
+                            </small>
+                          </div>
+                        </div>
+                    </div>
+                    {% else %}
+                        <div class="d-flex mb-4 received justify-content-start align-items-start">
+                          <div class="msg_cotainer px-3 py-3 card" style="background-color:aqua;">
+                                                        <h4>{{chat.user}}</h4>
+                            <!-- <h4>{{chat.user}}</h4> -->
+                              {{ chat.message }}
+                              <span class="msg_time">{{ chat.timestamp|date:"d D" }}, {{ chat.timestamp|time:"H:i" }}</span>
+                          </div>
+                        </div>
+                  {% endif %}
+                {% endfor %}
+              {% endfor %}
+            {% endif %}
+            </div>
+            <form method='POST'>
+              {% csrf_token %}
+            <input type="text" class="form-control m y-3" id="chat_message" placeholder="Type your message here">
+            <input type="button" value="send" class="btn btn-primary mt-2" id="chat_send">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block extra_js %}
+<script>
+  
+    $('#users').on('change',()=>{
+      let selected_user = $("#users").val();
+      console.log(selected_user);
+    });
+    let ws_url = `ws://{{request.get_host}}/ws/chat/`
+    
+    {% if request.scheme == 'https' %}
+      ws_url = `wss://{{request.get_host}}/ws/chat/`
+    {% endif %}
+
+    
+    const ws = new WebSocket(ws_url);
+    ws.addEventListener('open',async (e)=>{
+        console.log(e);
+
+      });
+      ws.addEventListener('message',async (e)=>{
+        console.log(e);
+        var d = new Date();
+        var n = new Date(d.getDate()).toLocaleString('en-us', { weekday: 'short' });
+        // <span class="msg_time">{{ chat.timestamp | date:"d D" }}, {{ chat.timestamp | time:"H:i" }}</span>
+        var today = new Date().toLocaleDateString(undefined, {
+          weekday: 'short',
+          day: '2-digit',
+        });
+
+        let data = JSON.parse(e.data);
+        let message = data['message'];
+        let thread_id = data['thread_id']
+        let sent_by_id = data['sent_by']
+        //newMessage(message, sent_by_id, thread_id)
+        //console.log(message);
+        let sent_message = `<div  class="d-flex mb-4 justify-content-end align-items-end ">
+                          <div  class="msg_cotainer px-3 py-3 card"  style="background-color:aquamarine;">
+                            <h4>You</h4>
+                              ${message}
+                              <span class="msg_time" style="padding-top:10px;"><small>`+today+`, `+d.getHours()+`:`+ d.getMinutes()+`</small></span>
+                          </div>
+                        </div>`;
+        $("#messages").append(sent_message);
+      });
+      ws.addEventListener('error', async (e)=>{
+
+      });
+      ws.addEventListener('close',async (e)=>{
+        console.log(e);
+      });
+    $('#chat_send').click(()=>{
+      console.log('hello websocket');
+      let chat = document.getElementById('chat_message');
+      let selected_user = $("#users").find(":selected");
+      let send_to=selected_user.attr("data-src");
+      let USER_ID=`{{request.user.id}}`
+      let thread_id=selected_user.val();
+      /*if(USER_ID==1)
+      {
+        send_to=5;
+      }
+      else{
+        send_to=6;
+      }
+      */
+      let data = {
+        'message':chat.value,
+        'sent_by':USER_ID,
+        'sent_to':send_to,
+        'thread_id':thread_id,
+        }
+  
+       var token = '{{csrf_token}}';
+      //  console.log(data, "ggggggggggggggggggggggggggggggggggggggggggg")
+       $.ajax({
+         type:'POST',
+         url : '/admin/chat_ajax/',
+        headers: { 'X-CSRFToken': token },
+       
+          select: data,
+      
+
+        
+         success: function (res) {
+          // newMessage(data.message, data.sent_by_id, data.thread_id)
+         },
+
+       });
+
+
+        //let thread_id = data['thread_id']
+    //newMessage(message, sent_by_id, thread_id)
+      ws.send(JSON.stringify(data));
+      chat.value="";
+    });
+  function newMessage(message, sent_by_id, thread_id) {
+    if ($.trim(message) === '') {
+      return false;
+    }
+    let message_element;
+    let chat_id = 'chat_' + thread_id
+    if(sent_by_id == USER_ID){
+        message_element = `
+        <div class="d-flex mb-4 replied">
+          <div class="msg_cotainer_send">
+            ${message}
+
+            <span class="msg_time_send">8:55 AM, Today</span>
+          </div>
+          <div class="img_cont_msg">
+            <img src="img1.png" alt="image">
+          </div>
+        </div>
+        `
+      }
+    else{
+        message_element = `
+            <div class="d-flex mb-4 received">
+                <div class="img_cont_msg">
+                  <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
+                </div>
+                <div class="msg_cotainer">
+                  ${message}
+                <span class="msg_time">8:40 AM, Today</span>
+                </div>
+            </div>
+          `
+
+      }
+
+      let message_body = $('.messages-wrapper[chat-id="' + chat_id + '"] .msg_card_body')
+      message_body.append($(message_element))
+        message_body.animate({
+            scrollTop: $(document).height()
+        }, 100);
+      input_message.val(null);
+  }
+  function get_active_other_user_id(){
+      let other_user_id = $('.messages-wrapper.is_active').attr('other-user-id')
+      other_user_id = $.trim(other_user_id)
+      return other_user_id
+  }
+
+  function get_active_thread_id(){
+      let chat_id = $('.messages-wrapper.is_active').attr('chat-id')
+      let thread_id = chat_id.replace('chat_', '')
+      return thread_id
+  }
+  window.onload = function() {
+    var objDiv = document.getElementsByClassName("card");
+    objDiv.scrollTop = objDiv.scrollHeight;
+  }
+  // $(".box").scrollTop($(".box")[0].scrollHeight);
+  
+
+</script>
+<!-- <style>
+
+</style> -->
+{% endblock %}

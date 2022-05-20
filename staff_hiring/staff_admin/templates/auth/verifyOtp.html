@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+
+
+<div class="container">
+    {% for message in messages %}
+
+    <div class="alert alert-primary">
+        {{message}}
+    
+    </div>
+    {% endfor %}
+    <form class="forms-sample" method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="exampleInputEmail1" class="">verify OTP</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" name="otp" placeholder="otp">
+        </div>
+
+        <button type="submit" class="btn btn-primary me-2">verify Otp</button>
+
+<form action=""  method="POST">
+            
+            <button type="submit" class="btn btn-primary me-2">resendotp</button>
+
+</form>
+        <!-- <button class="btn btn-light">Cancel<g/button> -->
+    </form>
+</div>
+{% endblock content %}

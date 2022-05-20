@@ -1,0 +1,888 @@
+{% extends 'basefile/base.html' %}
+{% load static %}
+{% block content %}
+
+   <div class="wrapper-inner bg-sky">
+   
+      <section class="outer-table-space time-sheet-pr">
+            <div class="container">
+               <div class="table-dash-box time-sheet-tabs mg_shifts">
+                  <div class="table-heading-bx filter-time-sheet">
+                     <h2>Manage Shifts</h2>
+                     
+                   
+                      {% comment %} {% csrf_token %} {% endcomment %}
+ 
+                     <div class="d-flex">
+                        <form method="POST" >
+                           {% csrf_token %}
+                         <div class="form-group">
+                              <input type="search" oninput="Search()" id="sorting" name="search" class="form-control" placeholder="Search">
+                         </div>
+                        </form>
+                         <form method="GET">
+                         <div class="form-group">
+                              <label>Sort by</label>
+                              <div class="form-group-icon">
+                                  <input type="date" id="sort" onchange="sorting()" name="manage-shift" class="form-control" placeholder="10 Feb 2022">
+                                  <img src="{% static 'images/date-icon.svg' %}">
+                              </div>
+                         </div>
+                        </form>
+                     </div>
+                  </div>
+
+                  <!-- ------tabing-time-sheet------ -->
+                     <ul class="nav nav-pills time-rw-navs" id="pills-tab" role="tablist">
+                         <li class="nav-item" role="presentation">
+                         <button class="nav-link active" id="pills-newpost-tab" onclick="select_tabs('pills-newpost-tab')" data-bs-toggle="pill" data-bs-target="#pills-newpost" type="button" role="tab" aria-controls="pills-newpost" aria-selected="true" data-name='1'>New Post</button>
+                       </li>
+                       <li class="nav-item" role="presentation">
+                         <button class="nav-link " id="pills-accepted-tab"  onclick="select_tabs('pills-accepted-tab')" data-bs-toggle="pill" data-bs-target="#pills-accepted" type="button" role="tab" aria-controls="pills-accepted" aria-selected="true" data-name='2'>Accepted</button>
+                       </li>
+                       <li class="nav-item" role="presentation">
+                         <button class="nav-link" id="pills-pending-tab"  onclick="select_tabs('pills-pending-tab')" data-bs-toggle="pill" data-bs-target="#pills-pending" type="button" role="tab" aria-controls="pills-pending" aria-selected="false" data-name='3'>Pending</button>
+                       </li>
+                       <li class="nav-item" role="presentation">
+                         <button class="nav-link" id="pills-completed-tab"  onclick="select_tabs('pills-completed-tab')" data-bs-toggle="pill" data-bs-target="#pills-completed" type="button" role="tab" aria-controls="pills-completed" aria-selected="false" data-name='4'>Completed</button>
+                       </li>
+                     </ul>
+                     <div class="tab-content" id="pills-tabContent">
+                     
+                       
+                       
+                       
+                       <div class="tab-pane fade show active" id="pills-newpost" role="tabpanel" aria-labelledby="pills-newpost-tab">
+                           <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Location</th>
+                                    <th>Shift Date</th>
+                                    <th>Shift Time</th>
+                                    <th>Staff Name</th>
+                                    <th>Position</th>
+                                    <th>Wages Multiplier</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                
+                              
+                                <tbody class="tb_input_box" id="newpost">
+                                    {% comment %} {% if users %} {% endcomment %}
+                                   {% for i in users %}
+
+                                    <tr class="day-shift">
+                                         {% if i.applicant.address%}
+                                       <td>{{i.applicant.address}}</td>
+                                       {% else %}
+                                        <td><h5>No Applicant Found</h5></td>
+                                         {% endif %}
+                                       <td>{{i.date}}</td>
+                                       <td>{{i.in_time}} - {{i.out_time}}</td>
+                                       {% if i.applicant.fname%}
+                                       <td><h5>{{i.applicant.fname}}</h5></td>
+                                       {% else %}
+                                       <td><h5>No Applicant Found</h5></td>
+                                       {% endif %}
+                                       <td>{{i.position.name}}</td>
+                                       <td>{{i.wages}}</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                             <a class="btn btn-inverse-danger btn-fw"onclick="return confirm('Are you sure you want to delete this item')" href="/del_post/{{i.id}}" >delete</a>
+
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% comment %} {% else %}
+                                     <tr class="day-shift">
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                             No New post found
+                                        </td>
+                                        <td>
+                                        </td>
+                                         <td>
+                                        </td>
+                                          <td>
+                                        </td>
+
+                                     </tr>
+                                    {% endif %} {% endcomment %}
+                                 
+                                    <div>
+                                    </div>
+                                     {% if users.has_other_pages %}
+                                       <ul class="pagination" style=" float: right; ">
+                                          {% if users.has_previous %}
+                                          <li style="margin-right:10px "><a href="?page={{ users.previous_page_number }}"> Previous </a></li>
+                                          {% else %}
+                                          <li style="margin-right:10px " class="disabled"><span>Previous</span></li>
+                                          {% endif %}
+                                          {% comment %} {% for i in users.paginator.page_range %}
+                                          {% if users.number == i %}
+                                             <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                          {% else %}
+                                             <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                          {% endif %}
+                                          {% endfor %} {% endcomment %}
+                                          {% if users.has_next %}
+                                          <li style="margin-right:10px;  "><a href="?page={{ users.next_page_number }}">Next</a></li>
+                                          {% else %}
+                                          <li style="margin-right:10px  " class="disabled"><span style="">Next</span></li>
+                                          {% endif %}
+                                       </ul>
+                                    {% endif %}
+                                      <div id="test">
+                                       </div>
+                                      
+
+                                    
+                                    {% comment %} <tr class="night-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>9 Feb 2022</td>
+                                       <td>7:30AM - 5:00PM</td>
+                                       <td>Smith Abraham</td>
+                                       <td>Sr. Developer</td>
+                                       <td>x1.5</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="day-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>5 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td><h5>Smith Jhone</h5></td>
+                                       <td>Abc</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="night-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>3 Feb 2022</td>
+                                       <td>9:30AM - 5:00PM</td>
+                                       <td>Deni Abraham</td>
+                                       <td>Sr. Developer</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="day-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>4 Feb 2022</td>
+                                       <td>7:30AM - 5:00PM</td>
+                                       <td><h5>Monserrat Abraham</h5></td>
+                                       <td>Abc</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="night-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>3 Feb 2022</td>
+                                       <td>9:30AM - 5:00PM</td>
+                                       <td>Deni Abraham</td>
+                                       <td>Developer</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="day-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>5 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td><h5>Smith Jhone</h5></td>
+                                       <td>Abc</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="night-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>3 Feb 2022</td>
+                                       <td>9:30AM - 5:00PM</td>
+                                       <td>Deni Abraham</td>
+                                       <td>Sr. Developer</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr> {% endcomment %}
+                                </tbody>
+                              </table>
+                           </div>
+                       </div>
+                       
+                       <div class="tab-pane fade show " id="pills-accepted" role="tabpanel" aria-labelledby="pills-accepted-tab">
+                           <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Location</th>
+                                    <th>Shift Date</th>
+                                    <th>Shift Time</th>
+                                    <th>Staff Name</th>
+                                    <th>Position</th>
+                                    <th>Wages Multiplier</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                
+                              
+                                <tbody class="tb_input_box" id="accept">
+                              
+                                   {% for i in obj %}
+                                    <tr class="day-shift">
+                                         {% if i.applicant.address%}
+                                       <td>{{i.applicant.address}}</td>
+                                       {% else %}
+                                        <td><h5>No Applicant Found</h5></td>
+                                         {% endif %}
+                                       <td>{{i.date}}</td>
+                                       <td>{{i.in_time}} - {{i.out_time}}</td>
+                                       {% if i.applicant.fname%}
+                                       <td><h5>{{i.applicant.fname}}</h5></td>
+                                       {% else %}
+                                       <td><h5>No Applicant Found</h5></td>
+                                       {% endif %}
+                                       <td>{{i.position.name}}</td>
+                                       <td>{{i.wages}}</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+
+                                    {% endfor %}
+                               
+                                    
+                                    <div>
+                                       {% comment %} {% if users.has_other_pages %}
+                                       <ul class="pagination" style=" float: right; ">
+                                          {% if users.has_previous %}
+                                          <li style="margin-right:10px"  ><a href="?page={{ users.previous_page_number }}"> Previous </a></li>
+                                          {% else %}
+                                          <li style="margin-right:10px " class="disabled"><span>Previous</span></li>
+                                          {% endif %} {% endcomment %}
+                                          {% comment %} {% for i in users.paginator.page_range %}
+                                          {% if users.number == i %}
+                                             <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                          {% else %}
+                                             <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                          {% endif %}
+                                          {% endfor %} {% endcomment %}
+                                          {% comment %} {% if users.has_next %}
+                                          <li style="margin-right:10px;  "><a href="?page={{ users.next_page_number }}">Next</a></li>
+                                          {% else %}
+                                          <li style="margin-right:10px  " class="disabled"><span style="">Next</span></li>
+                                          {% endif %}
+                                       </ul>
+                                    {% endif %} {% endcomment %}
+                                    </div>
+                                
+
+                                    
+                                    {% comment %} <tr class="night-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>9 Feb 2022</td>
+                                       <td>7:30AM - 5:00PM</td>
+                                       <td>Smith Abraham</td>
+                                       <td>Sr. Developer</td>
+                                       <td>x1.5</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="day-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>5 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td><h5>Smith Jhone</h5></td>
+                                       <td>Abc</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="night-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>3 Feb 2022</td>
+                                       <td>9:30AM - 5:00PM</td>
+                                       <td>Deni Abraham</td>
+                                       <td>Sr. Developer</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="day-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>4 Feb 2022</td>
+                                       <td>7:30AM - 5:00PM</td>
+                                       <td><h5>Monserrat Abraham</h5></td>
+                                       <td>Abc</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="night-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>3 Feb 2022</td>
+                                       <td>9:30AM - 5:00PM</td>
+                                       <td>Deni Abraham</td>
+                                       <td>Developer</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="day-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>5 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td><h5>Smith Jhone</h5></td>
+                                       <td>Abc</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="night-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>3 Feb 2022</td>
+                                       <td>9:30AM - 5:00PM</td>
+                                       <td>Deni Abraham</td>
+                                       <td>Sr. Developer</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr> {% endcomment %}
+                                   
+                                </tbody>
+
+                              </table>
+                              
+                           </div>
+                       </div>
+                       
+                       <div class="tab-pane fade" id="pills-pending" role="tabpanel" aria-labelledby="pills-pending-tab">
+                           <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Location</th>
+                                    <th>Shift Date</th>
+                                    <th>Shift Time</th>
+                                    <th>Staff Name</th>
+
+                                    <th>Position</th>
+                                    <th>Wages Multiplier</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="tb_input_box" id="pending">
+                                 
+                                     {% for i in obj3 %}
+                                    <tr>
+                                        {% if i.applicant.address %}
+                                       <td>{{i.applicant.address}}</td>
+                                       {% else %}
+                                        <td>No Applicant found</td>
+                                       {% endif %}
+                                       <td>{{i.date}}</td>
+                                       <td>{{i.in_time}} - {{i.out_time}}</td>
+                                       {% if i.applicant.fname %}
+                                        <td>{{i.applicant.fname}}</td>
+                                       {% else %}
+                                       <td>No Applicant found</td>
+                                       {% endif %}
+                                       <td>{{i.position.name}}</td>
+                                       <td>{{i.wages}}</td>
+                                       
+                                    
+                                    
+                                       <td><span class="pending-ar">Pending</span></td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                                <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    {% endfor %}
+                                    
+                                    <div id="test">
+                                    </div>
+                                 {% comment %} {% if users.has_other_pages %}
+                                    <ul class="pagination" style=" float: right; ">
+                                       {% if users.has_previous %}
+                                          <li style="margin-right:10px "><a onclick="page()" type="button" href="?page={{ users.previous_page_number }}"> Previous </a></li>
+                                       {% else %}
+                                          <li style="margin-right:10px " class="disabled"><span>Previous</span></li>
+                                       {% endif %} {% endcomment %}
+                                       {% comment %} {% for i in users.paginator.page_range %}
+                                          {% if users.number == i %}
+                                          <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                          {% else %}
+                                          <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                          {% endif %}
+                                       {% endfor %} {% endcomment %}
+                                       {% comment %} {% if users.has_next %}
+                                          <li style="margin-right:10px;  "><a onclick="page()" type="button" href="?page={{ users.next_page_number }}">Next</a></li>
+                                       {% else %}
+                                          <li style="margin-right:10px  " class="disabled"><span style="">Next</span></li>
+                                       {% endif %}
+                                    </ul>
+                                 {% endif %} {% endcomment %}
+                                    {% comment %} <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td>Sr. Developer</td>
+                                       <td>x1.5<span class="amend-files"><img src="images/amend-files.svg">Amend</span></td>
+                                       <td><span class="pending-ar">Pending</span></td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                                <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td>Manager</td>
+                                       <td>x1.75<span class="amend-files"><img src="images/amend-files.svg">Amend</span></td>
+                                       <td><span class="pending-ar">Pending</span></td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                                <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td>Lorem Ipsum</td>
+                                       <td>x1.15<span class="amend-files"><img src="images/amend-files.svg">Amend</span></td>
+                                       <td><span class="pending-ar">Pending</span></td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                                <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td>Sr. Developer</td>
+                                       <td>x1.25<span class="amend-files"><img src="images/amend-files.svg">Amend</span></td>
+                                       <td><span class="pending-ar">Pending</span></td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                                <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td>Manager</td>
+                                       <td>x1.75<span class="amend-files"><img src="images/amend-files.svg">Amend</span></td>
+                                       <td><span class="pending-ar">Pending</span></td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                                <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td>Lorem Ipsum</td>
+                                       <td>x1.45<span class="amend-files"><img src="images/amend-files.svg">Amend</span></td>
+                                       <td><span class="pending-ar">Pending</span></td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                                <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td>Sr. Developer</td>
+                                       <td>x1.75<span class="amend-files"><img src="images/amend-files.svg">Amend</span></td>
+                                       <td><span class="pending-ar">Pending</span></td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                                <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr> {% endcomment %}
+
+                                </tbody>
+                              </table>
+                           </div>
+                       </div>
+                       <div class="tab-pane fade" id="pills-completed" role="tabpanel" aria-labelledby="pills-completed-tab">
+                           <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Location</th>
+                                    <th>Shift Date</th>
+                                    <th>Shift Time</th>
+                                    <th>Staff Name</th>
+                                    <th>Position</th>
+                                    <th>Wages Multiplier</th>
+                                    <th>Status</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="tb_input_box" id='complete'>
+                                   {% for i in completed %}
+                                    <tr>
+                                       <td>{{i.applicant.address}}</td>
+                                       <td>{{i.date}}</td>
+                                       <td>{{i.in_time}} - {{i.out_time}}</td>
+                                        <td>{{i.applicant.fname}}</td>
+                                       <td>{{i.position.name}}</td>
+                                       <td>{{i.wages}}</td>
+                                     
+                                       <td><span class="unfilled-text">Unfilled</span></td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% comment %} <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td><span class="amend-files">Lorem Ipsum</span></td>
+                                       <td>Sr. Developer</td>
+                                       <td>x1.5</td>
+                                       <td><span class="completed-text">Completed</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td><span class="amend-files">-</span></td>
+                                       <td>Manager</td>
+                                       <td>x1.25</td>
+                                       <td><span class="unfilled-text">Unfilled</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td><span class="amend-files">-</span></td>
+                                       <td>Lorem Ipsum</td>
+                                       <td>x1.25</td>
+                                       <td><span class="unfilled-text">Unfilled</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td><span class="amend-files">-</span></td>
+                                       <td>Manager</td>
+                                       <td>x1.25</td>
+                                       <td><span class="unfilled-text">Unfilled</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td><span class="amend-files">Smith Johan</span></td>
+                                       <td>Sr. Developer</td>
+                                       <td>x1.5</td>
+                                       <td><span class="completed-text">Completed</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td><span class="amend-files">Monserrat Abraham</span></td>
+                                       <td>Lorem Ipsum</td>
+                                       <td>x1.25</td>
+                                       <td><span class="completed-text">Completed</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td><span class="amend-files">Monserrat Abraham</span></td>
+                                       <td>Lorem Ipsum</td>
+                                       <td>x1.25</td>
+                                       <td><span class="completed-text">Completed</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td><span class="amend-files">Lorem Ipsum</span></td>
+                                       <td>Manager</td>
+                                       <td>x1.25</td>
+                                       <td><span class="completed-text">Completed</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td><span class="amend-files">Lorem Ipsum</span></td>
+                                       <td>Manager</td>
+                                       <td>x1.25</td>
+                                       <td><span class="completed-text">Completed</span></td>
+                                    </tr> {% endcomment %}
+                                </tbody>
+                              </table>
+                           </div>
+                       </div>
+                        <div id="test">
+                        </div>
+                     
+                       {% comment %} <div id="test"></div> {% endcomment %}
+                     </div>
+                  <!-- ------tabing-time-sheet------ -->
+               </div>
+            </div>
+      </section>
+
+
+      <div class="modal fade time-mds" id="examplecancel" aria-hidden="true" aria-labelledby="examplecancelLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+          <!--     <h5 class="modal-title" id="examplecancelLabel">Modal 1</h5> -->
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                  <div class="cancel-shift">
+                     <h5>Are you sure to cancel the shift?</h5>
+                     <div class="approv-details-query">
+                        <a href="/manage/shift/" class="btn btn-outline" href="javascript:;">Yes</a>
+                        <a class="btn" href="javascript:;" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">No</a>
+                     </div>
+                 </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade time-mds" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- <h5 class="modal-title" id="exampleModalToggleLabel2">Modal 2</h5> -->
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                 <div class="cancel-shift">
+                     <h5>Wages Multiplier</h5>
+                     <ul class="multiplier-list">
+                        <li class="active">
+                           <a href="javascript:;">x1.25</a>
+                        </li>
+                        <li>
+                           <a href="javascript:;">x1.5</a>
+                        </li>
+                        <li>
+                           <a href="javascript:;">x1.75</a>
+                        </li>
+                     </ul>
+                     <div class="approv-details-query">
+                        <a class="btn" href="javascript:void(0);" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Submit</a>
+                     </div>
+                 </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+   </div>
+
+
+<script>
+
+   $(document).ready(()=>{
+     let data= localStorage.getItem("select-tab");
+      $('#'+data).click();
+   })
+
+   function select_tabs(id){
+    localStorage.setItem("select-tab", id);
+   }
+
+   function Search(){
+      let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value; 
+      let s = $('#sorting').val();
+      let tab = $('.nav-link.active').attr('data-name');
+      console.log(tab,"dddddddddddddddddddddd")
+ 
+
+      console.log(s,"dddddddddddddddddddddd")
+       $.ajax({
+          type: "POST",
+          url: "/manage/shift/search/",
+          headers: { 'X-CSRFToken': csrftoken },
+
+          data:
+         {
+          s:s,
+          tab:tab,
+         },
+           
+         success:function(res){        
+               if(tab==1){
+                  $('#newpost').html(res);
+                  
+               }else if(tab==2){
+                  $('#accept').html(res);
+                  
+               }else if(tab==3){
+                  $('#pending').html(res);
+                  
+               }else{
+                  $('#complete').html(res);
+               }   
+          console.log(res);
+          //console.log('success');
+          //toastr.success(res.message);
+         
+         
+         
+         
+            //$('#informationModal').modal('show');
+          
+
+        },
+        error:function(res){
+          console.log(res)
+          toastr.error(res.responseJSON.message);
+          
+        }
+  });
+ 
+
+   }
+</script>
+
+ <script>
+   function sorting(){
+
+      let sorts = $('#sort').val();
+      let tab = $('.nav-link.active').attr('data-name');
+
+      $.ajax({
+          type: "GET",
+          url: "/manage/shift/sorting/",
+          data:
+         {
+           tab:tab,
+          sorts:sorts,
+         },
+      success:function(res){        
+        if(tab==1){
+         $('#newpost').html(res);
+         
+        }else if(tab==2){
+         $('#accept').html(res);
+         
+        }else if(tab==3){
+         $('#pending').html(res);
+         
+        }else{
+           $('#complete').html(res);
+        }   
+          console.log(res);
+          //console.log('success');
+          //toastr.success(res.message);
+         
+         
+         
+         
+         
+         {% comment %} $('#test').html(res); {% endcomment %}
+          //$('#informationModal').modal('show');
+          
+
+        },
+        error:function(res){
+          console.log(res)
+          toastr.error(res.responseJSON.message);
+          
+        }
+  });
+   }
+</script>
+<script>
+   function page(){
+      let tab = $('.nav-link.active').attr('data-name'); 
+      alert(tab)
+      
+   }
+
+
+{% comment %} 
+
+$(document).ready(function(){
+  $("#sorting").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $(".tb_input_box tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+    
+  });
+}); {% endcomment %}
+
+</script>
+
+{% endblock content %}

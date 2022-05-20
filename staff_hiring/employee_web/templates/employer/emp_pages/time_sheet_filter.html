@@ -1,0 +1,60 @@
+{% if tab == '1' %}
+    {% for i in query %}
+       <tr>
+          <td>{{i.shift.employee.company}}</td>
+          <td>{{i.user.fname}} {{i.user.lname}}</td>
+          <td>{{i.position}}</td>
+          <td>{{i.date}}</td>
+          <td>{{i.time_in}} - {{i.time_out}}</td>
+          <td>{{i.break_time}}</td>
+          <td>9 Hours</td>
+          <td>x1.25</td>
+          <td>
+             <div class="approv-ya-query">
+                <a class="btn" href="{% url 'approveFormSubmit' i.id %}">Approve</a>
+                <a class="btn btn-outline" href="{% url 'querySubmit' i.id %}">Query</a>
+             </div>
+          </td>
+       </tr>
+       {% endfor %}
+       
+ {% elif tab == '2' %}
+    {% for i in query %}
+     <tr>
+        <td>{{i.shift.employee.company}}</td>
+        <td>{{i.id}}</td>
+        <td>{{i.shift.employee.fname}} {{i.shift.employee.lname}}</td>
+        <td>{{i.position}}</td>
+        <td>{{i.position}}</td>
+        <td>{{i.time_in}} - {{i.time_out}}</td>
+        <td>{{i.break_time}}</td>
+        <td>9 Hours</td>
+        <td>x1.25</td>
+        <td>
+           <div class="approv-ya-query">
+              <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampledetails" onclick='queryData(2)' >View Query</a>
+           </div>
+        </td>
+     </tr>
+     {% endfor %}
+     
+   {% else %}
+     {% for i in query %}
+     <tr>
+        <td>
+           <div class="approve-img">
+              <figure><img src="images/ellipse-1.png"></figure>
+           </div>
+        </td>
+        <td>{{i.shift.employee.company}}</td>
+        <td>{{i.shift.employee.fname}} {{i.shift.employee.lname}}</td>
+        <td>{{i.position}}</td>
+        <td>{{i.date}}</td>
+        <td>{{i.time_in}}- {{i.time_out}}</td>
+        <td>{{i.break_time}}</td>
+        <td>8 Hours</td>
+        <td>x1.25</td>
+        <td> <span class="rating_approve"><i class="ri-star-fill"></i>4.5</span></td>
+     </tr>
+     {% endfor %}
+   {% endif %}

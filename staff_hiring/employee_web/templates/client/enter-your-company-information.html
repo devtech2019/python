@@ -1,0 +1,276 @@
+{% extends 'basefile/base.html' %}
+{% load static %}
+{% block content %}
+
+   <div class="wrapper-inner bg-sky">
+    
+      <section class="forms_content_sec from-wrap ptb">
+         <div class="container">
+            <div class="head-line-sd">
+               <h2>Enter your company information</h2>
+            </div>
+            <div class="form-box-out">
+               <form method="POST" id="emp-company-information">
+                 {% csrf_token %}
+                  <div class="row">
+                       <div class="col-md-12">
+                         <div class="form-group">
+                           <label class="form-label">Company Name</label>
+                           
+
+                           <input  type="text" name="Cname"class="form-control" data-rule-required="true" data-rule-noSpace="true"  placeholder="Enter Your Company Name">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">Phone Number </label>
+                           <input  type="tel" data-rule-required="true" data-rule-noSpace="true" data-rule-minLength="8" data-rule-maxLength="15" name="mob_num"class="form-control" placeholder="Enter Your Company Mobile Number">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">Fax</label>
+                           <input  type="text" data-rule-required="true" data-rule-noSpace="true" data-rule-minLength="8" data-rule-maxLength="15"  name="fax"class="form-control" placeholder="Enter fax number">
+                         </div>
+                       </div>
+                       <div class="col-md-12">
+                         <div class="form-group">
+                           <label class="form-label">Email address</label>
+                           <input  type="email" data-rule-email="true" data-rule-noSpace="true" name="email" value="{{user.email}}" class="form-control" placeholder="Enter Your Email Address">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">Register Company Address</label>
+                           <input  id="autocom" data-rule-noSpace="true" type="text" name="address"  class="form-control" placeholder="Enter register company address">
+                         </div>
+                       </div>
+                        {% comment %} <div  class="col-md-6">
+                          <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">Country</label>
+
+            
+                          <select onchange="select_country()" id="country" name="country" class="form-select"
+                              aria-label="Default select example">
+                              <option selected disabled> Select Option </option>
+                              {% for i in country %}
+                              <option value="{{i.id}}">{{i.name}}</option>
+
+                              {% endfor %}
+                  
+                          </select>
+                        </div>
+                      </div>
+                         <div  class="col-md-6">
+                          <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">State</label>
+
+            
+                         <select id="state" onchange="select_state_id()" name="state" class="form-select" aria-label="Default select example">
+                                    <option selected disabled> Select Option </option>
+                                    <option value="0"></option>
+                                </select>
+                        </div>
+                      </div>
+                         <div  class="col-md-6">
+                          <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">City</label>
+
+            
+                          <select id="city" onchange="select_city_id()" name="city" class="form-select"
+                                    aria-label="Default select example">
+                                    <option selected disabled> Select Option </option>
+                                    <option value="0"></option>
+                                </select>
+                        </div>
+                      </div> {% endcomment %}
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">Number of year in business</label>
+                           <input  type="number" data-rule-maxLength="2" data-rule-noSpace="true" name="year_in_bussiness" class="form-control" placeholder="Enter number of year in business">
+                         </div>
+                       </div>
+  {% comment %} <input type="radio" id="html" name="fav_language" value="sole">
+  <label for="html">HTML</label><br>
+  <input type="radio" id="css" name="fav_language" value="partnership">
+  <label for="css">CSS</label><br>
+  <input type="radio" id="javascript" name="fav_language" value="corporation">
+  <label for="javascript">JavaScript</label> {% endcomment %}
+
+                       <div class="col-md-12">
+                        <div class="radio-outer">
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio"  onchange="prpertychange()" name="propertytype" value="1" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                              Sole proprietorship
+                            </label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" onchange="prpertychange()" type="radio" name="propertytype" value="3" id="flexRadioDefault2">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                              Corporation
+                            </label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input"  type="radio" onchange="prpertychange()"  name="propertytype" value="2" id="flexRadioDefault3">
+                            <label class="form-check-label" for="flexRadioDefault3">
+                              Partnership
+                            </label>
+                          </div>
+
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" data-rule-noSpace="true" type="radio" onchange="prpertychange()"  name="propertytype" value="4" id="flexRadioDefault4">
+                            <label class="form-check-label" for="flexRadioDefault4">
+                              Other
+                            </label>
+                          </div>
+                        </div>
+                         
+                       </div>
+
+                       <div class="col-md-6" id="sole" style="display:none;">
+                         <div class="form-group">
+                           <label class="form-label">Sole proprietorship</label>
+                            
+                           <input  type="text" name="Sole" data-rule-noSpace="true" class="form-control" placeholder="Enter sole proprietorship">
+                         </div>
+                       </div>
+                       <div class="col-md-6" id="partnership" style="display:none;" >
+                         <div class="form-group">
+                           <label class="form-label">Partnership</label>
+                           <input  type="text" name="partnership" data-rule-required="true" data-rule-noSpace="true" class="form-control" placeholder="Enter partnership">
+                         </div>
+                       </div>
+                       <div class="col-md-6" id="corporation" style="display:none;">
+                         <div class="form-group">
+                           <label class="form-label">Corporation</label>
+                           <input  type="text" data-rule-required="true" data-rule-noSpace="true" name="corporation" class="form-control" placeholder="Enter corporation">
+                         </div>
+                       </div>
+                       <div class="col-md-6" id="other" style="display:none;" >
+                         <div class="form-group">
+                           <label class="form-label">Other</label>
+                           <input  type="text" data-rule-required="true" data-rule-noSpace="true" name="other" class="form-control" placeholder="Enter other">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">Tax</label>
+                           <input  type="tel" data-rule-required="true" name="tax" class="form-control" placeholder="Enter tax">
+                         </div>
+                       </div>
+                       <div class="col-md-12">
+                           <div class="text-center mt-3">
+                               <button type="submit" class="btn">Submit</button>
+                           </div>
+                       </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </section>
+
+   </div>
+
+{% include "footer.html" %}
+{% comment %} <script>
+$('input[name=fav_language]').click(function(){
+  var id = $(this).val();
+  
+  
+  $('#'+id).removeClass('d-none');
+  var solo ='solo';
+  var corporation ='corporation';
+  var partnership = 'partnership';
+  const cars = ["solo", "corporation", "partnership"];
+  if(){
+    if(!($('#'+i).hasClass('d-none'))){
+        $('#'+i).addClass('d-none');
+    }
+    
+  }
+  $('#corporation').removeClass('d-none');
+  $('#partnership').removeClass('d-none');
+});
+
+</script> {% endcomment %}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlljhS4LLf_864PqbvXtDGXver091jLiI&callback=initMap&libraries=places&v=weekly" async></script>
+
+<script>
+    function initMap()
+    {
+      var input = document.getElementById('autocom');
+      var options =     {
+              types: ['geocode']
+              
+          
+          };
+        var input= document.getElementById('autocom')
+        autocomplete = new google.maps.places.Autocomplete(input, options);
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var place = autocomplete.getPlace();
+        
+        let lat = place.geometry.location.lat()
+        let long = place.geometry.location.lng()
+        console.log(lat,long )
+        $('#latitude').val(lat);
+        $('#longitude').val(long);
+       
+      
+            //alert("This function is working!");
+            //alert(place.name);
+           // alert(place.address_components[0].long_name);
+
+        });
+       //var place = autocomplete.getPlace();
+        //console.log(autocomplete ,'dddddd')
+        //document.getElementById('autocom').value = place.geometry.location.lat();
+
+    }
+    
+   
+</script>
+<script>
+  setTimeout(() => {
+    $('.alert').fadeOut('fast');
+  }, 3000);
+</script>
+<script>
+  function prpertychange()
+  {
+ var type = $('input[name="propertytype"]:checked').val();
+ if(type==1)
+ {
+  $('#sole').css("display","block");
+  $('#corporation').css("display","none");
+  $('#partnership').css("display","none");
+  $('#other').css("display","none")
+
+ }else if(type ==3)
+ {
+  $('#sole').css("display","none");
+  $('#corporation').css("display","block");
+  $('#partnership').css("display","none");
+  $('#other').css("display","none")
+
+ }else if(type ==4){
+  $('#other').css("display","block")
+ $('#sole').css("display","none");
+  $('#corporation').css("display","none");
+  $('#partnership').css("display","none");
+
+ }
+ else
+ {
+  $('#sole').css("display","none");
+  $('#corporation').css("display","none");
+  $('#partnership').css("display","block");
+  $('#other').css("display","none")
+
+ }
+
+  }
+
+</script>
+
+{% endblock content %}

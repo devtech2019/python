@@ -1,0 +1,248 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'base/header.html'%}
+
+<div class="admin-inner-panel">
+    <div class="admin-inner-left">
+        {% include 'base/navbar.html' %}
+    </div>
+    <div class="admin-inner-right">
+        
+             <div class="card" style="width:98%;">
+
+          <div class="card-body ">
+            <h4 class="card-title">Cms Pages / List</h4>
+              <h3 style="color:red">{{u}}</h3>
+             
+                <div class="table-responsive">
+
+                            <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Sr.No
+                                    </th>
+                                    
+                                   
+
+                                    <th>
+                                        Title                                    
+                                        </th>
+                                    <th>
+                                       Slug
+                                    </th>
+                                    <th>
+                                       Content
+                                    </th>
+                             
+                                    <th>
+                                        Action
+                                    </th>
+                                    <!-- <th>
+                                        Delete
+                                    </th> -->
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for i in terms %}
+                                {% if i.soft_del_status == 0 %}
+
+                                <tr>
+                                    <td>
+                                        {{ forloop.counter }}
+                                    </td>
+                                    
+                                    <td>
+                                        {{i.title}}
+
+                                    </td>
+                                    <td>
+                                      {{i.slug}}  
+
+                                    </td>
+                                    <td>
+
+                                        {{i.content|safe|truncatewords:15 }}
+
+                                    </td>
+                               
+
+ 
+                                    <td>
+                                      {% if perms.staff_admin.change_pages %}
+
+                                        <a class="btn btn-inverse-success btn-fw" 
+                                            href="/admin/edit_Cms_Pages/{{i.slug}}">Edit</a>
+                                            {% endif %}
+                                    </td>
+                                    <!-- <td>
+                                        <a class="btn btn-danger btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                                            href="/admin/deltermcondition/{{i.slug}}">Delete</a>
+
+                                    </td> -->
+
+                                </tr>
+                             
+                              {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} <div class="container-fluid ">
+    <div class="row">
+        <div class="col-md-2" style="margin-top:95px ;">
+            {% include 'base/navbar.html' %}
+
+        </div>
+        <div class="col-md-10" style="margin-top:120px ;">
+            <div class="card">
+
+                <div class="card-body">
+                    <h4 class="card-title">Pages</h4>
+
+                    <div class="table-responsive">
+                        {% if messages %}
+                        
+                        <div class="table-responsive">
+                            {% for message in messages %}
+                            {% if message.tags == 'success'%}
+                            <div class="alert alert-success">
+                                {{message}}
+                                {% elif message.tags == 'error' %}
+                                <div class="alert alert-danger">
+                                    {{message}}
+                                    {% endif %}
+                                </div>
+                        
+                                {% endfor %}
+                                {% endif %}
+                        <!-- <a href="/admin/termcondition/"
+                            class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                            style="text-align: right; margin-left: 1300px;"> Add term and condition </a> -->
+
+                        <table class="table table-striped" style="margin-top: 30px;">
+
+
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Sr.No
+                                    </th>
+                                    <th>
+                                        Title                                    
+                                        </th>
+                                    <th>
+                                       Content
+                             
+                                    <th>
+                                        Action
+                                    </th>
+                                    <!-- <th>
+                                        Delete
+                                    </th> -->
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for i in terms %}
+                                {% if i.soft_del_status == 0 %}
+
+                                <tr>
+                                    <td>
+                                        {{ forloop.counter }}
+                                    </td>
+
+                                    <td>
+                                        {{i.title}}
+
+                                    </td>
+                                    <td>
+
+                                        {{i.content|safe|truncatewords:15 }}
+
+                                    </td>
+                               
+
+ 
+                                    <td>
+                                      {% if perms.staff_admin.change_pages %}
+
+                                        <a class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                                            href="/admin/edit_Cms_Pages/{{i.slug}}">Edit</a>
+                                            {% endif %}
+                                    </td>
+                                    <!-- <td>
+                                        <a class="btn btn-danger btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                                            href="/admin/deltermcondition/{{i.slug}}">Delete</a>
+
+                                    </td> -->
+
+                                </tr>
+                             
+                              {% endif %}
+                                {% endfor %}
+                            </tbody>
+
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+ {% endcomment %}
+
+<script>
+    setTimeout(() => {
+        $('.alert').fadeOut('fast');
+    }, 3000);
+</script>
+
+
+
+{% endblock content %}

@@ -1,0 +1,165 @@
+{% extends 'basefile/base.html' %}
+{% load static %}
+{% include 'header.html' %}
+{% comment %} <?php include(""); ?>  {% endcomment %}
+{% block content %}
+  
+   <div class="wrapper-inner bg-sky">
+   
+      <section class="view-query-wrap">
+            <div class="container">
+               <div class="head-line-sd">
+                  <h2>Query Details</h2>
+               </div>
+               <div class="view-query-accodion">
+                  <div class="head-query">
+                     <figure><img src="{% static 'images/team4.png' %}"></figure>
+                     <figcaption>
+                        <h3>{{q.employee.fname}} {{q.employee.lname}}</h3>
+                        <h6>{{q.postion.name}}</h6>
+                        <ul>
+                           <li>{{q.timesheet.date}}</li>
+                           <li>{{q.timesheet.time_in}} - {{q.timesheet.time_out}}</li>
+                        </ul>
+                     </figcaption>
+                  </div>
+
+                  <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                 <div class="accordion-text-collapse">
+                                   <h3>{{q.name}}</h3>
+                                   <h6>{{q.postion.name}}</h6>
+                                </div>
+                                <span class="timer_flex">10 Feb 2022</span>
+                              </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                              <div class="accordion-body items-inner-accordion">
+                                 {% for i in details %}
+                                 
+                                 <ul class="left_msg_sec">
+                                    {% if i.sender_id != request.user.id %} 
+                                    <li class="left_msg" >
+                                       <article>
+                                          <h6>Admin</h6>
+                                        
+                                          <p>{{i.message|safe}}</p>
+                                   
+                                       </article>
+                                    </li>
+                                    {% endif %}
+                                       {% if i.sender_id == request.user.id%}
+                                    <li class="right_msg">
+                                       <article>
+                                          <h6>You</h6>
+                                       
+                                          <p>{{i.message}}</p>
+                                       </article>
+                                    </li>
+                                  {% endif %}
+
+                                 </ul>
+                                 {% endfor %}
+                                 {% if resolve_query.resolve_status == True %}
+                                  <div id="hi"> 
+
+                                  </div>
+                                  {% comment %} <img src="{% static 'images/resolved.jpeg' %}"> {% endcomment %}
+                                    <h3 id="" style="color:green" > Resolved </h3>
+
+                               
+                                 {% else %}
+                                 <form method="POST" id="emps">
+                                    {% csrf_token %}
+
+                                 <div>
+                                    <input id="emp_reply" data-rule-required="true" data-rule-noSpace="true" name="emp_reply" type="text" class="form-control" placeholder="Enter Your reply here">
+                                    <br>
+                                    <button onclick="emp()" class="btn" id="em">Send message</button>
+                                    <button onclick="resolve()"  type="button" id="re" class="btn">Resolved</button>
+                                    <input id="time_id" type="hidden" value="{{q.timesheet_id}}">
+                                 </div>
+                              </form>
+                              {% endif %}
+                              </div>
+                            </div>
+                        </div>
+                    
+                     </div>
+               </div>
+            </div>
+      </section>
+
+   </div>
+
+
+{% include 'footer.html' %}
+   {% comment %} <?php include("f"); ?> {% endcomment %}
+<script>
+  $('#emps').validate()
+  return false;
+</script>
+<script>
+   function emp(){
+      if (!$('#emps').valid()){
+         return false;
+      }
+            let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+            let emp_reply = $('#emp_reply').val()
+            $.ajax({
+               type: "POST",
+               headers: { 'X-CSRFToken': csrftoken }, 
+               url: "/emp_reply/",
+               data: {
+               emp_reply:emp_reply
+
+               },            
+               success:function(res){ 
+                  $('#emp_reply').trigger()
+                  console.log(res)       
+               
+               }
+            }); 
+      }
+   </script>
+<script>
+  function resolve(){
+   let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+     let resolve_status = "True"
+     let timesheet_id= $('#time_id').val()
+     
+     alert(resolve_status)
+     $.ajax({
+        type: "POST",
+         headers: { 'X-CSRFToken': csrftoken },
+         url: "/resolve_status/",
+         data: {
+         timesheet_id:timesheet_id,
+         resolve_status:resolve_status
+
+         },            
+         success:function(res){ 
+           
+{% comment %} console.log(res.save_status) {% endcomment %}
+     if(res.save_status=="True"){
+      $('#emp_reply').css("display","none")
+     $('#collapseOne').addClass('hide')
+      $('#collapseOne').removeClass('show')
+      $('#emp_reply').css("display","none")
+      $('#em').css("display","none")
+      $('#re').css("display","none")
+      h = "<h3> Resolved </h3>"
+      $('#hi').html(h) 
+            }       
+         }
+     })    
+
+  }
+</script>
+   {% endblock content %}
+
+{% comment %} <?php include("footer.php"); ?> {% endcomment %}

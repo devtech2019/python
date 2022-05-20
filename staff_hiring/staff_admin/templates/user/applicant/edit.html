@@ -1,0 +1,352 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'base/header.html'%}
+
+<body style="background:#f4f5f7">
+<div class="admin-inner-panel">
+    <div class="admin-inner-left">
+        {% include 'base/navbar.html' %}
+    </div>
+<div class="admin-inner-right">
+            <form action="" id="formss" method="POST">
+                {% csrf_token %}
+                <div class="card" style="width:95%;">
+                    <div class="card-body">
+                        <h4 class="card-title">Edit Applicant Details</h4>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <input class="form-control" type="hidden" value="{{users.slug}}" name="slug">
+                                <input class="form-control" type="hidden" value="{{users.latitude}}" name="latitude" id="latitude">
+                                    <input class="form-control" type="hidden" value="{{users.longitude}}" name="longitude" id="longitude">
+                                <input class="form-control" type="hidden" value="{{users.0.id}}" name="id">
+
+                                                        <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        First Name </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                
+                                        <input class="form-control" type="text" value="{{users.fname}}" name="FName">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Last Name </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                
+                                        <input class="form-control" type="text" value="{{users.lname}}" name="LName">
+                                    </div>
+                                </div>
+                                
+                          <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Email </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input readonly class="form-control" type="email" value="{{users.email}}" name="email">
+                                    </div>
+                                </div>
+                               
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Mobile Number </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                    <input type="tel"  value="{{users.mobile_number}} " name="ee" placeholder="Enter Mobile Number" id="phone_cus_register" class="form-control"
+                                        onblur="test()" pattern="[0-9]+"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength=14>
+                                    <input type="hidden" hidden name="co11" id="co11" value="" >
+                                    <input type="text" id="phone1_cus_register" value="" name="phone" hidden>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Job Position </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                
+                                        <select onchange="job_position()" id="job" name="job" class="form-select" aria-label="Default select example">
+                                            <option selected disabled> Select Option </option>
+                                            {% for i in job %}
+                                            {% if i.soft_del_status == 0%}
+                                            <option {% if i.id == users.position_id %} selected {% endif %} value="{{i.id}}">{{i.name}}</option>
+                                            {% endif %}
+                                            {% endfor %}
+                                
+                                        </select>
+                                    </div>
+                                
+                                </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-2 col-lg-2 col-form-label">
+                                            Experince (Year & month ) </label>
+                                            
+                                        <div class="col-lg-5 col-xl-5">
+                                            <select   id="job" name="year" class="form-select"
+                                                aria-label="Default select example">
+                                                <option selected disabled> Select Year </option>
+                                            {% for i in year_list %}
+                                                <option {% if i == years%} selected {% endif %}  value="{{i}}">{{i}}</option>
+                                            {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-5 col-xl-5">
+                                            <select  id="job" name="month" class="form-select"
+                                                aria-label="Default select example">
+                                                <option selected disabled> Select Month </option>
+                                            {% for i in month_list %}
+                                                <option {% if i == months %} selected {% endif %} value="{{i}}" >{{i}}</option>
+                                        {% endfor %}
+                                            </select>
+                                         </div>  
+                                    </div>
+                              <div class="form-group row">
+                            <label class="col-xl-2 col-lg-2 col-form-label">
+                                Postal Code </label>
+                            <div class="col-lg-10 col-xl-10">
+                                <input onchange="select_postal_code()"  oninput="zipcode()" placeholder="indra nagar jaipur" id="Postal_code" class="form-control"
+                                    type="text" value="{{users.post_code}}" name="Postal_code">
+                            </div>
+                        </div>
+                         <div class="form-group row">
+                            <label class="col-xl-2 col-lg-2 col-form-label">
+                                Country </label>
+                            <div class="col-lg-10 col-xl-10">
+                                
+                            <input class="form-control" type="text" id="country" value="{{users.country}}" name="country" >
+
+                                {% comment %} <select onchange="select_country()" id="country" name="country" class="form-select" {% endcomment %}
+                                    {% comment %} aria-label="Default select example">
+                                    {% for i in country %}
+                                    <option {% if i.id == users.country.id %}selected{% endif %} value="{{i.id}}">{{i.name}}</option>
+                        
+                                    {% endfor %}
+                                </select> {% endcomment %}
+                        
+                            </div>
+                        
+                        </div>
+                        {% comment %} <div class="form-group row">
+                            <label class="col-xl-2 col-lg-2 col-form-label">
+                                State </label>
+                            <div class="col-lg-10 col-xl-10">
+                            <input class="form-control" type="text" id="state" value="{{users.state}}" name="state" > {% endcomment %}
+   
+                                {% comment %} <select id="state" onchange="select_state_id()" name="state" class="form-select"
+                                    aria-label="Default select example">
+                                    <option disabled> Select Option </option>
+                        
+                                    {% for i in state %}
+                                    <option {% if i.id == users.state_id %}selected{% endif %} value="{{i.id}}">{{i.name}}</option>
+                                    {% endfor %}
+                        
+                                </select> {% endcomment %}
+                            {% comment %} </div>
+                        </div> {% endcomment %}
+                        <div class="form-group row">
+                            <label class="col-xl-2 col-lg-2 col-form-label">
+                                City </label>
+                            <div class="col-lg-10 col-xl-10">
+                        <input onchange="select_postal_code()" placeholder="Enter Your City Here" id="city" class="form-control"
+                                    type="text" value="{{users.city}}" name="city">
+                            </div>
+                        
+                        </div>
+                        
+                      
+                        <div class="form-group row">
+                            <label class="col-xl-2 col-lg-2 col-form-label">
+                                Address </label>
+                            <div class="col-lg-10 col-xl-10">
+                                <input placeholder="Enter Your Address Here" id="" class="form-control" type="text"
+                                    value="{{users.address}}" name="address">
+                            </div>
+                        </div>
+                                <div class="form-group row">
+                                    <!-- <label class="col-xl-3 col-lg-3 col-form-label">
+                   usertype	</label> -->
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input class="form-control" type="hidden" value="{{users.roll}}" name="app">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <button type="submit" class="btn btn-inverse-success btn-fw">Submit</button>
+                <a  href="/admin/applicant/" class="btn btn-in verse-dark btn-fw">Back</a>
+                    </div>
+                </div>
+
+            </form>
+
+
+<script>
+    function select_country() {
+        let p = $('#country').val();
+
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        console.log(p)
+
+        $('#select_id').submit();
+        $.ajax({
+            type: "POST",
+            url: "/admin/emp_country_ajax/",
+            headers: { 'X-CSRFToken': csrftoken },
+            data:
+            {
+                select_country: p,
+
+
+            },
+            // success: function (res) {
+            //     console.log(res.message)
+            //     toastr.success(res.message);
+
+            // },
+
+            success: function (res) {
+                option = ""
+                if (jQuery.isEmptyObject(res.result)) {
+                    option += "<option selected disabled value='0'>No  data Found</option>";
+
+                } else {
+                    option += '<option selected disabled >Select Option</option>';
+                    res.result.forEach(item => {
+                        option += '<option value=' + item.id + '>' + item.name + '</option>';
+                    });
+                }
+
+                $("#state").html(option);
+            }
+
+        });
+
+    }
+</script>
+{% comment %}
+<script>
+    function select_postal_code() {
+        let u = $('#Postal_code').val();
+
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        console.log(u)
+
+        $('#select_id').submit();
+        $.ajax({
+            type: "POST",
+            url: "/admin/emp_postal_code_ajax/",
+            headers: { 'X-CSRFToken': csrftoken },
+            data:
+            {
+                postal_code: u
+
+
+            },
+            success: function (res) {
+                console.log(res.location)
+                $("#address").val(res.location[0]);
+            }
+
+        });
+
+    }
+</script>
+
+<script>
+    function select_state_id() {
+        let v = $('#state').val();
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        console.log(v);
+        $('#select_id').submit();
+        $.ajax({
+            type: "POST",
+            url: "/admin/emp_state_city_ajax/",
+            headers: { 'X-CSRFToken': csrftoken },
+            data:
+            {
+                state_value: v
+
+
+            },
+            success: function (res) {
+                option = ""
+                if (jQuery.isEmptyObject(res.result)) {
+                    option += "<option selected disabled value='0'>No  data Found</option>";
+
+                } else {
+                    option += '<option selected disabled >Select Option</option>';
+                    res.result.forEach(item => {
+                        option += '<option value=' + item.id + '>' + item.name + '</option>';
+                    });
+                }
+
+                $("#city").html(option);
+            }
+
+        });
+    }
+    function select_city_id() {
+        let c = $('#city').val();
+        console.log(c)
+    }
+</script> {% endcomment %}
+
+<script>
+  let Postal_code =0;
+  function zipcode(){
+    Postal_code = $('#Postal_code').val()
+
+    let fetchRes = fetch(
+`https://maps.googleapis.com/maps/api/geocode/json?address=${Postal_code}&sensor=true&key=AIzaSyAlljhS4LLf_864PqbvXtDGXver091jLiI&callback=initMap&libraries=places&v=weekly`);
+        fetchRes.then(res =>
+            res.json()).then(d => {
+              console.log(d.results[0].address_components[1].long_name ,"ccccccccccccccccc")
+              console.log(d.results[0].address_components[2].long_name ,"ccccccccccccccccc")
+
+              console.log(d.results[0].address_components[3].long_name ,"ccccccccccccccccc")
+               $('#country').val(d.results[0].address_components[3].long_name)
+               $('#state').val(d.results[0].address_components[2].long_name)
+              $('#city').val(d.results[0].address_components[1].long_name)  
+            })
+
+  }
+</script>
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlljhS4LLf_864PqbvXtDGXver091jLiI&callback=initMap&libraries=places&v=weekly" async></script>
+
+<script>
+    function initMap()
+    {
+      var input = document.getElementById('autocom');
+      var options =     {
+              types: ['geocode']
+              
+          
+          };
+        var input= document.getElementById('autocom')
+        autocomplete = new google.maps.places.Autocomplete(input, options);
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var place = autocomplete.getPlace();
+        
+        let lat = place.geometry.location.lat()
+        let long = place.geometry.location.lng()
+        console.log(lat,long )
+        $('#latitude').val(lat);
+        $('#longitude').val(long);
+
+      
+            //alert("This function is working!");
+            //alert(place.name);
+           // alert(place.address_components[0].long_name);
+
+        });
+       //var place = autocomplete.getPlace();
+        //document.getElementById('autocom').value = place.geometry.location.lat();
+                
+
+    }
+    
+   
+</script>
+<script>
+  setTimeout(() => {
+    $('.alert').fadeOut('fast');
+  }, 3000);
+</script>
+{% endblock content %}

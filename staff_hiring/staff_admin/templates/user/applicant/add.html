@@ -1,0 +1,726 @@
+
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'base/header.html'%}
+<body style="background:#f4f5f7">
+<div class="admin-inner-panel">
+    <div class="admin-inner-left">
+        {% include 'base/navbar.html' %}
+    </div>
+ <div class="admin-inner-right">
+
+<form action="" id="signup" method="POST"  onsubmit="process(event)" >
+
+{% csrf_token %}
+
+
+<div class="card" style="width:95%;">
+    <div class="card-body" >
+        <h4 class="card-title">Add Applicant Details</h4>        
+<div class="loader text-center" style="margin:auto; display:none; position: absolute; left: 45%;top: 30%;">
+<img src="{% static '/media/loader2.gif' %}"  width="30px" height="30px"/>
+    </div>
+        <div class="col-md-12">
+
+            <input class="form-control" type="hidden" value="" name="id" >
+            <input class="form-control" type="hidden" id="latitude" value="" name="latitude" >
+            <input class="form-control" type="hidden" id="longitude" value="" name="longitude" >
+
+
+            <div class="form-group row">
+                <label class="col-xl-2 col-lg-2 col-form-label">
+                    First Name </label>
+                <div class="col-lg-10 col-xl-10">
+            
+                    <input data-rule-required="true"   class="form-control" type="text" placeholder="First Name" id="FName" value="" name="FName">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-2 col-lg-2 col-form-label">
+                    Last Name </label>
+                <div class="col-lg-10 col-xl-10">
+            
+                    <input data-rule-required="true" class="form-control" type="text" placeholder="Last Name" id="LName" value="" name="LName">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-2 col-lg-2 col-form-label">
+                   Email	</label>
+                <div class="col-lg-10 col-xl-10">
+                    <input data-rule-required="true" class="form-control" placeholder="Email Address" id="email" type="email" value="" name="email" >
+                </div>
+            </div>
+
+            
+                <div class="form-group row">
+
+           
+                    <label class="col-xl-2 col-lg-2 col-form-label">
+                        Mobile number </label>
+                        <div class="col-lg-10 col-xl-10">
+                        
+
+                        <!--  -->
+                            <input data-rule-required="true" type="tel" name="phone" placeholder="Enter Your Mobile Number" id="phone_cus_register"
+                                class="form-control" onblur="test()" pattern="[0-9]+"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength=14>
+                            
+                            <input data-rule-required="true"  type="hidden" placeholder="123456789" id="phone1_cus_register" value=" " name="phone">
+                            
+                        <!--  -->
+                <!-- <input type="submit" class="btn" value="Verify" /> -->
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-2 col-lg-2 col-form-label">
+                    Job Position </label>
+                <div class="col-lg-10 col-xl-10">
+            
+                    <select data-rule-required="true" onchange="job_position()" id="job" name="job" class="form-select"
+                        aria-label="Default select example">
+                        <option selected disabled> Select Option </option>
+                      {% for i in job_postion %}
+                        {% if i.soft_del_status == 0%}
+                        <option value="{{i.id}}">{{i.name}}</option>
+                        {% endif %}
+                   {% endfor %}
+             
+                    </select>
+                </div>
+            
+            </div>
+            
+                <div class="form-group row">
+                    <label class="col-xl-2 col-lg-2 col-form-label">
+                       Experince </label>
+                <div class="col-lg-5 col-xl-5">
+            
+                    <select data-rule-required="true"  id="exp_year" name="year" class="form-select"
+                        aria-label="Default select example">
+                        <option selected disabled> Select Year </option>
+                      {% for i in year_list %}
+                        <option value="{{i}}">{{i}}</option>
+                    {% endfor %}
+             
+                    </select>
+                </div>
+                <div class="col-lg-5 col-xl-5">
+            
+                    <select data-rule-required="true"  id="exp_month" name="month" class="form-select"
+                        aria-label="Default select example">
+                        <option selected disabled> Select Month </option>
+                    {% for i in month_list %}
+                        <option value="{{i}}">{{i}}</option>
+                  {% endfor %}
+             
+                    </select>
+                </div>  
+                </div>
+                 <div class="form-group row">
+                <label class="col-xl-2 col-lg-2 col-form-label">
+                    Postal Code </label>
+                <div class="col-lg-10 col-xl-10">
+                    <input data-rule-required="true" onchange="select_postal_code()" oninput="zipcode()" placeholder="123456" id="Postal_code" class="form-control"
+                        type="text" value="" name="Postal_code">
+                </div>
+            </div>
+             <div class="form-group row" id="Address_div">
+                    <label class="col-xl-2 col-lg-2 col-form-label">
+                            Select address </label>
+                    <div class="col-lg-10 col-xl-10">
+                                <select id="Address" onchange="select_city()" name="Address" class="form-select"
+                                    aria-label="Default select example">
+                                    <option selected disabled> Select Option </option>
+                                    <option value=""></option>
+                                </select>  
+                        </div>     
+                    </div> 
+            <div class="form-group row">
+                <label class="col-xl-2 col-lg-2 col-form-label">
+                    Country </label>
+                <div class="col-lg-10 col-xl-10">
+                <input data-rule-required="true" class="form-control" id="country" type="text" placeholder="country" value="" name="country">
+
+                    {% comment %} <select onchange="select_country()" id="country" name="country" class="form-select"
+                        aria-label="Default select example">
+                        <option selected disabled> Select Option </option>
+                        {% for i in country %}
+                        <option value="{{i.id}}">{{i.name}}</option>
+                        {% endfor %}
+            
+                    </select> {% endcomment %}
+                </div>
+            
+            </div>
+            {% comment %} <div class="form-group row">
+                <label class="col-xl-2 col-lg-2 col-form-label">
+                    State </label>
+                <div class="col-lg-10 col-xl-10">
+                <input data-rule-required="true" class="form-control" id="state" type="text" placeholder="state" value="" name="state"> {% endcomment %}
+    
+                    {% comment %} <select id="state" onchange="select_state_id()" name="state" class="form-select"
+                        aria-label="Default select example">
+                        <option selected disabled> Select Option </option>
+            
+                        <option value="0"></option>
+            
+            
+                    </select> {% endcomment %}
+                {% comment %} </div>
+            </div> {% endcomment %}
+            <div class="form-group row">
+                <label class="col-xl-2 col-lg-2 col-form-label">
+                    City </label>
+                <div class="col-lg-10 col-xl-10">
+            
+                <input data-rule-required="true"  placeholder="Enter your city name " id="city" class="form-control"
+                        type="text" value="" name="city">
+                </div>
+            
+            </div>
+            
+           
+            <div class="form-group row">
+                <label class="col-xl-2 col-lg-2 col-form-label">
+                    Address </label>
+                <div class="col-lg-10 col-xl-10">
+                    <input data-rule-required="true" id="address" placeholder="Address" id="address" class="form-control" type="text" value="" name="address">
+                </div>
+            </div>
+            <div class="form-group row">
+                <!-- <label style="padding-top:30px; " for="cars">Choose a User</label> -->
+                <div class="col-lg-10 col-xl-10">
+                    <input class="form-control" id="app" type="hidden" value="applicant" name="app" >
+
+                 
+                </div>
+            </div>
+            <!-- <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">
+                   Applicant user	</label>
+                <div class="col-lg-9 col-xl-9">
+                    <input type="checkbox" id="check" name="app"
+                    >
+                </div>
+            </div> -->
+         
+        </div>	 
+        <button  onclick="app_data()" type="button" class="btn btn-inverse-success btn-fw">Submit</button>
+        <a href="/admin/applicant/" class="btn btn-inverse-dark btn-fw">Cancel</a>
+        
+        
+    
+</div>
+</div>
+
+</form> 
+</div>
+</div>
+</div>
+{% comment %} <div class="container-fluid">
+<div class="row">
+
+<div class="col-lg-2" style="margin-top:97px ;">
+{% include 'base/navbar.html' %}
+</div>
+
+<div class="col-lg-10" style="margin-top:120px ;">
+
+<div class="table-responsive">
+    {% for message in messages %}
+
+    <div class="alert alert-primary">
+        {{message}}
+
+    </div>
+    {% endfor %}
+<form action="" id="formss" method="POST"  onsubmit="process(event)" >
+
+{% csrf_token %}
+
+
+<div class="card">
+    <div class="card-body" >
+        <h4 class="card-title">Add Applicant Details</h4>        
+
+        <div class="col-md-6">
+
+            <input class="form-control" type="hidden" value="" name="id" >
+
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">
+                    First Name </label>
+                <div class="col-lg-9 col-xl-9">
+            
+                    <input class="form-control" type="text" placeholder="John" value="" name="FName">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">
+                    Last Name </label>
+                <div class="col-lg-9 col-xl-9">
+            
+                    <input class="form-control" type="text" placeholder="John" value="" name="LName">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">
+                   Email	</label>
+                <div class="col-lg-9 col-xl-9">
+                    <input class="form-control" placeholder="John@gmail.com" type="email" value="" name="email" >
+                </div>
+            </div>
+
+            
+                <div class="form-group row">
+
+           
+                    <label class="col-xl-3 col-lg-3 col-form-label">
+                        Mobile number </label>
+                        <div class="col-lg-9 col-xl-9">
+                        
+
+                        <!--  -->
+                            <input type="tel" name="phone" placeholder="123456789" placeholder="Enter Mobile Number" id="phone_cus_register"
+                                class="form-control" onblur="test()" pattern="[0-9]+"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength=14>
+                            
+                            <input type="hidden" placeholder="123456789" id="phone1_cus_register" value="" name="phone">
+                            
+                        <!--  -->
+                <!-- <input type="submit" class="btn" value="Verify" /> -->
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">
+                    Job Position </label>
+                <div class="col-lg-9 col-xl-9">
+            
+                    <select onchange="job_position()" id="job" name="job" class="form-select"
+                        aria-label="Default select example">
+                        <option selected disabled> Select Option </option>
+                      {% for i in job_postion %}
+                        <option value="{{i.id}}">{{i.name}}</option>
+                   {% endfor %}
+             
+                    </select>
+                </div>
+            
+            </div>
+            
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">
+                       Experince (Year & month ) </label>
+                    <div class="col-lg-4 col-xl-4">
+                        <input class="form-control" placeholder=" 2 year" type="text" value="" name="year">
+                    </div>
+                   
+                    <div class="col-lg-4 col-xl-4">
+                        <input class="form-control" placeholder=" 2 month" type="text" value="" name="month">
+                    </div>
+                </div>
+
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">
+                    Country </label>
+                <div class="col-lg-9 col-xl-9">
+            
+                    <select onchange="select_country()" id="country" name="country" class="form-select"
+                        aria-label="Default select example">
+                        <option selected disabled> Select Option </option>
+                        {% for i in country %}
+                        <option value="{{i.id}}">{{i.name}}</option>
+                        {% endfor %}
+            
+                    </select>
+                </div>
+            
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">
+                    State </label>
+                <div class="col-lg-9 col-xl-9">
+            
+                    <select id="state" onchange="select_state_id()" name="state" class="form-select"
+                        aria-label="Default select example">
+                        <option selected disabled> Select Option </option>
+            
+                        <option value="0"></option>
+            
+            
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">
+                    City </label>
+                <div class="col-lg-9 col-xl-9">
+            
+                    <select id="city" onchange="select_city_id()" name="city" class="form-select"
+                        aria-label="Default select example">
+                        <option selected disabled> Select Option </option>
+            
+                        <option value="0"></option>
+            
+            
+                    </select>
+                </div>
+            
+            </div>
+            
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 co      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/css/bootstrap-select.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">
+                    Address </label>
+                <div class="col-lg-9 col-xl-9">
+                    <input placeholder="indra nagar jaipur" id="address" class="form-control" type="text" value="" name="address">
+                </div>
+            </div>
+            <div class="form-group row">
+                <!-- <label style="padding-top:30px; " for="cars">Choose a User</label> -->
+                <div class="col-lg-9 col-xl-9">
+                    <input class="form-control" type="hidden" value="applicant" name="app" >
+
+                 
+                </div>
+            </div>
+            <!-- <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">
+                   Applicant user	</label>
+                <div class="col-lg-9 col-xl-9">
+                    <input type="checkbox" id="check" name="app"
+                    >
+                </div>
+            </div> -->
+         
+        </div>	
+        <div class="kt-form__actions"style="margin-left: 350px; margin-top: 40px;">
+                                                                                
+            <button  class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u">Submit</button>
+                
+            
+        </div>
+        
+        
+    
+</div>
+</div>
+
+</form> 
+</div>
+</div>
+</div> {% endcomment %}
+
+
+</head>
+ {% comment %} gen_pass = generatePassword()
+            first_name = request.POST.get("FName") {% endcomment %}
+           {% comment %} = request.POST.get("LName")
+            email = request.POST.get("email")
+            mobile_number = request.POST.get("phone")
+            address = request.POST.get("address")
+            code = mobile_number.split(" ")[0]
+            # latitude = request.POST.get('latitude')
+            # longitude = request.POST.get('longitude')
+
+            phone = mobile_number.split(" ")[1]
+            # print(code, "sssssssssssssssssssssssssssssssssssssssss")
+            country = request.POST.get("country")
+            state = request.POST.get("state")
+            city = request.POST.get("city")
+            postal = request.POST.get("Postal_code")
+            job_position = request.POST.get("job")
+            exp_year = request.POST.get("year")
+            exp_month = request.POST.get("month") last_name  {% endcomment %}
+<script>
+    $('#signup').validate()
+    function app_data(){
+     $('.loader').show();
+    if(!$('#signup').valid()){
+     $('.loader').hide();
+      return false;
+    }
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        let fname = $('#FName').val()
+        let lname = $('#LName').val()
+        let email = $('#email').val()
+        let phone = $('#phone1_cus_register').val()
+        let code = $('#phone_cus_register').val()
+
+        let app = $('#app').val()
+     
+        let job = $('#job').val()
+        let exp_year = $('#exp_year').val()
+        let exp_month = $('#exp_month').val()
+
+
+        let country = $('#country').val()
+        let state = $('#state').val()
+        let city = $('#city').val()
+        let postal_code = $('#Postal_code').val()
+        let address = $('#address').val()
+        $.ajax({
+            type: "POST",
+            url: "/admin/applicant/add/ajax/",
+            headers: { 'X-CSRFToken': csrftoken },
+            data:
+            {
+            fname:fname,
+            lname:lname,
+            email:email,
+            phone:phone,
+            job:job,
+            exp_year:exp_year,
+            exp_month:exp_month,
+            country:country,
+            state:state,
+            city:city,
+            postal_code:postal_code,
+            address:address,
+            app:app,
+
+
+            },
+            success: function (res) {
+                console.log(res)
+                toastr.success(res.message);
+                window.location.href="/admin/applicant/"
+                 $('.loader').hide();
+
+            },
+            error: function(res){
+                toastr.error(res.responseJSON.message);
+                $('.loader').hide();
+
+            }
+
+
+        }); 
+     
+        
+    }
+</script>
+
+<script>
+  let Postal_code =0;
+  function zipcode(){
+    Postal_code = $('#Postal_code').val()
+    console.log(Postal_code)
+
+    let fetchRes = fetch(
+  `https://maps.googleapis.com/maps/api/geocode/json?address=${Postal_code}&sensor=true&key=AIzaSyAlljhS4LLf_864PqbvXtDGXver091jLiI&callback=initMap&libraries=places&v=weekly`);
+        fetchRes.then(res =>
+            res.json()).then(d => {
+              console.log(d.results, "ccccccccccccccccc")
+              
+              let data = d.results[0].postcode_localities 
+              let option;
+              for(let a of data){
+                option +=  "<option value="+a+">" + a +"</option>"
+              }
+              $('#Address').html(option);
+              
+              console.log(d.results[0].address_components[3].long_name ,"ccccccccccccccccc")
+               $('#country').val(d.results[0].address_components[3].long_name)
+               $('#state').val(d.results[0].address_components[2].long_name)
+             $('#city').val(d.results[0].address_components[1].long_name)   
+            })
+
+  }
+</script>
+<script>
+  function select_city(){
+  let Address = $('#Address').val()
+
+  $('#address').val(Address)
+  $('#Address_div').hide()
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlljhS4LLf_864PqbvXtDGXver091jLiI&callback=initMap&libraries=places&v=weekly" async></script>
+
+<script>
+    function initMap()
+    {
+      var input = document.getElementById('autocom');
+      var options =     {
+              types: ['geocode']
+              
+          
+          };
+        var input= document.getElementById('autocom')
+        autocomplete = new google.maps.places.Autocomplete(input, options);
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var place = autocomplete.getPlace();
+        
+        let lat = place.geometry.location.lat()
+        let long = place.geometry.location.lng()
+        console.log(lat,long )
+        $('#latitude').val(lat);
+        $('#longitude').val(long);
+       
+      
+            //alert("This function is working!");
+            //alert(place.name);
+           // alert(place.address_components[0].long_name);
+
+        });
+       //var place = autocomplete.getPlace();
+        //console.log(autocomplete ,'dddddd')
+        //document.getElementById('autocom').value = place.geometry.location.lat();
+
+    }
+    
+   
+</script>
+<script>
+    function select_country() {
+        let p = $('#country').val();
+
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        console.log(p)
+
+        $('#select_id').submit();
+        $.ajax({
+            type: "POST",
+            url: "/admin/emp_country_ajax/",
+            headers: { 'X-CSRFToken': csrftoken },
+            data:
+            {
+                select_country: p,
+
+
+            },
+            // success: function (res) {
+            //     console.log(res.message)
+            //     toastr.success(res.message);
+
+            // },
+
+            success: function (res) {
+                option = ""
+                if (jQuery.isEmptyObject(res.result)) {
+                    option += "<option selected disabled value='0'>No  data Found</option>";
+
+                } else {
+                    option += '<option selected disabled >Select Option</option>';
+                    res.result.forEach(item => {
+                        
+                        option += '<option value=' + item.id + '>' + item.name + '</option>';
+                    });
+                }
+
+                $("#state").html(option);
+            }
+
+        });
+
+    }
+</script>
+{% comment %}
+<script>
+    function select_postal_code() {
+        let u = $('#Postal_code').val();
+
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        console.log(u)
+
+        $('#select_id').submit();
+        $.ajax({
+            type: "POST",
+            url: "/admin/emp_postal_code_ajax/",
+            headers: { 'X-CSRFToken': csrftoken },
+            data:
+            {
+                postal_code: u
+
+
+            },
+            success: function (res) {
+                console.log(res.location)
+                $("#address").val(res.location[0]);
+            }
+
+        });
+
+    }
+</script>
+
+<script>
+    function select_state_id() {
+        let v = $('#state').val();
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        console.log(v);
+        $('#select_id').submit();
+        $.ajax({
+            type: "POST",
+            url: "/admin/emp_state_city_ajax/",
+            headers: { 'X-CSRFToken': csrftoken },
+            data:
+            {
+                state_value: v
+
+
+            },
+            success: function (res) {
+                option = ""
+                if (jQuery.isEmptyObject(res.result)) {
+                    option += "<option selected disabled value='0'>No  data Found</option>";
+
+                } else {
+                    option += '<option selected disabled >Select Option</option>';
+                    res.result.forEach(item => {
+                        option += '<option value=' + item.id + '>' + item.name + '</option>';
+                    });
+                }
+
+                $("#city").html(option);
+            }
+
+        });
+    }
+    function select_city_id() {
+        let c = $('#city').val();
+        console.log(c)
+    }
+     
+</script> {% endcomment %}
+<script>
+    function job_position() {
+            let job = $('#job').val();
+            let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+            console.log(job)
+            $('#select_id').submit();
+            $.ajax({
+            type: "POST",
+            url: "/admin/app_job_position_ajax/",
+            headers: { 'X-CSRFToken': csrftoken },
+            data:
+            {
+                job_position: job
+
+
+            },
+            success: function (res) {
+                console.log(res)
+                // $("#address").val(res.location[0]);
+            }
+
+        });
+        }
+</script>
+<script>
+  setTimeout(() => {
+    $('.alert').fadeOut('fast');
+  }, 3000);
+</script>
+{% endblock content %}

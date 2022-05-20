@@ -1,0 +1,174 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'base/header.html'%}
+
+
+
+<div class="admin-inner-panel">
+
+    <div class="admin-inner-left">
+        {% include 'base/navbar.html' %}
+    </div>
+    <div class="admin-inner-right">
+             <div class="card" style="width:98%;">
+
+          <div class="card-body ">
+            <h4 class="card-title">Chat</h4>
+            
+    <div class="table-responsive">
+                            
+        <div class="dashboard-right">
+            <div class="business-chat">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="chat-list">
+                    <div class="user-chat">
+                      {% comment %} <figure><img src="images/user7.jpg"></figure> {% endcomment %}
+                      <figcaption>
+                        <h4>Admin</h4>
+                        
+                      </figcaption>
+                    </div>
+                    <div class="user-chat testlist">
+                      <form class="form-inline">
+                        <div class="search-icons">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onkeyup="userList()" id="userName">
+                        <i class="fas fa-search"></i>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="chat-more">
+                      {% for i in users %}
+                      
+                      <div class="user-chat testuserlist"  onclick="message({{f_user}},{{i.id}})">                        
+                        {% comment %} <figure><img src="{% static 'images/user6.jpg' %}"></figure> {% endcomment %}
+                        <figcaption>
+                          <h4>{{i.fname}} {{i.lname}}</h4>
+                          <input type='text' name="{{f_user}}" value="{{f_user}}" id="f_user" hidden >
+                          <input type='text' name="{{i.id}}" value="{{i.id}}" id="s_user_id" hidden >
+                          {% comment %} <p>Lorem Ipsum is simply </p> {% endcomment %}
+                        </figcaption>
+                      </div>
+                    {% endfor %}
+                    
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                 <div class="chat-infobox">
+                    <div class="user-chats">
+                      {% comment %} <figure id="userIMgae1"><img src="images/user7.jpg"></figure> {% endcomment %}
+                      <figcaption id="userIMgae1Text">
+                        <h4>Samith Johan</h4>
+                        {% comment %} <p>Lorem Ipsum is simply </p> {% endcomment %}
+                      </figcaption>
+                    </div>
+                    <div class="user-chating-box " >
+                      {% comment %} <div class="left-chat">
+                        <div class="left-chat-in">
+                          <figure><img src="images/user7.jpg"></figure>
+                          <figcaption>
+                            <p>Hello Jorden!</p>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            <span>3:40 AM,  26 July 2019</span>
+                          </figcaption>
+                        </div>
+                      </div>
+                      <div class="right-chat">
+                        <div class="left-chat-in">
+                          <figure><img src="images/user3.jpg"></figure>
+                          <figcaption>
+                            <p>Hello</p>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            <span>3:40 AM,  26 July 2019</span>
+                          </figcaption>
+                        </div>
+                      </div> {% endcomment %}
+                       
+                    </div>
+                    <div class="chat-textarea">
+                      <div class="form-group">
+                         <textarea class="form-control" placeholder="Write a message....."  name="msg" id="chat-message-input"></textarea>
+                      </div>
+                      <input type="text" name="room" id="room_id" value="room"  hidden >
+                      <button class="btn btn-green waves-effect waves-light" id="chat_message_submit" ><i class="mdi mdi-send"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+                  
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+      <script>
+        $(document).ready(function(){
+          $('.testuserlist').click(function(){
+            
+            let rr = $(this).clone().children();
+            
+            {% comment %} $('#userIMgae1').html(rr[0]); {% endcomment %}
+            $('#userIMgae1Text').html(rr[1]);            
+          })
+        });
+
+
+        {% comment %} const scroller = document.querySelector("#scroller");
+        const output = document.querySelector("#output");
+        
+        scroller.addEventListener("scroll", event => {
+          console.log($('#SetscrollerHight').val());
+      if($('#SetscrollerHight').val()<scroller.scrollTop){
+console.log("hit page",$('#SetscrollerHight').val(),scroller.scrollTop);
+        };
+        if(scroller.scrollTop == 0){
+          console.log("hit page");
+        }
+          output.textContent = `scrollTop: ${scroller.scrollTop}`;
+        }); {% endcomment %}
+      </script>
+
+
+      <script>
+        $(document).ready(function() {
+                $('#collapseOne').scrollTop($('#collapseOne')[0].scrollHeight);
+           
+        });
+    </script>  
+
+
+
+
+
+
+
+  {% endblock content %}
+
+  {% block extra_js %}
+  <script src="{% static 'js/chat.js' %}"></script>
+  {{ room_name|json_script:"room-name" }}
+  
+  {% endblock extra_js %}
+
+{% comment %}  {% endcomment %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

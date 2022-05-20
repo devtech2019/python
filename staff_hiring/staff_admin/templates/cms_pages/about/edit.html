@@ -1,0 +1,91 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'base/header.html'%}
+
+<div class="admin-inner-panel">
+    <div class="admin-inner-left">
+        {% include 'base/navbar.html' %}
+    </div>
+    <div class="admin-inner-right">
+        {% for message in messages %}
+        <div class="alert alert-primary">
+            {{message}}
+        </div>
+        {% endfor %} 
+
+ <form action="" id="addemail" method="POST" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+
+
+                    <div class="card" style="width:95%;">
+                        <div class="card-body">
+                            <h4 class="card-title">Edit Email Details</h4>
+
+                            <div class="col-md-12">
+
+
+
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Name </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input class="form-control" type="hidden" value="{{about.slug}}" name="slug">
+
+                                        <input class="form-control" type="text" value="{{about.title}}" name="title">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Image </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                    <input  id="imgInp" name="img2" value="/media/{{about.image}}" type="file"/>
+                                    <img  src="/media/{{about.image}}" style="height: 140px" alt="" default="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.w3schools.com%2Fhowto%2Fhowto_css_image_avatar.asp&psig=AOvVaw2rbwwUa8b8iFk78lr_0m2E&ust=1645271373376000&source=images&cd=vfe&ved=0CAgQjRxqFwoTCKDaptCXifYCFQAAAAAdAAAAABAD"/>                                    </div>
+                                </div>
+
+
+                                <div class="form-group row">
+
+
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Discription </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <textarea onkeyup="editor()" id="editor" class="editor" name="discripion">{{about.discripion}}</textarea>
+                                        {% comment %} <input class="form-control" type="text" value="" name="content"> {% endcomment %}
+
+
+                                        <!--  -->
+                                        <!-- <input type="submit" class="btn" value="Verify" /> -->
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-inverse-success btn-fw">Submit</button>
+                            <button class="btn btn-inverse-dark btn-fw">Cancel</button>
+
+                            </div>
+                            
+                            
+                            
+                            
+                                     </div>
+                                </div>
+                            
+                            </form>
+
+
+
+
+
+
+
+
+
+   <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('editor');
+      
+   
+    </script>
+{% endblock content %}
+         

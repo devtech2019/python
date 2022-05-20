@@ -1,0 +1,160 @@
+[Wed Feb 09 19:13:16.897659 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 09 19:13:18.675658 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Sat Feb 12 07:22:14.472122 2022] [autoindex:error] [pid 47845] [client 192.168.1.1:50962] AH01276: Cannot serve directory /var/www/carenetstaff.devtechnosys.tech/public_html/: No matching DirectoryIndex (index.html,index.php) found, and server-generated directory index forbidden by Options directive
+[Sat Feb 12 07:22:17.396108 2022] [autoindex:error] [pid 49151] [client 192.168.1.1:56268] AH01276: Cannot serve directory /var/www/carenetstaff.devtechnosys.tech/public_html/: No matching DirectoryIndex (index.html,index.php) found, and server-generated directory index forbidden by Options directive
+[Mon Feb 14 11:39:38.465174 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:39:47.319265 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:39:51.448621 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:40:06.034425 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:40:12.284289 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:40:17.866491 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:40:32.625952 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:40:38.641768 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:40:43.449156 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:41:01.441342 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:41:10.436128 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:41:15.426587 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:41:30.288504 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:41:35.295568 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:41:41.278017 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:41:49.656646 2022] [autoindex:error] [pid 14425] [client 192.168.1.1:51568] AH01276: Cannot serve directory /var/www/carenetstaff.devtechnosys.tech/public_html/: No matching DirectoryIndex (index.html,index.php) found, and server-generated directory index forbidden by Options directive
+[Mon Feb 14 11:41:56.365511 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:42:03.046960 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:42:07.256976 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:42:22.155464 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:42:30.875044 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:42:36.857220 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:43:05.132970 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:43:11.003248 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:43:16.107146 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:43:32.460629 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:43:35.199482 2022] [autoindex:error] [pid 22049] [client 192.168.1.1:45038] AH01276: Cannot serve directory /var/www/carenetstaff.devtechnosys.tech/public_html/: No matching DirectoryIndex (index.html,index.php) found, and server-generated directory index forbidden by Options directive
+[Mon Feb 14 11:43:38.540615 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:43:43.863116 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:43:59.001459 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:44:04.627139 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:44:10.637349 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:44:24.540578 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:44:30.537851 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:44:35.493816 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:44:51.733637 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:44:57.621265 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:45:02.273539 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:45:16.877880 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:45:22.778443 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:45:28.061573 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:45:47.077901 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:45:55.854931 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:46:00.926720 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:46:22.672625 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:46:28.294850 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:46:37.425927 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:46:53.159926 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:47:02.161899 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:47:07.245924 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:47:25.530684 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:47:34.872609 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:47:40.081260 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:47:55.777986 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:48:02.041113 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:48:06.981952 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:48:22.748624 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:48:28.449279 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:48:33.610638 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:48:51.916646 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:49:01.041271 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:49:06.630508 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:49:25.546539 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:49:30.955909 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:49:35.527331 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:49:51.726251 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:49:57.275702 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:50:03.940809 2022] [ssl:warn] [pid 950] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:51:56.568612 2022] [ssl:warn] [pid 58392] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:51:57.300291 2022] [ssl:warn] [pid 58392] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:57:42.858399 2022] [ssl:warn] [pid 58392] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:57:48.459528 2022] [ssl:warn] [pid 58392] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:57:55.380245 2022] [ssl:warn] [pid 58392] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:57:57.748992 2022] [ssl:warn] [pid 58392] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:58:11.449533 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 11:58:12.365336 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Mon Feb 14 18:15:51.174323 2022] [php7:error] [pid 7686] [client 192.168.1.1:56676] script '/var/www/carenetstaff.devtechnosys.tech/public_html/index.php' not found or unable to stat
+[Mon Feb 14 18:16:02.673019 2022] [php7:error] [pid 7178] [client 192.168.1.1:56680] script '/var/www/carenetstaff.devtechnosys.tech/public_html/index.php' not found or unable to stat
+[Mon Feb 14 18:17:33.966653 2022] [php7:error] [pid 54324] [client 192.168.1.1:51121] script '/var/www/carenetstaff.devtechnosys.tech/public_html/index.php' not found or unable to stat
+[Mon Feb 14 18:17:36.048142 2022] [autoindex:error] [pid 5409] [client 192.168.1.1:36626] AH01276: Cannot serve directory /var/www/carenetstaff.devtechnosys.tech/public_html/: No matching DirectoryIndex (index.html,index.php) found, and server-generated directory index forbidden by Options directive
+[Mon Feb 14 18:17:38.251102 2022] [autoindex:error] [pid 7686] [client 192.168.1.1:63301] AH01276: Cannot serve directory /var/www/carenetstaff.devtechnosys.tech/public_html/: No matching DirectoryIndex (index.html,index.php) found, and server-generated directory index forbidden by Options directive
+[Mon Feb 14 18:21:43.499034 2022] [php7:error] [pid 5409] [client 192.168.1.1:51162] script '/var/www/carenetstaff.devtechnosys.tech/public_html/index.php' not found or unable to stat
+[Mon Feb 14 18:36:15.897648 2022] [php7:error] [pid 46133] [client 192.168.1.1:58572] script '/var/www/carenetstaff.devtechnosys.tech/public_html/index.php' not found or unable to stat
+[Mon Feb 14 18:42:44.848970 2022] [php7:error] [pid 7686] [client 192.168.1.1:60976] script '/var/www/carenetstaff.devtechnosys.tech/public_html/index.php' not found or unable to stat
+[Mon Feb 14 18:43:51.849160 2022] [php7:error] [pid 19533] [client 192.168.1.1:64960] script '/var/www/carenetstaff.devtechnosys.tech/public_html/index.php' not found or unable to stat
+[Mon Feb 14 18:55:58.772287 2022] [autoindex:error] [pid 63612] [client 192.168.1.1:51348] AH01276: Cannot serve directory /var/www/carenetstaff.devtechnosys.tech/public_html/: No matching DirectoryIndex (index.html,index.php) found, and server-generated directory index forbidden by Options directive
+[Mon Feb 14 19:01:55.908468 2022] [php7:error] [pid 3295] [client 192.168.1.1:49828] script '/var/www/carenetstaff.devtechnosys.tech/public_html/index.php' not found or unable to stat
+[Tue Feb 15 16:49:32.229438 2022] [autoindex:error] [pid 11012] [client 192.168.1.1:34748] AH01276: Cannot serve directory /var/www/carenetstaff.devtechnosys.tech/public_html/: No matching DirectoryIndex (index.html,index.php) found, and server-generated directory index forbidden by Options directive
+[Tue Feb 15 16:49:36.110853 2022] [autoindex:error] [pid 48885] [client 192.168.1.1:39362] AH01276: Cannot serve directory /var/www/carenetstaff.devtechnosys.tech/public_html/: No matching DirectoryIndex (index.html,index.php) found, and server-generated directory index forbidden by Options directive
+[Wed Feb 16 12:32:54.121048 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:32:58.892881 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:33:03.607247 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:33:18.633993 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:33:27.970088 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:33:32.976264 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:33:49.466670 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:33:58.476954 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:34:04.421424 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:34:19.516183 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:34:26.359307 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:34:31.107201 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:34:45.848383 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:34:51.282921 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:34:56.732598 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:35:14.944304 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:35:20.395695 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:35:25.867465 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:35:39.494358 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:35:48.344729 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:35:54.032003 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:36:09.248167 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:36:15.162557 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:36:19.567730 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:36:32.889261 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:36:38.213923 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:36:42.940011 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:36:58.185976 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:37:07.124813 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:37:11.625434 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:37:27.376965 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:37:33.015443 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:37:38.557677 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:38:00.635916 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:38:06.236720 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Wed Feb 16 12:38:11.795818 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Fri Feb 18 15:56:55.671765 2022] [autoindex:error] [pid 14924] [client 192.168.1.1:39902] AH01276: Cannot serve directory /var/www/carenetstaff.devtechnosys.tech/public_html/: No matching DirectoryIndex (index.html,index.php) found, and server-generated directory index forbidden by Options directive
+[Fri Feb 18 16:11:55.787967 2022] [autoindex:error] [pid 392] [client 192.168.1.1:41256] AH01276: Cannot serve directory /var/www/carenetstaff.devtechnosys.tech/public_html/: No matching DirectoryIndex (index.html,index.php) found, and server-generated directory index forbidden by Options directive
+[Sat Feb 19 00:55:46.186483 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Sat Feb 19 00:55:50.379228 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Sat Feb 19 00:55:55.703549 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Sat Feb 19 14:28:57.243972 2022] [autoindex:error] [pid 1841] [client 192.168.1.1:48930] AH01276: Cannot serve directory /var/www/carenetstaff.devtechnosys.tech/public_html/: No matching DirectoryIndex (index.html,index.php) found, and server-generated directory index forbidden by Options directive
+[Sun Feb 20 00:29:39.940023 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Sun Feb 20 00:29:44.957814 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Sun Feb 20 00:29:49.560065 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Tue Feb 22 00:13:15.808102 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Tue Feb 22 00:13:21.336628 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Tue Feb 22 00:13:25.884777 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Tue Feb 22 12:41:48.693944 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Tue Feb 22 12:41:54.137945 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Tue Feb 22 12:41:58.588557 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Tue Feb 22 17:37:01.869113 2022] [autoindex:error] [pid 62975] [client 192.168.1.1:60396] AH01276: Cannot serve directory /var/www/carenetstaff.devtechnosys.tech/public_html/: No matching DirectoryIndex (index.html,index.php) found, and server-generated directory index forbidden by Options directive
+[Thu Feb 24 00:26:37.199561 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Thu Feb 24 00:26:41.794109 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Thu Feb 24 00:26:46.846851 2022] [ssl:warn] [pid 19520] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Thu Feb 24 19:19:59.784900 2022] [ssl:warn] [pid 19732] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Thu Feb 24 19:19:59.965581 2022] [ssl:warn] [pid 19732] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Thu Feb 24 19:22:52.295214 2022] [ssl:warn] [pid 19732] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Thu Feb 24 19:23:08.783986 2022] [ssl:warn] [pid 19732] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Thu Feb 24 19:30:58.566298 2022] [ssl:warn] [pid 1903] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Thu Feb 24 19:30:59.045267 2022] [ssl:warn] [pid 1903] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Thu Feb 24 19:32:16.066015 2022] [ssl:warn] [pid 1903] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Thu Feb 24 19:32:17.490834 2022] [ssl:warn] [pid 1903] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Thu Feb 24 19:32:28.367895 2022] [ssl:warn] [pid 8111] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Thu Feb 24 19:32:28.611195 2022] [ssl:warn] [pid 8111] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Fri Feb 25 13:35:29.939539 2022] [ssl:warn] [pid 22549] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name
+[Fri Feb 25 13:35:30.459710 2022] [ssl:warn] [pid 22549] AH01909: RSA certificate configured for www.carenetstaff.devtechnosys.tech:443 does NOT include an ID which matches the server name

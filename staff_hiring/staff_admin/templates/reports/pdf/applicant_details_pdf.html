@@ -1,0 +1,193 @@
+
+
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+  text-align: left;
+}
+</style>
+</head>
+
+
+<h2>Applicant Pdf details </h2>
+
+<table style="width:100%">
+  <tr>
+    <th>First Name:</th>
+    <td>{{app_user.fname}}</td>
+  </tr>
+  <tr>
+    <th>Last name:</th>
+    <td>{{app_user.lname}}</td>
+  </tr>
+  <tr>
+    <th>Mobile Number:</th>
+    <td>{{app_user.mobile_number}}</td>
+  </tr>
+  <tr>
+    <th>Execpirence in year</th>
+    <td>{{app_user.exp_year}}</td>
+  </tr>
+  <tr>
+    <th>Execpirence in month</th>
+    <td>{{app_user.exp_month}}</td>
+  </tr>
+    <tr>
+    <th>Address</th>
+    <td>{{app_user.address}}</td>
+  </tr>
+    <tr>
+    <th>Status</th>
+    {% if app_user.user_status == False %}
+    <td> Rejected</td>
+    {% else %}
+    <td> Accepted</td>
+    {% endif %}
+  </tr>
+    <tr>
+    <th>Price </th>
+    <td>{{app_user.price}}</td>
+  </tr>
+</table>
+
+  <h1>Applicant Vaccination details </h1>
+  <table>
+
+   
+     <tr>
+    <th>Vaccination</th>
+    <td>{{data.vaccinated}}</td>
+  </tr>
+  
+    {% comment %} <tr>
+    <th>Second Name:</th>
+    <td>{{data.second_dose}}</td>
+  </tr> {% endcomment %}
+   {% comment %} <tr>
+  <th>image</th>
+    <td><img src="{{data.image.url}}" width='70px' height="70px">
+</td>
+  </tr> {% endcomment %}
+  
+    <tr>
+  <th>Booster Name:</th>
+    <td>{{data.booster_dose}}</td>
+  </tr>
+  
+   {% comment %} <tr>
+  <th>City</th>
+    <td>{{data.city}}</td>
+  </tr> {% endcomment %}
+  {% comment %} <tr>
+  <th>Position</th>
+    <td>{{data.position}}</td>
+  </tr> {% endcomment %}
+   <tr>
+  <th>nmc_pin</th>
+    <td>{{data.Mnc_pin}}</td>
+  </tr>
+   <tr>
+  <th>Date of birth </th>
+    <td>{{data.dob}}</td>
+  </tr>
+  
+    <tr>
+  <th>Social Care Was Recitations</th>
+  {% if data.recitation == True %}
+    <td>Yes</td>
+  {% else %}
+  <td> No </td>
+  {% endif %}
+  </tr>
+  
+   <tr>
+  <th>Enhance DBC No.</th>
+    <td>{{data.enhance_dbc}}</td>
+  </tr>
+  
+  <th>If Yes Recitations</th>
+    <td>{{data.recitation_desc}}</td>
+  </tr>
+  <tr>
+ 
+  <th>Enhance DBC  Issues Date</th>
+    <td>{{data.enhance_dbc_issue}}</td>
+  </tr>
+  <th>DBC Status</th>
+    <td>{{data.dbc_status}}</td>
+  </tr>
+{% if data.work_checkes == "WorkCheckes"%}
+   <tr>
+  <th>Right To Work Checkes </th>
+    <td>{{data.work_checkes}}</td>
+  </tr>
+  {% else%}
+  <th>Right To Work Checkes </th>
+    <td>{{data.work_checkes}}</td>
+  </tr>
+  {% endif %}
+{% comment %} 
+   <tr>
+  <th>Preference Checkes</th>
+    <td>{{data.work_preference}}</td>
+  </tr> {% endcomment %}
+      
+
+   <tr>
+  <th>Emergency Contact Number</th>
+    <td>{{data.emergency_no}}</td>
+  </tr>
+ 
+   <tr>
+  <th>Training</th>
+    <td>{{data.training.training_name}}</td>
+  </tr>
+    
+   <tr>
+  <th> Trainy Start Date</th>
+    <td>{{data.training_start_date}}</td>
+  </tr>
+ 
+   <tr>
+  <th>Trainy End Date</th>
+    <td>{{data.training_end_date}}</td>
+  </tr>
+  <tr>
+  <th>Status</th>
+  {% if data.status == 1 %}
+    <td>Approved</td>
+    {% elif data.status == 2%}
+    <td>Rejected</td>
+    {% else %}
+     <td>Pending</td>
+     {% endif %}
+  </tr>  
+</table>
+
+  
+    {% comment %} <tr>
+    <th>image</th>
+    <td></td>
+  </tr> {% endcomment %}
+  {% comment %}
+    <tr>
+    <th>First Name:</th>
+    <td>{{app_user.fname}}</td>
+  </tr>
+    <tr>
+    <th>First Name:</th>
+    <td>{{app_user.fname}}</td>
+  </tr>
+    <tr>
+    <th>First Name:</th>
+    <td>{{app_user.fname}}</td>
+  </tr>
+    <tr>
+    <th>First Name:</th>
+    <td>{{app_user.fname}}</td>
+  </tr> {% endcomment %}

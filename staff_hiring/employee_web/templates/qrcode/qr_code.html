@@ -1,0 +1,37 @@
+{% load static %}
+ <section class="ab-devices-sec">
+          <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="qr-row-sec">
+                        <ul class="qr-code-list">
+                            
+                            <li>
+                                <figure><img src="/media/{{qr_code.0.Qr_image}}"></figure>
+                                <a href="javascript:;">SCAN QR CODE</a>
+                                <h6>Android Device</h6>
+                            </li>
+                            <li>
+                                <figure><img src="/media/{{qr_code.0.Qr_image}}"></figure>
+                                <a href="javascript:;">SCAN QR CODE</a>
+                                <h6>IOS Device </h6>
+                            </li>
+                        </ul>
+                        <div class="device-right">
+                            <img src="{% static 'images/iPhone-xs.png' %}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="devices-text-sec">
+                        <h2> <a href="javascript:;"> Care Net Staff </a> <br> is available for all devices</h2>
+                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
+                        <ul class="app-links">
+                            <li><a href="javascript:;"> <img src="{% static 'images/app-store.svg' %}"> </a></li>
+                            <li><a href="javascript:;"> <img src="{% static 'images/play-store.svg' %}"> </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+          </div>
+      </section>

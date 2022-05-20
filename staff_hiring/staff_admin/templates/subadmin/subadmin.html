@@ -1,0 +1,304 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'base/header.html'%}
+
+<div class="admin-inner-panel">
+    <div class="admin-inner-left">
+        {% include 'base/navbar.html' %}
+    </div>
+    <div class="admin-inner-right">
+             <div class="card" style="width:98%;">
+
+          <div class="card-body ">
+            <h4 class="card-title">Subadmin / List</h4>
+                <a href="/admin/subadmin/add/"
+               class="btn btn-inverse-dark btn-fw" 
+                style="text-align: right; margin-left: 1300px;"> Create </a>
+                 <div class="table-responsive">
+                   {% comment %} <div class="input-group">
+               
+                <form class="search-form" action="/admin/emp_search/" method="GET">
+                  {% csrf_token %}
+                  <input type="search" class="form-control" name="Q_emp" placeholder="Search Here" title="Search here">
+                 <br>
+                 <button class="btn btn-inverse-success btn-fw"> search </button>
+                  <a class="btn btn-inverse-danger btn-fw"
+                                            href="/admin/employer/">reset</a> {% endcomment %}
+                
+                {% comment %} </form> {% endcomment %}
+              {% comment %} </div> {% endcomment %}
+                    <table class="table">
+                      
+                      <thead>
+                         <tr>
+                                        <th>
+                                            Sr No.
+                                        </th>
+                                        <th>
+                                            Subadmin name
+                                        </th>
+                                        <th>
+                                            Email
+                                        </th>
+                                        <th>
+                                            Moblie num
+                                        </th>
+                                        <th>
+                                            Address
+                                        </th>
+
+                                        <th>
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                 {% if users %}
+                                <tbody>
+                                   
+                                    {% for user in users %}
+                                    {% if user.deleted is Null  %}
+                                    <tr>
+                                        <td>
+                                             {{forloop.counter0|add:users.start_index}}
+                                        </td>
+                                        <td>
+                                            {{user.username}}
+
+                                        </td>
+                                        <td>
+                                            {{user.email}}
+                                        </td>
+                                        <td>
+
+                                            {{user.mobile_number}}
+                                        </td>
+                                        <td>
+                                            {{user.address|truncatechars:25}}
+                                        </td>
+                                      
+                                        <td>
+                                            <a class="btn btn-inverse-success btn-fw" 
+                                                href="/admin/subadmin/edit/{{user.slug}}">Edit</a>
+                                            <a class="btn btn-inverse-danger btn-fw" 
+                                                href="/admin/subadmin/del/{{user.id}}"
+                                                onclick="return confirm('Are you sure you want to delete this item')">Delete</a>
+
+                                          
+
+
+
+                        </div>
+                        </tr>
+                        
+                       {% endif %}
+                        {% endfor %}
+                        </tbody>
+                        
+                        {% else %}
+                        <tbody>
+                           
+                            <tr>
+                                 
+                                <td style="justify-content: center;"> 
+                                  
+                              </td>
+                              <td style="justify-content: center;"> 
+                               
+                              </td>
+                              <td style=""> 
+                                 <h4 style="color:lightgrey">No data found</h4>
+                              </td>
+                              <td style="justify-content: center; "> 
+                               
+                              </td>
+                                <td > 
+                               
+                              </td>
+                            </tr>
+                        
+                    </tbody> 
+                    {% endif %}                      
+                        </table>
+                    {% if users.has_other_pages %}
+                    <ul class="pagination" style=" float: right; ">
+                      {% if users.has_previous %}
+                        <li style="margin-right:10px "><a href="?page={{ users.previous_page_number }}">Previous</a></li>
+                      {% else %}
+                        <li style="margin-right:10px " class="disabled"><span>Previous</span></li>
+                      {% endif %}
+                      {% comment %} {% for i in users.paginator.page_range %}
+                        {% if users.number == i %}
+                          <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                        {% else %}
+                          <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                      {% endfor %} {% endcomment %}
+                      {% if users.has_next %}
+                        <li style="margin-right:10px;"><a href="?page={{ users.next_page_number }}">Next</a></li>
+                      {% else %}
+                        <li style="margin-right:10px;" class="disabled"><span style="">Next</span></li>
+                      {% endif %}
+                    </ul>
+                  {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} 
+
+<div class="container-fluid">
+
+    {% include 'base/header.html'%}
+    <!-- partial:partials/_settings-panel.html -->
+
+
+    <div class="row ">
+        <div class="col-md-2" style="margin-top:95px ;">
+            {% include 'base/navbar.html' %}
+
+        </div>
+        <div class="col-md-10 " style="margin-top:120px ;">
+            <div class="card">
+
+                <div class="card-body ">
+                    <h4 class="card-title"> Subadmin Table</h4>
+
+                    {% if messages %}
+
+                    <div class="table-responsive">
+                        {% for message in messages %}
+                        {% if message.tags == 'success'%}
+                        <div class="alert alert-success">
+                            {{message}}
+                            {% elif message.tags == 'error' %}
+                            <div class="alert alert-danger">
+                                {{message}}
+                                {% endif %}
+                            </div>
+
+                            {% endfor %}
+                            {% endif %}
+                            <a href="/admin/subadmin/add/"
+                                class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                                style="text-align: right; margin-left: 1300px;"> Create </a>
+
+                            <table class="table table-striped" style="margin-top: 30px;">
+
+
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Sr No.
+                                        </th>
+                                        <th>
+                                            Subadmin name
+                                        </th>
+                                        <th>
+                                            Email
+                                        </th>
+                                        <th>
+                                            Moblie num
+                                        </th>
+                                        <th>
+                                            Address
+                                        </th>
+
+                                        <th>
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for user in user_subadmin %}
+                                    {% if user.soft_del_status == 0 %}
+                                    <tr>
+                                        <td>
+                                            {{ forloop.counter }}
+                                        </td>
+                                        <td>
+                                            {{user.username}}
+
+                                        </td>
+                                        <td>
+                                            {{user.email}}
+                                        </td>
+                                        <td>
+
+                                            {{user.mobile_number}}
+                                        </td>
+                                        <td>
+                                            {{user.address}}
+                                        </td>
+                                      
+                                        <td>
+                                            <a class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                                                href="/admin/subadmin/edit/{{user.slug}}">Edit</a>
+                                            <a class="btn btn-danger btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                                                href="/admin/subadmin/del/{{user.id}}"
+                                                onclick="return confirm('Are you sure you want to delete this item')">Delete</a>
+
+                                          
+
+
+
+                        </div>
+                        </tr>
+                       {% endif %}
+                        {% endfor %}
+                        </tbody>
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div> {% endcomment %}
+<script>
+    setTimeout(() => {
+        $('.alert').fadeOut('fast');
+    }, 3000);
+</script>
+
+
+
+{% endblock content %}

@@ -1,0 +1,142 @@
+{% extends 'basefile/base.html' %}
+{% load static %}
+{% block content %}
+
+   <div class="wrapper-inner bg-sky">
+   
+      <section class="from-wrap">
+         <div class="form-box-out">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-7">
+                     <div class="user_forms_content">
+                        <div class="head-line">
+                           <h2>Verification</h2>
+                        </div>
+                        {% for message in messages %}
+        <div class="alert alert-primary">
+            {{message}}
+        </div>
+        {% endfor %}
+                        <form method="POST" id="app-otp-verify">
+                           {% csrf_token %}
+                           <div class="form-group">
+                              <label for="exampleInputEmail1" class="form-label">Enter OTP</label>
+                              <div id="otp" class="inputs-otp-row">
+                                 
+                                 <input type="hidden" id="slug" value={{slug}}>
+
+                                 <input type="tel"data-rule-required="true" data-msg-required="Otp required."  id="otp1" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength=1 required  name="otp1" class="form-control otp" placeholder="0">
+                                 <input type="tel" data-rule-required="true" data-msg-required="Otp required."  id="otp2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required  name="otp2" class="form-control otp" placeholder="0">
+                                 <input type="tel" data-rule-required="true" data-msg-required="Otp required."  id="otp3" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"required   name="otp3" class="form-control otp" placeholder="0">
+                                 <input type="tel" data-rule-required="true" data-msg-required="Otp required."  id="otp4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"required  name="otp4"  class="form-control otp" placeholder="0">
+                              </div>
+                           </div>
+                                <h1></h1>
+                           <div class="forgot-pass">
+                              <button type="button" onclick="verifyOtp()" class="btn">Verify</button>
+                              <a class="resend-otp" href="/applicant/resend-otp/{{slug}}"> Resend OTP </a>
+                              {% comment %}  {% endcomment %}
+                              {% comment %} <a class="resend-otp" href="">Resend OTP</a> {% endcomment %}
+                           </div>
+           <div class="modal fade first-modal" id="informationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+           <div class="modal-dialog modal-dialog-centered">
+             <div class="modal-content">
+               <div class="modal-header">
+                <!--  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body company-information">
+                   <h6>Would you like to enter company information</h6>
+                   <div class="d-flex">
+                      <a href="/applicant/vaccination/{{slug}}" type="submit" class="btn btn-outline">Yes</a>
+                      <a href="/" type="button" class="btn" >No</a>
+                   </div>
+               </div>
+             </div>
+           </div>
+         </div>
+                        </form>
+                     </div>
+                  </div>
+                  <div class="col-md-5">
+                     <div class="login-banner">
+                        <img src="{% static 'images/forgot-banner.png' %}">
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+   </div>
+
+{% include "footer.html" %}
+<script>
+    $(document).ready(function(){    
+      $('.otp:first').focus()    
+      $(".otp").keyup(function(e){            
+         if(e.keyCode == 8){
+               $(this).prev().focus();    
+         }else{
+               if($(this).val()){
+                  $(this).next().focus();
+               }
+         }            
+      });
+   });
+</script>
+<script>
+    function verifyOtp(){
+   let csrftoken =$('input[name="csrfmiddlewaretoken"]').val();
+
+    let slug = $('#slug').val();
+      if(!$('#app-otp-verify').valid()){
+      return false;
+    }
+    let otp1 = $('#otp1').val();
+    let otp2 = $('#otp2').val();
+
+    let otp3 = $('#otp3').val()
+    let otp4 = $('#otp4').val();
+    $('.loader').show();
+
+
+    $.ajax({
+          type: "POST",
+          url: "/otp_verify_ajax/" + slug,
+          headers: { 'X-CSRFToken': csrftoken },
+          data:
+        {
+          otp1:otp1,
+          otp2:otp2,
+          otp3:otp3,
+          otp4:otp4,
+         },
+         
+      success:function(res){
+          console.log(res.message)
+          toastr.success(res.message);
+
+       
+          $('#informationModal').modal('show');
+          $('.loader').hide();
+
+        },
+        error:function(res){
+          console.log(res.responseJSON.message)
+          toastr.error(res.responseJSON.message);
+          $('.loader').hide();
+
+        }
+  });
+
+        
+}
+</script>
+<script>
+  setTimeout(() => {
+    $('.alert').fadeOut('fast');
+  }, 3000);
+</script>
+{% endblock content %} 

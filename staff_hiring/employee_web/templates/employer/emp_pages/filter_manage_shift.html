@@ -1,0 +1,131 @@
+{% load static %}
+
+                                {% if accepted_fetch_data %}
+
+                                   {% for i in accepted_fetch_data %}
+                                    <tr class="day-shift">
+                                        
+                                       <td>{{i.applicant.address}}</td>
+                                       <td>{{i.date}}</td>
+                                       <td>{{i.in_time}} - {{i.out_time}}</td>
+                                       <td><h5>{{i.applicant.fname}}</h5></td>
+                                       <td>{{i.position.name}}</td>
+
+                                       <td>{{i.wages}}</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% else %}
+                                     <tr class="">
+                                        
+                                       <td></td>
+                                       <td></td>
+                                       <td></td>
+                                       <td style="color:#0080F9;"><h5 >No data Found</h5></td>
+                                       <td></td>
+
+                                       <td></td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn btn-inverse-danger  btn-fw" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    {% endif %}
+                                    {% comment %} <tr class="night-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>9 Feb 2022</td>
+                                       <td>7:30AM - 5:00PM</td>
+                                       <td>Smith Abraham</td>
+                                       <td>Sr. Developer</td>
+                                       <td>x1.5</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="day-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>5 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td><h5>Smith Jhone</h5></td>
+                                       <td>Abc</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="night-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>3 Feb 2022</td>
+                                       <td>9:30AM - 5:00PM</td>
+                                       <td>Deni Abraham</td>
+                                       <td>Sr. Developer</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="day-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>4 Feb 2022</td>
+                                       <td>7:30AM - 5:00PM</td>
+                                       <td><h5>Monserrat Abraham</h5></td>
+                                       <td>Abc</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="night-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>3 Feb 2022</td>
+                                       <td>9:30AM - 5:00PM</td>
+                                       <td>Deni Abraham</td>
+                                       <td>Developer</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="day-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>5 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td><h5>Smith Jhone</h5></td>
+                                       <td>Abc</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="night-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>3 Feb 2022</td>
+                                       <td>9:30AM - 5:00PM</td>
+                                       <td>Deni Abraham</td>
+                                       <td>Sr. Developer</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr> {% endcomment %}
+                            
+                              

@@ -1,0 +1,43 @@
+{% extends 'emp_base.html' %}
+{% load static %}
+{% block content %}
+{% include "header-inner.html" %}
+
+   <div class="wrapper-inner bg-sky">
+    
+      <section class="forms_content_sec manage-shift-name">
+         <div class="container">
+            <div class="form-box-out">
+                <div class="query-profile">
+                  <figure>
+                     <img src="images/query-profile.png">
+                  </figure>
+                  <h5>ID No. Candidate 10</h5>
+                </div>
+
+                <div class="v-informations">
+                    <h5>Vaccination Information</h5>
+                    <ul>
+                        <li>
+                            <span>First Dose</span>
+                            <h6>10 Feb 2022</h6>
+                        </li>
+                        <li>
+                            <span>Second Dose</span>
+                            <h6>10 Mar 2022</h6>
+                        </li>
+                        <li>
+                            <span>Bootster</span>
+                            <h6>Lorem Ipsum</h6>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+         </div>
+      </section>
+
+   </div>
+
+{% include "footer.html" %}
+{% endblock content %}

@@ -1,0 +1,350 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+
+{% include 'base/header.html'%}
+<div class="admin-inner-panel">
+    <div class="admin-inner-left">
+        {% include 'base/navbar.html' %}
+    </div>
+    <div class="admin-inner-right">
+             <div class="card" style="width:98%;">
+
+          <div class="card-body ">
+            <h4 class="card-title">Job Management / Category / List</h4>
+              <h3 style="color:red">{{u}}</h3>
+    <div class="table-responsive">
+                              {% if perms.staff_admin.add_job_category%}
+                  <a href="/admin/category/add/" class="btn btn-inverse-dark btn-fw" style="text-align: right; margin-left: 1300px;"> Create </a>   
+            {% endif %}   
+                   {% comment %} <div class="input-group">
+               
+                <form class="search-form" action="/admin/emp_search/" method="GET">
+                  {% csrf_token %}
+                  <input type="search" class="form-control" name="Q_emp" placeholder="Search Here" title="Search here">
+                 <br>
+                 <button class="btn btn-inverse-success btn-fw"> search </button>
+                  <a class="btn btn-inverse-danger btn-fw"
+                                            href="/admin/employer/">reset</a> {% endcomment %}
+                
+                {% comment %} </form> {% endcomment %}
+              {% comment %} </div> {% endcomment %}
+                    <table class="table">
+                      
+                      <thead>
+                        <tr>
+                           <th>
+                      Sr No.
+                    </th>
+                    <th>
+                     Category Name 
+                    </th>
+                    
+                    <th>
+                       Week haur
+                    </th>
+                    <th>
+                      Leave day
+                    </th>
+                    <th>
+                      Shift diffrence
+                    </th>
+                    <th>
+                      Status
+                    </th>
+                    <th>
+                      Action
+                    </th>
+                
+                        </tr>
+                      </thead>
+                      {% if cat_list %}
+                      <tbody>
+                  {% for i in cat_list %}
+                  {% if i.obj.soft_del_status == 0 %}
+                  <tr>
+
+                    <td>
+                      {{ forloop.counter }}
+                    </td>
+                    <td>
+                      {{i.obj.name}}
+
+                    
+                    <td>
+                      {{i.obj.week_hour}}
+                    </td>
+                    <td>
+                     
+                        {% for j in i.leave %}
+                        {{ j }}
+                        {% endfor %}
+                      
+
+                     
+                    </td>
+                    <td>
+                      {{i.obj.shift_diffrence}}
+                    </td>
+                    <td>
+                      {% if i.obj.status == True %}
+                      <h6 style=" color: green;" class="badge badge-success"> Activate </h6>
+                          
+                      {% else %}
+                      <h6 style=" color:red;"  class="badge badge-danger"> Deactivate </h6>
+                          {% endif %}
+                    </td>
+               
+                    <!-- <td>
+                        {% csrf_token %}
+                        <select id="status_{{user.id}}" name="status_applicant" class="form-select status"
+                          aria-label="Default select example"
+                          onchange="select_applicant('status_{{user.id}}','{{user.id}}')">
+                          <option selected disabled> Select Option </option>
+                          <option value="0" {% if i.status == '0'%} selected {% endif %}>Accepted</option>
+
+                          <option value="1" {% if i.status == '1'%} selected {% endif %}>Rejected</option>
+                        </select> -->
+                    <!-- </td> -->
+                    <td>
+                        {% if perms.staff_admin.change_job_category %}
+
+                      <a class="btn btn-inverse-success btn-fw" 
+                        href="/admin/category/edit/{{i.obj.slug}}">Edit</a>
+                        {% endif  %}
+                        {% if perms.staff_admin.delete_job_category %}
+
+                      <a class="btn btn-inverse-danger btn-fw" 
+                        href="/admin/category/del/{{i.obj.id}}"
+                        onclick="return confirm('Are you sure you want to delete this item')">Delete</a>
+                        {% endif %}
+                    </td>
+
+
+                  </tr>
+                  {% else %}
+                  {% endif %}
+                  {% endfor %}
+                </tbody>
+                {% else %}
+                 <tr>
+                      
+                    <td style="justify-content: center;"> 
+                      
+                  </td>
+                  <td style="justify-content: center;"> 
+                    
+                  </td>
+                  <td style=""> 
+                   
+   
+                  </td>
+                  <td style="justify-content: center; "> 
+                     <h3 style="color:lightgrey">No data found</h3>
+                  </td>
+                    <td > 
+                    
+                  </td>
+                       <td > 
+                    
+                  </td>
+                  </tr>
+                {% endif %}
+
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} 
+ <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2" style="margin-top:95px ;">
+      {% include 'base/navbar.html' %}
+
+    </div>
+    <div class="col-md-10" style="margin-top:120px ;">
+      <div class="card">
+
+        <div class="card-body">
+          <h4 class="card-title">Category Table</h4>
+          {% if messages %}
+
+          <div class="table-responsive">
+            {% for message in messages %}
+            {% if message.tags == 'success'%}
+            <div class="alert alert-success">
+              {{message}}
+              {% elif message.tags == 'error' %}
+              <div class="alert alert-danger">
+                {{message}}
+                {% endif %}
+              </div>
+
+              {% endfor %}
+              {% endif %}
+
+              <a href="/admin/category/add/"
+                class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                style="text-align: right; margin-left: 1300px;"> Create </a>
+
+              <table class="table table-striped" style="margin-top: 30px;">
+
+
+                <thead>
+                  <tr>
+                    <th>
+                      Sr No.
+                    </th>
+                    <th>
+                     Category Name 
+                    </th>
+                     
+                    <th>
+                      Hour's week
+                    </th>
+                    <th>
+                      Hour's daily
+                    </th>
+                    <th>
+                      Working Day
+                    </th>
+                    <th>
+                      Status
+                    </th>
+                    <th>
+                      Action
+                    </th>
+                
+
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {% for i in cat %}
+                  {% if i.soft_del_status == 0 %}
+                  <tr>
+
+                    <td>
+                      {{ forloop.counter }}
+                    </td>
+                    <td>
+                      {{i.name}}
+
+                    </td>
+                     
+                      </td>
+                    <td>
+                      {{i.haur_in_week}}
+                    </td>
+                    <td>
+
+
+                      {{i.haur_in_day}}
+                    </td>
+                    <td>
+                      {{i.working_day}}
+                    </td>
+                    <td>
+                      {% if i.status == True %}
+                      <h6 style=" color: green;"> Activate </h6>
+                          
+                      {% else %}
+                      <h6 style=" color:red;"> Deactivate </h6>
+                          {% endif %}
+                    </td>
+               
+                    <!-- <td>
+                        {% csrf_token %}
+                        <select id="status_{{user.id}}" name="status_applicant" class="form-select status"
+                          aria-label="Default select example"
+                          onchange="select_applicant('status_{{user.id}}','{{user.id}}')">
+                          <option selected disabled> Select Option </option>
+                          <option value="0" {% if i.status == '0'%} selected {% endif %}>Accepted</option>
+
+                          <option value="1" {% if i.status == '1'%} selected {% endif %}>Rejected</option>
+                        </select> -->
+                    <!-- </td> -->
+                    <td>
+                        {% if perms.staff_admin.change_job_category %}
+
+                      <a class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                        href="/admin/category/edit/{{i.slug}}">Edit</a>
+                        {% endif  %}
+                        {% if perms.staff_admin.delete_job_category %}
+
+                      <a class="btn btn-danger btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                        href="/admin/category/del/{{i.id}}"
+                        onclick="return confirm('Are you sure you want to delete this item')">Delete</a>
+                        {% endif %}
+                    </td>
+
+
+                  </tr>
+                  {% else %}
+                  {% endif %}
+                  {% endfor %}
+                </tbody>
+
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div> {% endcomment %}
+  <!-- <script>
+    function select_applicant(id, user_id) {
+      let p = $('#' + id).val();
+      let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+      // $('#select_id').submit();
+      $.ajax({
+        type: "POST",
+        url: "/admin/applicant_user_ajax/" + user_id,
+        headers: { 'X-CSRFToken': csrftoken },
+
+        data:
+        {
+          select: p,
+
+        },
+        success: function (res) {
+          toastr.success(res.message);
+        },
+
+      }); -->
+
+      <!-- // $(this).parent('div').parent('#select_id').submit();
+      // alert(p)  -->
+
+<!-- 
+    }
+  </script>
+ -->
+
+<script>
+  setTimeout(() => {
+    $('.alert').fadeOut('fast');
+  }, 3000);
+</script>
+
+
+  {% endblock content %}

@@ -1,0 +1,556 @@
+{% extends 'basefile/base.html' %}
+{% load static %}
+{% block content %}
+
+ <div class="wrapper-inner bg-sky">
+     {% for message in messages %}
+        <div class="alert alert-primary container">
+            {{message}}
+        </div>
+        {% endfor %}
+      <section class="forms_content_sec from-wrap ptb">
+         <div class="container">
+            <div class="head-line-sd">
+               <h2>Register yourself as a client</h2>
+            </div>
+            <div class="form-box-out">
+               <form method="POST" id="signup">
+                 {% csrf_token %}
+              <input class="form-control" type="hidden" value="employer" id="emp" name="emp">
+              <input class="form-control" type="hidden" id = "latitude" value="" name="latitude">
+              <input class="form-control" type="hidden" id = "longitude" value="" name="longitude">
+              <input type="hidden" data-rule-required="true" data-msg-required="Required" id="company_profile_status"name="company_profile_status" value="0" class="form-control" placeholder="Lorem lipsum">
+              <div class="loader text-center" style="margin:auto; display:none; position: absolute; left: 45%;top: 30%;">
+              <img src="{% static '/media/loader2.gif' %}"  width="30px" height="30px"/>
+                </div>
+
+                  <div class="row">
+                       <div class="col-md-12">
+                         <div class="form-group">
+                           <label for="exampleInputEmail1" class="form-label">Name of the home</label>
+                           <input  data-rule-required="true" data-rule-maxLength="55" data-rule-noSpace="true"  type="text" value="" class="form-control" id="CName" name="CName" placeholder="Enter name">
+                            <input  type="hidden" data-rule-noSpace="true" data-rule-required="true" data-msg-required="This field is required." class="form-control" id="slug" name="slug" >
+
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">First Name</label>
+                           <input type="text" data-rule-noSpace="true" data-rule-maxLength="30" data-rule-required="true" data-msg-required="This field is required." class="form-control" id="FName" name="FName" placeholder="Enter your first name">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">Last Name</label>
+                           <input type="text" data-rule-noSpace="true" data-rule-maxLength="30" data-rule-required="true" data-msg-required="This field is required." class="form-control" id="LName" name="LName" placeholder="Enter your last name">
+                         </div>
+                       </div>
+                      {% comment %} style="pointer-events: none;" {% endcomment %}
+                       <div class="col-md-6">
+                         <div class="form-group" >
+                           <label for="exampleInputEmail2" class="form-label">Contact/ Mobile number</label>
+                           <input   type="tel" data-rule-noSpace="true" data-rule-required="true" data-msg-required="This field is required." name="phone" placeholder="Enter your mobile number"  placeholder="Enter Mobile Number" id="phone_cus_register" class="form-control"
+                                    onblur="test()" pattern="[0-9]+"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength=10>
+                                <input   type="hidden" placeholder="123456789" id="phone1_cus_register" value="" name="phone">                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">Email Address</label>
+                           <input type="email" data-rule-noSpace="true" data-rule-email="true" data-rule-required="true" data-msg-required="This field is required."name="email" id="email" class="form-control" placeholder="Enter email address">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">Password</label>
+                           <input type="password" data-rule-noSpace="true" data-rule-minLength="6" data-rule-maxLength="15"  data-rule-required="true" data-msg-required="This field is required." data-rule-required="true" data-msg-required="Enter some data"  name="password" id="Password" class="form-control" placeholder="Enter password">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">Confirm Password</label>
+                           <input type="password" data-rule-minLength="6" data-rule-maxLength="15" data-rule-required="true" data-msg-required="This field is required." id="rePassword" name="re_password" class="form-control" placeholder="Enter confirm password">
+                         </div>
+                       </div>
+                       <div class="col-md-12 inner-title">
+                            <h5>Address</h5>
+                       </div>
+                      <div class="col-md-6">
+                         <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">Post code</label>
+                      <input  data-rule-noSpace="true" data-rule-required="true" placeholder="Enter your pin code" id="Postal_code" oninput="zipcode()" class="form-control autocom" type="text" value="" name="Postal_code">                         </div>
+                       </div> 
+                       <div class="col-md-6" id="Address_div">
+                        <div class="form-group">
+                        <label for="exampleInputEmail2"  class="form-label">Select address</label>
+
+                                <select id="Address" data-rule-required="true" onchange="select_city()" name="Address" class="form-select"
+                                    aria-label="Default select example">
+                                    <option selected disabled> Select Option </option>
+                                </select>       
+                         </div>
+                       </div>
+                     <div class="col-md-6">
+                          <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">Address line 1</label>
+                           <input data-rule-noSpace="true" type="text" id="address" data-rule-required="true" data-msg-required="This field is required." class="form-control" id="country" name="country" placeholder="Enter your first name">
+                          </div>
+                        </div>
+                       <div  class="col-md-6">
+                          <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">Country</label>
+                           <input type="text" data-rule-maxLength="30" data-rule-noSpace="true" data-rule-required="true" data-msg-required="This field is required." class="form-control" id="country" name="country" placeholder="Enter your first name">
+
+            
+                          {% comment %} <select onchange="select_country()" id="country" name="country" class="form-select"
+                              aria-label="Default select example">
+                              <option selected disabled> Select Option </option>
+                              {% for i in country %}
+                              <option value="{{i.id}}">{{i.name}}</option>
+                              {% endfor %}
+                  
+                          </select> {% endcomment %}
+                        </div>
+                      </div>
+                        {% comment %} <div  class="col-md-6">
+                          <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">State</label>
+                           <input type="text" data-rule-maxLength="30" data-rule-noSpace="true"data-rule-required="true" data-msg-required="This field is required." class="form-control" id="state" name="state" placeholder="Enter your state name"> {% endcomment %}
+
+            
+                         {% comment %} <select id="state" onchange="select_state_id()" name="state" class="form-select" aria-label="Default select example">
+                                    <option selected disabled> Select Option </option>
+                                    <option value="0"></option>
+                                </select> {% endcomment %}
+                        {% comment %} </div>
+                      </div> {% endcomment %}
+                    <div  class="col-md-6">
+                          <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">City</label>
+
+                          <input  data-rule-noSpace="true" data-rule-maxLength="30" placeholder="Enter Your City Name" id="city" class="form-control" type="text" value="" name="city">                
+                          {% comment %} <select id="city" onchange="select_city_id()" name="city" class="form-select"
+                                    aria-label="Default select example">
+                                    <option selected disabled> Select Option </option>
+                                    <option value="0"></option>
+                                </select> {% endcomment %}
+                        </div>
+                      </div>
+                  
+                       {% comment %} <div class="col-md-6">
+                         <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">Address</label>
+                            <input  placeholder="indra nagar jaipur" data-rule-required="true" data-msg-required="This field is required." id="autocom" class="form-control"
+                                    type="text" value="" name="address" >                         </div>
+                       </div> {% endcomment %}
+                       
+                       {% comment %} <div class="col-md-6">
+                         <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">City</label>
+                           <input type="text" class="form-control" placeholder="Enter city">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">State</label>
+                           <input type="text" class="form-control" placeholder="Enter state">
+                         </div>
+                       </div> {% endcomment %}
+                       <div class="col-md-12">
+                           <div class="form-check i-accept">
+                             <input name="Term-Condition" class="form-check-input"  type="checkbox"  data-rule-required="true" data-msg-required="Required." value="" id="flexCheckDefault">
+                             <label class="form-check-label" for="flexCheckDefault">
+                               I accept <a href="{% url 'termcondition' %}"> Term & Condition </a>
+                             </label>
+                           </div>
+
+                           <div class="text-center mt-4">
+                               <button  onclick="sendData()" type="button" class="btn"  >Submit</button>
+                     </div>
+                       
+                  </div>
+               
+            </div>
+         </div>
+     </form>
+
+      </section>
+
+      <!-- Modal -->
+      {% comment %} <div class="modal fade first-modal" id="informationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+           <div class="modal-dialog modal-dialog-centered">
+             <div class="modal-content">
+               <div class="modal-header">
+                <!--  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" id="modal" aria-label="Close"></button>
+               </div>
+              <div class="modal-body company-information">
+                   <h6>Would you like to enter company information</h6>
+                   <div class="d-flex">
+                      <a type="button" href="/company-profile/" onclick="document.getElementById('signup').submit();" class="btn btn-outline">Yes</a> {% endcomment %}
+                      {% comment %} <button type="button" class="btn">No</button> {% endcomment %}
+                      {% comment %} <a type="button" onclick="document.getElementById('signup').submit();" class="btn" data-bs-dismiss="modal" >No</a>
+                   </div>
+               </div>
+             </div>
+           </div> 
+         </div> {% endcomment %}
+      <!-- Modal -->
+
+   {% comment %} </div> {% endcomment %}
+
+{% comment %} `https://maps.googleapis.com/maps/api/geocode/json?address=${Postal_code}&sensor=true&key=AIzaSyAlljhS4LLf_864PqbvXtDGXver091jLiI&callback=initMap&libraries=places&v=weekly`); {% endcomment %}
+
+{% include "footer.html" %}
+
+<script>
+  let Postal_code =0;
+  function zipcode(){
+    Postal_code = $('#Postal_code').val()
+    console.log(Postal_code)
+
+    let fetchRes = fetch(
+  `https://maps.googleapis.com/maps/api/geocode/json?address=${Postal_code}&sensor=true&key=AIzaSyAlljhS4LLf_864PqbvXtDGXver091jLiI&callback=initMap&libraries=places&v=weekly`);
+        fetchRes.then(res =>
+            res.json()).then(d => {
+              console.log(d.results, "ccccccccccccccccc")
+              
+              let data = d.results[0].postcode_localities 
+              let option="<option disabled selected >Select address </option>";
+              for(let a of data){
+                option +=  "<option value="+a+">" + a +"</option>"
+              }
+              $('#Address').html(option);
+              
+              console.log(d.results[0].address_components[3].long_name ,"ccccccccccccccccc")
+               $('#country').val(d.results[0].address_components[3].long_name)
+               $('#state').val(d.results[0].address_components[2].long_name)
+             $('#city').val(d.results[0].address_components[1].long_name)   
+            })
+
+  }
+</script>
+<script>
+  function select_city(){
+  let Address = $('#Address').val()
+
+  $('#address').val(Address)
+  $('#Address_div').hide()
+  }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlljhS4LLf_864PqbvXtDGXver091jLiI&callback=initMap&libraries=places&v=weekly" async></script>
+<script>
+  setTimeout(() => {
+    $('.alert').fadeOut('fast');
+  }, 3000);
+</script>
+<script>
+ function select_country() {
+        let p = $('#country' ).val();
+
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        console.log(p)
+        
+        $('#select_id').submit();
+        $.ajax({
+            type: "POST",
+            url: "/admin/emp_country_ajax/",
+            headers: { 'X-CSRFToken': csrftoken },
+            data:
+            {
+                select_country: p,
+
+
+            },
+            // success: function (res) {
+            //     console.log(res.message)
+            //     toastr.success(res.message);
+
+            // },
+
+            success: function(res){
+                option = ""
+                if(jQuery.isEmptyObject(res.result)){
+                    option += "<option required value='0'>No  data Found</option>";
+
+                }else{
+                    option += '<option selected disabled >Select Option</option>';
+                    res.result.forEach(item => {
+                        
+                        option += '<option value=' + item.id + '>' + item.name + '</option>';
+                    });
+                }
+                
+                $("#state").html(option);
+            }
+
+        });
+
+    }
+
+</script>
+<script>
+  function select_postal_code() {
+        let u = $('#Postal_code').val();
+
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        console.log(u)
+
+        $('#select_id').submit();
+        $.ajax({
+            type: "POST",
+            url: "/admin/emp_postal_code_ajax/",
+            headers: { 'X-CSRFToken': csrftoken },
+            data:
+            {
+                postal_code: u
+
+
+            },
+            success: function (res) {
+                console.log(res.location)
+                $("#address").val(res.location[0]);
+            }
+
+        });
+
+    }
+</script>
+{% comment %} <script>
+
+function select_state_id() {
+            let v = $('#state').val();
+            let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            console.log(v);
+            $('#select_id').submit();
+            $.ajax({
+                type: "POST",
+                url: "/admin/emp_state_city_ajax/",
+                headers: { 'X-CSRFToken': csrftoken },
+                data:
+                {
+                    state_value: v
+
+
+                },
+                success: function (res) {
+                    option = ""
+                    if (jQuery.isEmptyObject(res.result)) {
+                        option += "<option value='0'>No  data Found</option>";
+
+                    } else {
+                        option += '<option selected disabled >Select Option</option>';
+                        res.result.forEach(item => {
+                            option += '<option value=' + item.id + '>' + item.name + '</option>';
+                        });
+                    }
+
+                    $("#city").html(option);
+                }
+
+            });
+        }
+        function select_city_id(){
+            let c = $('#city').val();
+            console.log(c)
+         }
+
+
+</script> {% endcomment %}
+<script>
+    function initMap()
+    {
+      var input = document.getElementById('autocom');
+      var options =     {
+              types: ['geocode']
+              
+          
+          };
+        var input= document.getElementById('autocom')
+        autocomplete = new google.maps.places.Autocomplete(input, options);
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var place = autocomplete.getPlace();
+        
+        let lat = place.geometry.location.lat()
+        let long = place.geometry.location.lng()
+        console.log(lat,long )
+        $('#latitude').val(lat);
+        $('#longitude').val(long);
+       
+      
+            //alert("This function is working!");
+            //alert(place.name);
+           // alert(place.address_components[0].long_name);
+
+        });
+       //var place = autocomplete.getPlace();
+        //console.log(autocomplete ,'dddddd')
+        //document.getElementById('autocom').value = place.geometry.location.lat();
+
+    }
+    
+   
+</script>
+<script>
+
+</script>
+<script>
+function sendData(){
+
+    let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    let Cname = $('#CName').val();
+    
+    if(!$('#signup').valid()){
+      return false;
+    }
+
+    let slug = $('#slug').val();
+    if(!$('#signup').valid()){
+      return false;
+    }
+
+    let company_profile_status = $('#company_profile_status').val()
+    
+    let Fname = $('#FName').val();
+    let Lname = $('#LName').val();
+    let email = $('#email').val();
+    let password = $('#Password').val();
+    let rePassword = $('#rePassword').val();
+    let address = $('#Address').val();
+    alert(address,"dddddddddddddd")
+    let user_type = $('#emp').val();
+    let country = $('#country').val();
+    
+    let state = $('#state').val();
+
+    let city = $('#city').val();
+
+    let postal_code = $('#Postal_code').val();
+
+
+
+    let mob_num = $('#phone1_cus_register').val();
+    let c = $('#flexCheckDefault').val();
+
+    console.log(c,"fffffffffffffffffffffffffffffff")
+    console.log(company_profile_status,"ddddddddddddddd")
+    if(Cname == ""){
+      t= "Required True"
+      let f = $('#Cname').val(t);
+      console.log(f)
+      
+    
+  }
+  
+ 
+    $('.loader').show();
+
+
+    $.ajax({
+          type: "POST",
+          url: "/emp_lat_lng/",
+          headers: { 'X-CSRFToken': csrftoken },
+          data:
+        {
+          slug:slug,
+          CName:Cname,
+          FName:Fname,
+          LName:Lname,
+          country:country,
+          state:state,
+          city:city,
+          postal_code:postal_code,
+          mob_num:mob_num,
+          email:email,
+          password:password,
+          rePassword:rePassword,
+          address:address,
+          user_type:user_type,
+          
+          company_profile_status:company_profile_status,
+
+     },
+      success:function(res){
+          console.log(res.message);
+          console.log('success');
+          toastr.success(res.message);
+          window.location.href="/client/otp-verify/" + res.slug
+          //$('#informationModal').modal('show');
+          $('.loader').hide();
+
+        },
+        error:function(res){
+          console.log(res)
+          toastr.error(res.responseJSON.message);
+          $('.loader').hide();
+
+        }
+  });
+
+
+        
+}
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+
+  <script>
+  var K = {
+        44: ["GB", "GG", "IM", "JE"]
+      
+    }
+  var c = "{{users.0.country_code}}".replace("+", "");
+  
+
+  const phoneInputField = document.querySelector("#phone_cus_register");
+  const phoneInput = window.intlTelInput(phoneInputField, {
+    initialCountry: K[c] ? K[c][0] : 'gb',
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+
+  });
+    {% comment %}  {% endcomment %}
+
+  function test() {
+      var number = $('#phone_cus_register').val();
+      var setPhone = $('#phone1_cus_register').val('')
+      if (number) {
+        var countryData = phoneInput.getSelectedCountryData();
+        // console.log(countryData);
+        var code = countryData['dialCode'];
+
+        $("input[name='phone[phoneInput]'").val(number);
+        var full = '+' + code + ' ' + number;
+        var setPhone = $('#phone1_cus_register').val(full)
+      }
+    }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+  $(document).ready(function () {
+    var pho = document.getElementById('phone1_cus_register').value;
+    if (!(pho == '')) {
+      var myArr = pho.split(" ");
+      console.log(myArr[1]);
+
+      document.getElementById('phone_cus_register').value = myArr[1];
+    }
+  });
+</script>
+{% comment %} <script>
+  $(document).ready(function(){
+
+  jQuery.validator.addMethod("noSpace", function(value, element) { 
+    if(value.indexOf(" ")==0){
+        return false;
+    }
+    return true;
+}, "No space please and don't leave it empty");
+$(document)
+
+  });
+</script> {% endcomment %}
+
+{% endblock content %} 

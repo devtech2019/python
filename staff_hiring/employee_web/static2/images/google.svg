@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="123" height="42" viewBox="0 0 123 42">
+  <g id="Group_64" data-name="Group 64" transform="translate(-686 -34)">
+    <g id="Rectangle_2" data-name="Rectangle 2" transform="translate(686 34)" fill="#fff" stroke="#e6e6e6" stroke-width="1">
+      <rect width="123" height="42" rx="4" stroke="none"/>
+      <rect x="0.5" y="0.5" width="122" height="41" rx="3.5" fill="none"/>
+    </g>
+    <g id="Group_63" data-name="Group 63" transform="translate(695 43)">
+      <path id="Path_62" data-name="Path 62" d="M0,0H24V24H0Z" fill="none"/>
+    </g>
+    <g id="Group_67" data-name="Group 67" transform="translate(4)">
+      <g id="Group_65" data-name="Group 65" transform="translate(706 45)">
+        <path id="Path_64" data-name="Path 64" d="M275.941,211.479h-8.158a.652.652,0,0,0-.652.652v2.606a.652.652,0,0,0,.652.652h4.594a6.133,6.133,0,0,1-2.64,3.094l1.959,3.391a9.805,9.805,0,0,0,5-8.575,6.61,6.61,0,0,0-.112-1.281A.655.655,0,0,0,275.941,211.479Z" transform="translate(-256.696 -203.218)" fill="#167ee6"/>
+        <path id="Path_65" data-name="Path 65" d="M43.067,336.893a6.086,6.086,0,0,1-5.265-3.046L34.411,335.8a9.992,9.992,0,0,0,13.656,3.665v0l-1.959-3.391A6.042,6.042,0,0,1,43.067,336.893Z" transform="translate(-33.067 -320.806)" fill="#12b347"/>
+        <path id="Path_66" data-name="Path 66" d="M261,394.175v0l-1.959-3.391A6.041,6.041,0,0,1,256,391.6v3.913A9.983,9.983,0,0,0,261,394.175Z" transform="translate(-246 -375.514)" fill="#0f993e"/>
+        <path id="Path_67" data-name="Path 67" d="M3.913,133.114a6.042,6.042,0,0,1,.822-3.041l-3.391-1.954a9.954,9.954,0,0,0,0,9.991l3.391-1.954A6.042,6.042,0,0,1,3.913,133.114Z" transform="translate(0 -123.114)" fill="#ffd500"/>
+        <path id="Path_68" data-name="Path 68" d="M43.067,3.913A6.059,6.059,0,0,1,46.931,5.3a.65.65,0,0,0,.874-.039l1.846-1.846a.657.657,0,0,0-.038-.961A9.978,9.978,0,0,0,34.411,5L37.8,6.959A6.086,6.086,0,0,1,43.067,3.913Z" transform="translate(-33.067)" fill="#ff4b26"/>
+        <path id="Path_69" data-name="Path 69" d="M259.865,5.3a.65.65,0,0,0,.874-.039l1.846-1.846a.657.657,0,0,0-.038-.961A9.97,9.97,0,0,0,256,0V3.913A6.059,6.059,0,0,1,259.865,5.3Z" transform="translate(-246)" fill="#d93f21"/>
+      </g>
+      <text id="Google" transform="translate(734 60)" fill="#323234" font-size="14" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Google</tspan></text>
+    </g>
+  </g>
+</svg>

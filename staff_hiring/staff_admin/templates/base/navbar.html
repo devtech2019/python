@@ -1,0 +1,218 @@
+    <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          {% comment %} <li class="nav-item">
+            <a class="nav-link" href="index.html">
+              <i class="mdi mdi-grid-large menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li> {% endcomment %}
+          <li class="nav-item {% if request.path == '/admin/dashboard/'  %} active {% endif %}" >
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <i class="mdi mdi-google-physical-web"></i>
+              <span class="menu-title">Website</span>
+              <i class="menu-arrow"></i> 
+            </a>
+            <div class="collapse " id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item {% if request.path == '/admin/dashboard/'  %} active {% endif %}">
+                    <a class="nav-link {% if request.path == '/admin/dashboard/'  %} active {% endif %} " href="/admin/dashboard/">
+                        <i style="font-size: 20px;" class="mdi mdi-view-dashboard"></i>
+                        Dashboard
+                    </a>
+                 </li>
+                <li class="nav-item {% if request.path == '/admin/subadmin/' %} active {% endif %}" > 
+                    <a class="nav-link" href="{% url 'subadmin' %}">
+                        <i style="font-size: 20px;" class="mdi mdi mdi-account-check"></i> Subadmin
+                    </a>
+                </li>
+                {% if perms.staff_admin.view_job_category %}
+                <li class="nav-item {% if request.path == '/admin/category/'  %} active {% endif %}" > 
+                    <a class="nav-link" href="/admin/category/">
+                        <i style="font-size: 20px;" class="icon-briefcase" ></i>  Job Category
+                    </a>
+                </li>
+                {% endif %}
+              {% if perms.staff_admin.view_pages%}
+                <li class="nav-item {% if request.path == '/admin/Cms_Pages/'  %} active {% endif %}" > 
+                    <a class="nav-link" href='/admin/Cms_Pages/'>
+                        <i style="font-size: 20px;" class="mdi  mdi-cube-outline"></i> Pages
+                    </a>
+                </li>
+              {% endif %}
+            {% if perms.staff_admin.view_training %}
+              <li class="nav-item  {% if request.path == '/admin/training/'  %} active {% endif %} ">
+                    <a class="nav-link " href="{% url 'training' %}">
+
+                        <i style="font-size: 20px;"  class="mdi  mdi-cube-outline"></i>
+                            Training management
+                    </a>
+                </li>
+                {% endif %}
+              <li class="nav-item {% if request.path == '/admin/reports/'  %} active {% endif %}" > 
+                    <a class="nav-link" href='/admin/reports/'>
+                        <i style="font-size: 20px;" class="mdi mdi-file-pdf-box"></i> Reports
+                    </a>
+                </li>
+                {% if perms.staff_admin.view_global_setting %}
+                <li class="nav-item {% if request.path == '/admin/global/edit/global-setting'  %} active {% endif %}" > 
+                    <a class="nav-link"    href="/admin/global/edit/global-setting">
+                        <i style="font-size: 20px;" class="mdi mdi-settings"></i> Global Settings
+                    </a>
+                </li>
+              {% endif %}
+                
+                {% if perms.staff_admin.view_aboutus %}
+
+                <li class="nav-item  {% if request.path == '/admin/aboutus'  %} active {% endif %}" > 
+                    <a class="nav-link"    href="/admin/aboutus/">
+                        <i style="font-size: 20px;" class="mdi mdi-application"></i> About Us
+
+                    </a>
+                </li>
+                {% endif%}
+                 <li class="nav-item {% if request.path == '/admin/team'  %} active {% endif %}"> 
+                    <a class="nav-link"    href="/admin/team/">
+                        <i style="font-size: 20px;" class="mdi mdi-human-greeting"></i> Team
+
+
+                    </a>
+                </li>
+                 <li class="nav-item {% if request.path == '/admin/team'  %} active {% endif %}"> 
+                    <a class="nav-link"    href="/admin/content/management/term-condtion">
+                        <i style="font-size: 20px;" class="mdi mdi-human-greeting"></i> Term And Condition
+
+
+                    </a>
+                </li>
+            
+
+
+              </ul>
+              
+            </div>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+              <i class="mdi mdi-google-circles-communities"></i>              
+              <span class="menu-title">Common</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                
+          {% if perms.staff_admin.view_user %}
+
+                <li class="nav-item {% if request.path == '/admin/employer/' %} active {% endif %}">
+                    <a class="nav-link" href="/admin/employer/">
+                       <i class="mdi mdi-account"  style="font-size:20px;"></i> Employer
+                    </a>
+                </li>
+          {% endif %}
+          {% if perms.staff_admin.view_user %}
+                 <li class="nav-item {% if request.path == '/admin/applicant/' %} active {% endif %}">
+                    <a class="nav-link" href="/admin/applicant/">
+                       <i class="mdi mdi-account"  style="font-size:20px;"></i> Applicant
+                    </a>
+                </li>
+            {% endif %}
+            <li class="nav-item {% if request.path == '/admin/post/create/' %} active {% endif %}">
+                    <a class="nav-link" href="/admin/post/create/">
+                       <i class="mdi mdi-alert-box"  style="font-size:20px;"></i> Post New Shift 
+                    </a>
+            </li>
+                <li class="nav-item {% if request.path == '/admin/manage/shift/' %} active {% endif %}">
+                    <a class="nav-link" href="/admin/manage/shift/">
+                       <i class="mdi mdi-animation"  style="font-size:20px;"></i> Manage Shift
+                    </a>
+                </li>
+              {% if perms.staff_admin.view_email_templates %}
+                <li class="nav-item {% if request.path == '/admin/email/' %} active {% endif %}">
+                    <a class="nav-link" href="/admin/email/">
+                       <i class="mdi mdi-email-variant"  style="font-size:20px;"></i> Template Management
+                    </a>
+                </li>
+              {% endif %}
+              {% if perms.staff_admin.view_contactus%}
+                 <li class="nav-item {% if request.path == '/admin/contact/'  %} active {% endif %}">
+                    <a class="nav-link" href="/admin/contact/">
+                       <i class="mdi mdi-contact-mail"  style="font-size:20px;"></i> Inquiry
+                    </a>
+                </li>
+                {% endif %}
+                 <li class="nav-item {% if request.path == '/admin/query/'  %} active {% endif %}">
+                    <a class="nav-link" href="/admin/query/">
+                       <i class="mdi mdi-contact-mail"  style="font-size:20px;"></i> Query
+                    </a>
+                </li>
+               <li class="nav-item {% if request.path == '/admin/liveChat/'  %} active {% endif %}">
+                <a class="nav-link" href="/admin/liveChat/">
+                  <i class="mdi mdi-contact-mail"  style="font-size:20px;"></i> Chat
+                </a>
+               </li>
+
+
+                
+              </ul>
+            </div>
+          </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+              <i class="mdi mdi-application"></i>
+              <span class="menu-title">Application</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="charts">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item {% if request.path == '/admin/introduction/'  %} active {% endif %}"> 
+                    <a class="nav-link" href="/admin/introduction/">
+                    <i style="font-size: 20px;" class="mdi mdi-application"></i> App Intro
+                </a>
+            </li>
+        </ul>
+            </div>
+          </li>
+             {% comment %}
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+              <i class="menu-icon mdi mdi-table"></i>
+              <span class="menu-title">Tables</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">Basic table</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+              <i class="menu-icon mdi mdi-layers-outline"></i>
+              <span class="menu-title">Icons</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="icons">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">Mdi icons</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+              <i class="menu-icon mdi mdi-account-circle-outline"></i>
+              <span class="menu-title">User Pages</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="auth">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://bootstrapdash.com/demo/star-admin2-free/docs/documentation.html">
+              <i class="menu-icon mdi mdi-file-document"></i>
+              <span class="menu-title">Documentation</span>
+            </a>
+          </li> {% endcomment %}
+        </ul>
+      </nav>

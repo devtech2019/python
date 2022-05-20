@@ -1,0 +1,499 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+
+{% include 'base/header.html'%}
+<div class="admin-inner-panel">
+    <div class="admin-inner-left">
+        {% include 'base/navbar.html' %}
+    </div>
+    <div class="admin-inner-right">
+    <div class="card" >
+
+        <style>
+            td div img{
+                height: 20px!important;
+                }
+          </style>
+
+  <div class="card-body ">
+ 
+
+   {% comment %} <div class="wrapper-inner bg-sky"> {% endcomment %}
+      <div class="table-responsive">
+      <section class="outer-table-space">
+            {% comment %} <div class="container"> {% endcomment %}
+               <div class="table-dash-box">
+                  <div class="table-heading-bx">
+                     <h2>Post a New Shift</h2>
+                     <div class="form-group d-flex" >
+                         <label class="form-label">Select Number of Sifts</label>
+                        
+                         <select class="form-select" aria-label="Default select example" name="number"  onchange="sendNumber()" id="select_val" >
+                           {% for i in number %}
+                           <option value="{{i}}">{{i}}</option> 
+                           {% endfor %} 
+                           
+                         </select>
+                         
+                     </div>
+                  </div>
+                  <form action="{% url 'post_create' %}" method="POST" id="shift-form"> 
+                     {% csrf_token %}
+                    <div class="table-responsive-md">
+                     <table class="table" id="example">
+                       <thead>
+                         <tr>
+                           <th>Sr no.</th>
+                           <th>Date</th>
+                           <th>Time In</th>
+                           <th>Time Out</th>
+                           <th>Employer </th>
+                           <th>Select Position</th>
+                           <th>Wages Multiplier</th>
+                           <th>Instruction</th>
+                         </tr>
+                       </thead>
+                       
+                       
+                       <tbody class="tb_input_box">
+                           <tr id='no_0'>
+                              <th>1.</th>
+                              <td>
+                                 <div class="form-group">
+                                    <div class="form-group-icon">
+                                        <input type="date" class="form-control" placeholder="10 Feb 2022" name="shift[0]date" data-rule-required="true" data-msg-required="This field is required">
+                                        {% comment %} <img src="{% static 'images/date-icon.svg' %}"> {% endcomment %}
+                                     </div>
+                                 </div>
+                              </td>
+                              <td>
+                                 <div class="form-group">
+                                    <div class="form-group-icon">
+                                        <input  type="time" class="form-control" placeholder="2:30PM" name="shift[0]time_in"  data-rule-required="true" data-msg-required="This field is required">
+                                        {% comment %} <img src="{% static 'images/clock-icon.svg' %}"> {% endcomment %}
+                                     </div>
+                                 </div>
+                              </td>
+                              <td>
+                                 <div class="form-group">
+                                    <div class="form-group-icon">
+                                        <input  type="time" class="form-control" placeholder="2:30PM" name="shift[0]time_out"  data-rule-required="true" data-msg-required="This field is required">
+                                        {% comment %} <img src="{% static 'images/clock-icon.svg' %}"> {% endcomment %}
+                                     </div>
+                                 </div>
+                              </td>
+                              <td>
+                              <div class="form-group">
+                                     <select class="form-select" aria-label="Default select example" name="shift[0]employer"  data-rule-required="true" data-msg-required="This field is required">
+                               <option disabled  selected value="employer">Select option </option>
+
+                                        {% for i in employer %}
+                                       {% if i.soft_del_status == 0%}
+                                       {% comment %} <option selected="{{i.fname}}"></option> {% endcomment %}
+                                       <option value="{{i.id}}">{{i.fname}}</option>
+                                       {% endif %}
+                                       {% endfor %}
+                                     </select>
+                                 </div>
+                              </td>
+                              <td>
+                                 <div class="form-group">
+                                     <select class="form-select" aria-label="Default select example" name="shift[0]position"  data-rule-required="true" data-msg-required="This field is required">
+                                      <option disabled selected value="category">Select option </option>
+   
+                                     {% for i in category %}
+                                       {% if i.soft_del_status == 0%}
+                                       
+                                       <option value="{{i.id}}">{{i.name}}</option>
+                                       {% endif %}
+                                       {% endfor %}
+                                     </select>
+                                 </div>
+                              </td>
+                              <td>
+                                 <div class="form-group">
+                                    <input type="number"  class="form-control"  placeholder="x1"  name="shift[0]salary" data-rule-required="true" data-msg-required="This field is required" >
+                                 </div>
+                              </td>
+                              <td>
+                                 <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="There are many variations of passages " name="shift[0]desc"  data-rule-required="true" data-msg-required="This field is required">
+                                 </div>
+                              </td>
+                           </tr>
+                           
+                       </tbody>
+                    
+                     </table>
+                            <button type="submit" class="btn btn-inverse-success btn-fw">Submit</button>
+                    </div>
+                  </form>
+               </div>
+            {% comment %} </div> {% endcomment %}
+      </section>
+    </div>
+
+   {% comment %} </div> {% endcomment %}
+    </div>
+
+
+
+
+    {% block js %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js">
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js"></script> 
+</script>
+<script>
+   $("#shift-form").validate() 
+</script>
+
+{% comment %} <script>
+function sendNumber(){
+   let val=$('#select_val').val();
+   var htmls123 =`<tr><th>{step}.</th> 
+                              <td>
+                                 <div class="form-group">
+                                    <div class="form-group-icon">
+                                        <input type="date" class="form-control" placeholder="10 Feb 2022" name="shift[2]date"  id="date_2" data-rule-required="true" data-msg-required="enter abc xyz" >
+                                        <img src="{% static 'images/date-icon.svg' %}">
+                                     </div>
+                                 </div>
+                              </td>
+                              <td>
+                                 <div class="form-group">
+                                    <div class="form-group-icon">
+                                        <input type="time" class="form-control" placeholder="11:20AM" name="time_in[]"  >
+                                        <img src="{% static 'images/clock-icon.svg' %}">
+                                     </div>
+                                 </div>
+                              </td>
+                              <td>
+                                 <div class="form-group">
+                                    <div class="form-group-icon">
+                                        <input type="time" class="form-control" placeholder="2:30PM" name="time_out[]123" >
+                                        <img src="{% static 'images/clock-icon.svg' %}">
+                                     </div>
+                                 </div>
+                              </td>
+                              <td>
+                                 <div class="form-group">
+                                    <div class="form-group-icon">
+                                        <input type="time" class="form-control" placeholder="2:30PM" name="break[]123" >
+                                        <img src="{% static 'images/clock-icon.svg' %}">
+                                     </div>
+                                 </div>
+                              </td>
+                              <td>
+                                 <div class="form-group">
+                                     <select class="form-select" aria-label="Default select example",name="position[]123" >
+                                       {% for i in category %}
+                                       <option selected="{{i.name}}"></option>
+                                       <option value="{{i.id}}">{{i.name}}</option>
+                                       {% endfor %}
+                                     </select>
+                                 </div>
+                              </td>
+                              <td>
+                                 <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="x1" name="salary[]123" >
+                                 </div>
+                              </td>
+                              <td>
+                                 <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="There are many variations of passages " name="desc[]123" >
+                                 </div>
+                              </td>
+                           </tr>`;
+      
+      $('#no_of_row').html('');
+   for (let step = 0; step < val; step++) {
+      
+      var result = htmls123.replace("{step}", step+1);
+      
+      $('#no_of_row').append(result);
+      
+      
+    }
+    
+
+}
+
+</script> {% endcomment %}
+
+<script>
+ 
+ function sendNumber(){
+    $('tr').next('tr').remove()
+    const selectDrop=$('#select_val').val();
+    
+    for(let i =1; i<=selectDrop-1; i++){
+      
+       $('.tb_input_box:last').append(`
+        <tr id='no_${i}'>
+                                 <th>${i+1}.</th>
+                                 <td>
+                                    <div class="form-group">
+                                       <div class="form-group-icon">
+                                           <input type="date" class="form-control" placeholder="10 Feb 2022" name="shift[${i}]date" data-rule-required="true" data-msg-required="This field is required">
+                                           {% comment %} <img src="{% static 'images/date-icon.svg' %}"> {% endcomment %}
+                                        </div>
+                                    </div>
+                                 </td>
+                                 <td>
+                                    <div class="form-group">
+                                       <div class="form-group-icon">
+                                           <input type="time" class="form-control" placeholder="11:20AM" name="shift[${i}]time_in" data-rule-required="true" data-msg-required="This field is required" >
+                                           {% comment %} <img src="{% static 'images/clock-icon.svg' %}"> {% endcomment %}
+                                        </div>
+                                    </div>
+                                 </td>
+                                 <td>
+                                    <div class="form-group">
+                                       <div class="form-group-icon">
+                                           <input type="time" class="form-control" placeholder="2:30PM" data-rule-required="true" data-msg-required="This field is required" name="shift[${i}]time_out">
+                                           {% comment %} <img src="{% static 'images/clock-icon.svg' %}"> {% endcomment %}
+                                        </div>
+                                    </div>
+                                 </td>
+                                 <td>
+                                   <div class="form-group">
+                                     <select class="form-select" aria-label="Default select example" name="shift[${i}]employer"  data-rule-required="true" data-msg-required="This field is required">
+                                    <option disabled  selected value="employer">Select option </option>
+
+                                        {% for i in employer %}
+                                       {% if i.soft_del_status == 0%}
+                                       <option value="{{i.id}}">{{i.fname}}</option>
+                                       {% endif %}
+                                       {% endfor %}
+                                     </select>
+                                 </div>
+                                 </td>
+                                 <td>
+                                    <div class="form-group">
+                                        <select class="form-select" aria-label="Default select example" data-rule-required="true" data-msg-required="This field is required" name="shift[${i}]position" >
+                                    <option disabled  selected value="applicant">Select option </option>
+
+                                            {% for i in category %}
+                                             {% if i.soft_del_status == 0%}
+                                          <option value="{{i.id}}">{{i.name}}</option>
+                                          {% endif %}
+                                          {% endfor %}
+                                        </select>
+                                    </div>
+                                 </td>
+                                 <td>
+                                    <div class="form-group">
+                                       <input type="number"  class="form-control" placeholder="x1" data-rule-required="true" data-msg-required="This field is required"  name="shift[${i}]salary" >
+                                    </div>
+                                 </td>
+                                 <td>
+                                    <div class="form-group">
+                                       <input type="text" class="form-control" data-rule-required="true" data-msg-required="This field is required" placeholder="There are many variations of passages " name="shift[${i}]desc" >
+                                    </div>
+                                 </td>
+                              </tr>
+       `);
+    }
+ }
+
+</script>
+
+{% endblock js %}
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} 
+ <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2" style="margin-top:95px ;">
+      {% include 'base/navbar.html' %}
+
+    </div>
+    <div class="col-md-10" style="margin-top:120px ;">
+      <div class="card">
+
+        <div class="card-body">
+          <h4 class="card-title">Category Table</h4>
+          {% if messages %}
+
+          <div class="table-responsive">
+            {% for message in messages %}
+            {% if message.tags == 'success'%}
+            <div class="alert alert-success">
+              {{message}}
+              {% elif message.tags == 'error' %}
+              <div class="alert alert-danger">
+                {{message}}
+                {% endif %}
+              </div>
+
+              {% endfor %}
+              {% endif %}
+
+              <a href="/admin/category/add/"
+                class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                style="text-align: right; margin-left: 1300px;"> Create </a>
+
+              <table class="table table-striped" style="margin-top: 30px;">
+
+
+                <thead>
+                  <tr>
+                    <th>
+                      Sr No.
+                    </th>
+                    <th>
+                     Category Name 
+                    </th>
+                     
+                    <th>
+                      Hour's week
+                    </th>
+                    <th>
+                      Hour's daily
+                    </th>
+                    <th>
+                      Working Day
+                    </th>
+                    <th>
+                      Status
+                    </th>
+                    <th>
+                      Action
+                    </th>
+                
+
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {% for i in cat %}
+                  {% if i.soft_del_status == 0 %}
+                  <tr>
+
+                    <td>
+                      {{ forloop.counter }}
+                    </td>
+                    <td>
+                      {{i.name}}
+
+                    </td>
+                     
+                      </td>
+                    <td>
+                      {{i.haur_in_week}}
+                    </td>
+                    <td>
+
+
+                      {{i.haur_in_day}}
+                    </td>
+                    <td>
+                      {{i.working_day}}
+                    </td>
+                    <td>
+                      {% if i.status == True %}
+                      <h6 style=" color: green;"> Activate </h6>
+                          
+                      {% else %}
+                      <h6 style=" color:red;"> Deactivate </h6>
+                          {% endif %}
+                    </td>
+               
+                    <!-- <td>
+                        {% csrf_token %}
+                        <select id="status_{{user.id}}" name="status_applicant" class="form-select status"
+                          aria-label="Default select example"
+                          onchange="select_applicant('status_{{user.id}}','{{user.id}}')">
+                          <option selected disabled> Select Option </option>
+                          <option value="0" {% if i.status == '0'%} selected {% endif %}>Accepted</option>
+
+                          <option value="1" {% if i.status == '1'%} selected {% endif %}>Rejected</option>
+                        </select> -->
+                    <!-- </td> -->
+                    <td>
+                        {% if perms.staff_admin.change_job_category %}
+
+                      <a class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                        href="/admin/category/edit/{{i.slug}}">Edit</a>
+                        {% endif  %}
+                        {% if perms.staff_admin.delete_job_category %}
+
+                      <a class="btn btn-danger btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                        href="/admin/category/del/{{i.id}}"
+                        onclick="return confirm('Are you sure you want to delete this item')">Delete</a>
+                        {% endif %}
+                    </td>
+
+
+                  </tr>
+                  {% else %}
+                  {% endif %}
+                  {% endfor %}
+                </tbody>
+
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div> {% endcomment %}
+  <!-- <script>
+    function select_applicant(id, user_id) {
+      let p = $('#' + id).val();
+      let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+      // $('#select_id').submit();
+      $.ajax({
+        type: "POST",
+        url: "/admin/applicant_user_ajax/" + user_id,
+        headers: { 'X-CSRFToken': csrftoken },
+
+        data:
+        {
+          select: p,
+
+        },
+        success: function (res) {
+          toastr.success(res.message);
+        },
+
+      }); -->
+
+      <!-- // $(this).parent('div').parent('#select_id').submit();
+      // alert(p)  -->
+
+<!-- 
+    }
+  </script>
+ -->
+
+<script>
+  setTimeout(() => {
+    $('.alert').fadeOut('fast');
+  }, 3000);
+</script>
+
+
+  {% endblock content %}

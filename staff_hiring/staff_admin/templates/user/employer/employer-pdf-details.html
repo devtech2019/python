@@ -1,0 +1,678 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'base/header.html'%}
+
+<body style="background:#f4f5f7">
+<div class="admin-inner-panel">
+    <div class="admin-inner-left">
+        {% include 'base/navbar.html' %}
+    </div>
+<div class="admin-inner-right">
+
+
+ <form action="" id="formss" method="POST">
+
+                {% csrf_token %}
+
+
+                <div class="card" style="width:95%;">
+                    <div class="card-body">
+
+                        <h4 class="card-title">Genarate Client Details</h4>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <input class="form-control" type="hidden" value="{{users.id}}" name="id">
+                                <input class="form-control" type="hidden" id="slug" value="{{users.slug}}" name="slug">
+                                <input class="form-control" type="hidden" id="latitude" value="{{users.latitude}}" name="latitude">
+                                <input class="form-control" type="hidden" id="longitude" value="{{users.longitude}}" name="longitude">
+
+
+                                
+
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                       First Name </label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input readonly class="form-control" type="text" value="{{users.fname}}"
+                                            name="FName">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Last Name </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                
+                                        <input readonly class="form-control" type="text" value="{{users.lname}}" name="LName">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Email </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input readonly class="form-control" readonly type="email" value="{{users.email}}" name="email">
+                                    </div>
+                                </div>
+                                        <div class="form-group row">
+                                            <label class="col-xl-2 col-lg-2 col-form-label">
+                                                Mobile Number </label>
+                                            <div class="col-lg-10 col-xl-10">
+                                              
+                                                <input readonly type="text" value="{{users.mobile_number}}" name="ee"
+                                                    placeholder="Enter Mobile Number" id="phone_cus_register" class="form-control" onblur="test()"
+                                                    pattern="[0-9]+" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                                    maxlength=14>
+                                                
+                                                <input type="text" hidden name="co11" id="co11" value="">
+                                                <input readonly  type="text" id="phone1_cus_register" value="" name="phone" hidden>
+                                            </div>
+
+                                        </div>
+                                            <div class="form-group row">
+                                                <label class="col-xl-2 col-lg-2 col-form-label">
+                                                    Company Name </label>
+                                                <div class="col-lg-10 col-xl-10">
+                                            
+                                                    <input readonly class="form-control" type="text" placeholder="" value="{{users.company}}" name="CName">
+                                                </div>
+                                            </div>
+                                                            {% comment %} <div class="form-group row">
+                                                                <label class="col-xl-2 col-lg-2 col-form-label">
+                                                                    Country </label>
+                                                                <div class="col-lg-10 col-xl-10">
+                                                            
+                                                                    <select onchange="select_country()" id="country" name="country" class="form-select"
+                                                                        aria-label="Default select example">
+                                                                        {% for i in country %}
+                                                                        <option {% if i.id == users.0.country.id %}selected{% endif %} value="{{i.id}}">{{i.name}}</option>
+                                                                    
+                                                                         {% endfor %}
+                                                                    </select>
+ 
+                                                                </div>
+                                                            
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-2 col-lg-2 col-form-label">
+                                                                    State </label>
+                                                                <div class="col-lg-10 col-xl-10">
+                                                            
+                                                                    <select id="state" onchange="select_state_id()" name="state" class="form-select"
+                                                                        aria-label="Default select example">
+                                                                        <option  disabled> Select Option </option>
+                                                                      
+                                                                    {% for i in state %}
+                                                                        <option {% if i.id == users.0.state_id %}selected{% endif %} value="{{i.id}}">{{i.name}}</option>
+                                                                      {% endfor %}
+                                                            
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-2 col-lg-2 col-form-label">
+                                                                    City </label>
+                                                                <div class="col-lg-10 col-xl-10">
+                                                            
+                                                                    <select id="city" onchange="select_city_id()" name="city" class="form-select"
+                                                                        aria-label="Default select example">
+                                                                        <option disabled > Select Option </option>
+                                                                            {% for i in city %}
+                                                                        <option {% if i.id == users.0.city_id %}selected{% endif %} value="{{i.id}}">{{i.name}}</option>
+                                                                            {% endfor %}
+                                                            
+                                                                    </select>
+                                                                </div>
+                                                            
+                                                            </div>
+                                                            
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-2 col-lg-2 col-form-label">
+                                                                    Postal Code </label>
+                                                                <div class="col-lg-10 col-xl-10">
+                                                                    <input onchange="select_postal_code()" placeholder="indra nagar jaipur" id="Postal_code" class="form-control"
+                                                                        type="text" value="{{users.0.post_code}}" name="Postal_code">
+                                                                </div>
+                                                            </div> {% endcomment %}
+                                                            <div class="form-group row">
+                                                                <label class="col-xl-2 col-lg-2 col-form-label">
+                                                                    Address </label>
+                                                                <div class="col-lg-10 col-xl-10">
+                                                                    <input disabled readonly placeholder="indra nagar jaipur" id="" class="form-control" type="text" value="{{users.address}}" name="address">
+                                                                </div>
+                                                            </div>
+                                <div class="form-group row">
+                                    <!-- <label class="col-xl-2 col-lg-2 col-form-label">
+                   usertype	</label> -->
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input class="form-control" type="hidden" value="{{users.roll}}" name="emp">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            </form>
+
+                            <h4 class="card-title">Company Info</h4>
+                           
+                            {% if users.company_profile_status == 1%} 
+                   
+                            <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                       Company Name </label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input readonly class="form-control" type="text" value="{{c.name}}"
+                                            name="FName">
+                                    </div>
+                                </div>
+                                        <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                       Phone Number </label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input readonly class="form-control" type="text" value="{{c.phone_number}}"
+                                            name="FName">
+                                    </div>
+                                </div>
+  
+                               <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                      Fax</label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input readonly class="form-control" type="text" value="{{c.fax}}"
+                                            name="FName">
+                                    </div>
+                                </div>
+                                        <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                       Email address </label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input readonly class="form-control" type="text" value="{{c.email}}"
+                                            name="FName">
+                                    </div>
+                                </div>
+                                        <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                      Register Company Address </label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input readonly class="form-control" type="text" value="{{c.address}}"
+                                            name="FName">
+                                    </div>
+                                </div>
+                                        <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                       Number of year in business </label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input readonly class="form-control" type="text" value="{{c.year_of_business}}"
+                                            name="FName">
+                                    </div>
+                                </div>
+                                {% if c.partnership == "1" %}
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                      Sole proprietorship</label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input readonly class="form-control" type="text" value="{{c.about_company}}"
+                                            name="FName">
+                                    </div>
+                                </div>
+                                {% elif c.partnership == "2" %}
+                                 <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                     Partnership</label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input readonly class="form-control" type="text" value="{{c.about_company}}"
+                                            name="FName">
+                                    </div>
+                                </div>
+                                {% else %}
+                                 <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                     Corporation</label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input readonly class="form-control" type="text" value="{{c.about_company}}"
+                                            name="FName">
+                                    </div>
+                                </div>
+                                {% endif %}
+                                 <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                     Other</label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input readonly class="form-control" type="text" value="{{c.other}}"
+                                            name="FName">
+                                    </div>
+                                </div>
+                                  <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                     Tax</label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input readonly class="form-control" type="text" value="{{c.tax}}"
+                                            name="FName">
+                                    </div>
+                                </div>
+                                <a  href="/admin/employer_user_data_pdf/{{users.slug}}" type="" class="btn btn-inverse-success btn-fw">Generate Pdf</a>
+                            <a  href="/admin/employer/" class="btn btn-inverse-dark btn-fw">Back</a>
+                         
+                        {% else %}
+                        <form method="POST" id="emp">
+                               {% csrf_token %}
+                             <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                       Company Name </label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input data-rule-required="true" data-msg-required="This field is required." class="form-control" type="text" id="CName" value=""
+                                            name="CName">
+                                    </div>
+                                </div>
+                                        <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                       Phone Number </label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input data-rule-required="true" data-msg-required="This field is required." class="form-control" id="phone" type="number" value=""
+                                            name="phone">
+                                    </div>
+                                </div>
+                                        <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                      Fax</label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input  data-rule-required="true" data-msg-required="This field is required." class="form-control" type="text" id="Fax" value=""
+                                            name="Fax">
+                                    </div>
+                                </div>
+                                        <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                       Email address </label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input data-rule-required="true" data-msg-required="This field is required." class="form-control" id="email" type="text" value=""
+                                            name="email">
+                                    </div>
+                                </div>
+                                        <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                      Register Company Address </label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                         <input data-rule-required="true" data-msg-required="This field is required." id="autocom" type="text" name="address"  class="form-control" placeholder="Enter register company address">
+
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                       Number of year in business </label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input data-rule-required="true" maxlength="2" data-msg-required="This field is required." class="form-control" id="year_of_business"  type="text" value=""
+                                            name="year_of_business">
+                                    </div>
+                                </div>
+
+                            <div class="form-group row">
+                                <label class="col-xl-2 col-lg-2 col-form-label">
+                                      Sole proprietorship</label>
+                                <div class="col-lg-2 col-xl-2">
+                                    <input class="form-check-input" type="radio" onchange="prpertychange()" name="propertytype" value="1" id="flexRadioDefault1">
+
+                                </div>
+                                <label class="col-xl-2 col-lg-2 col-form-label">
+                                      Partnership</label>
+                                <div class="col-lg-2 col-xl-2">
+                                         <input class="form-check-input" type="radio" onchange="prpertychange()" name="propertytype" value="2" id="flexRadioDefault1">
+                                </div>
+                                <label class="col-xl-2 col-lg-2 col-form-label">
+                                      Corporation</label>
+                                <div class="col-lg-2 col-xl-2">
+                                    <input class="form-check-input" type="radio" onchange="prpertychange()" name="propertytype" value="3" id="flexRadioDefault1">
+                                    </div>                            
+                                </div>
+                            
+                            <div class="form-group row" id="sole" style="display:none;" >
+                                <label class="col-xl-2 col-lg-2 col-form-label">
+                                      Sole proprietorship</label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input data-rule-required="true" data-msg-required="This field is required." class="form-control" id="solo" type="text" value=""
+                                            name="Sole">
+                                    </div>
+                            </div>
+                           <div class="form-group row" id="partnership" style="display:none;" >
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                     Partnership</label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input  data-rule-required="true" data-msg-required="This field is required." class="form-control" id="partnerships" type="text" value=""
+                                            name="partnership">
+                                    </div>
+                            </div>
+                            <div class="form-group row" id="corporation" style="display:none;">
+                                <label class="col-xl-2 col-lg-2 col-form-label">
+                                     Corporation</label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input data-rule-required="true" data-msg-required="This field is required."  class="form-control" id="corporations" type="text" value=""
+                                            name="corporation">
+                                    </div>
+                            </div>  
+                                 <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                     Other</label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input data-rule-required="true" data-msg-required="This field is required." class="form-control" id="other" type="text" value=""
+                                            name="other">
+                                    </div>
+                                </div>
+                                  <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                     Tax</label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input data-rule-required="true" data-msg-required="This field is required." class="form-control" id="tax" type="text" value=""
+                                            name="tax">
+                                    </div>
+                                </div>
+                                <a type="" onclick="emp_pdf()" class="btn btn-inverse-success btn-fw">Submit</a>
+                                 <a  href="/admin/employer/" class="btn btn-inverse-dark btn-fw">Back</a>
+                                 </form>
+                                {% endif %}
+
+                 
+                    </div>
+   
+                </div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlljhS4LLf_864PqbvXtDGXver091jLiI&callback=initMap&libraries=places&v=weekly" async></script>
+
+<script>
+    function initMap()
+    {
+      var input = document.getElementById('autocom');
+      var options =     {
+              types: ['geocode']
+              
+          
+          };
+        var input= document.getElementById('autocom')
+        autocomplete = new google.maps.places.Autocomplete(input, options);
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var place = autocomplete.getPlace();
+        
+        let lat = place.geometry.location.lat()
+        let long = place.geometry.location.lng()
+        console.log(lat,long )
+        $('#latitude').val(lat);
+        $('#longitude').val(long);
+       
+      
+            //alert("This function is working!");
+            //alert(place.name);
+           // alert(place.address_components[0].long_name);
+
+        });
+       //var place = autocomplete.getPlace();
+        //console.log(autocomplete ,'dddddd')
+        //document.getElementById('autocom').value = place.geometry.location.lat();
+
+    }
+    
+   
+</script>
+<script>
+   function emp_pdf(){
+        if(!$('#emp').valid()){
+        return false;
+        }
+       let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+       let slug = $('#slug').val();
+
+       let cname = $('#CName').val();
+
+       let phone = $('#phone').val();
+       let Fax = $('#Fax').val();
+       let email = $('#email').val();
+       let caddress = $('#autocom').val();
+       let year_of_business = $('#year_of_business').val();
+        let propertytype = $('input[name="propertytype"]:checked').val();
+        
+
+       let solo = $('#solo').val();
+       
+       let partnership = $('#partnerships').val();
+       let corporation = $('#corporations').val();
+        let other = $('#other').val();
+
+        let tax = $('#tax').val();
+
+       console.log(cname,phone,Fax,email,caddress,year_of_business,solo,partnership,corporation,other,tax,"dssssssssssssd")
+        $.ajax({
+            type: "POST",
+            url: "/admin/employer_pdf/" + slug,
+            headers: { 'X-CSRFToken': csrftoken },
+            data:
+            {
+                cname: cname,
+                phone:phone,
+                Fax:Fax,
+                email:email, 
+                caddress:caddress,
+                year_of_business:year_of_business,
+                solo:solo,
+                propertytype :propertytype,
+                partnership:partnership,
+                corporation:corporation,
+                other:other,
+                tax:tax,
+
+            },
+            // success: function (res) {
+            //     console.log(res.message)
+            //     toastr.success(res.message);
+
+            // },
+
+            success: function (res) {
+            console.log("ddddddddddddddddd")
+            toastr.success(res.message);
+
+            window.location.href="/admin/employer/pdf/detail/list/" + slug
+
+            },
+            error: function(res){
+                toastr.error(res.responseJSON.message);
+            }
+
+        });
+   }
+</script>
+<script>
+  function prpertychange()
+  {
+     
+ var type = $('input[name="propertytype"]:checked').val();
+ if(type==1)
+ {
+  $('#sole').css("display","block");
+  $('#corporation').css("display","none");
+  $('#partnership').css("display","none");
+ }else if(type ==3)
+ {
+  $('#sole').css("display","none");
+  $('#corporation').css("display","block");
+  $('#partnership').css("display","none");
+ }
+ else
+ {
+  $('#sole').css("display","none");
+  $('#corporation').css("display","none");
+  $('#partnership').css("display","block");
+ }
+
+  }
+
+</script>
+
+
+{% comment %} <script>
+    function select_country() {
+        let p = $('#country').val();
+
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        console.log(p)
+
+        $('#select_id').submit();
+        $.ajax({
+            type: "POST",
+            url: "/admin/emp_country_ajax/",
+            headers: { 'X-CSRFToken': csrftoken },
+            data:
+            {
+                select_country: p,
+
+
+            },
+            // success: function (res) {
+            //     console.log(res.message)
+            //     toastr.success(res.message);
+
+            // },
+
+            success: function (res) {
+                option = ""
+                if (jQuery.isEmptyObject(res.result)) {
+                    option += "<option  selected disabled >No  data Found</option>";
+
+                } else {
+                    option += '<option selected disabled >Select Option</option>';
+                    res.result.forEach(item => {
+                        option += '<option value=' + item.id + '>' + item.name + '</option>';
+                    });
+                }
+
+                $("#state").html(option);
+            }
+
+        });
+
+    }
+</script>
+<script>
+    function select_postal_code() {
+        let u = $('#Postal_code').val();
+
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        console.log(u)
+
+        $('#select_id').submit();
+        $.ajax({
+            type: "POST",
+            url: "/admin/emp_postal_code_ajax/",
+            headers: { 'X-CSRFToken': csrftoken },
+            data:
+            {
+                postal_code: u
+
+
+            },
+            success: function (res) {
+                console.log(res.location)
+                $("#address").val(res.location[0]);
+            }
+
+        });
+
+    }
+</script>
+
+<script>
+    function select_state_id() {
+        let v = $('#state').val();
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        console.log(v);
+        $('#select_id').submit();
+        $.ajax({
+            type: "POST",
+            url: "/admin/emp_state_city_ajax/",
+            headers: { 'X-CSRFToken': csrftoken },
+            data:
+            {
+                state_value: v
+
+
+            },
+            success: function (res) {
+                option = ""
+                if (jQuery.isEmptyObject(res.result)) {
+                    option += "<option value='0' selected disabled >No  data Found</option>";
+
+                } else {
+                    option += '<option selected disabled >Select Option</option>';
+                    res.result.forEach(item => {
+                        option += '<option value=' + item.id + '>' + item.name + '</option>';
+                    });
+                }
+
+                $("#city").html(option);
+            }
+
+        });
+    }
+    function select_city_id() {
+        let c = $('#city').val();
+        console.log(c)
+    }
+</script> {% endcomment %}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlljhS4LLf_864PqbvXtDGXver091jLiI&callback=initMap&libraries=places&v=weekly" async></script>
+
+<script>
+    function initMap()
+    {
+      var input = document.getElementById('autocom');
+      var options =     {
+              types: ['geocode']
+              
+          
+          };
+        var input= document.getElementById('autocom')
+        autocomplete = new google.maps.places.Autocomplete(input, options);
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var place = autocomplete.getPlace();
+        
+        let lat = place.geometry.location.lat()
+        let long = place.geometry.location.lng()
+        console.log(lat,long )
+        $('#latitude').val(lat);
+        $('#longitude').val(long);
+       
+      
+            //alert("This function is working!");
+            //alert(place.name);
+           // alert(place.address_components[0].long_name);
+
+        });
+       //var place = autocomplete.getPlace();
+        //console.log(autocomplete ,'dddddd')
+        //document.getElementById('autocom').value = place.geometry.location.lat();
+      
+    }
+    
+   
+</script>
+<script>
+  setTimeout(() => {
+    $('.alert').fadeOut('fast');
+  }, 3000);
+</script>
+{% endblock content %}

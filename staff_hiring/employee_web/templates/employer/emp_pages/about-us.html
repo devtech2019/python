@@ -1,0 +1,89 @@
+{% extends 'basefile/base.html'%}
+{% load static %}
+{% block content %}
+
+   <div class="wrapper-inner" >
+      <form method="POST" enctype="multipart/form-data">
+      <section class="breadcrumb-banner-bg" id="about">
+           <img src="{% static 'employe_web/images/breadcrumb-bg1.jpg' %}">
+         <!-- -------------Background-img-breadcrumb------------- -->
+         <div class="container">
+            <div class="inner-breadcrumb-sec">
+               <div class="in-breadcrumb-sec">
+                  <h1>About us</h1>
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="/">Home</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">About us</li>
+                    </ol>
+                  </nav>
+               </div>
+            </div>
+         </div>
+      </section>
+   
+      <section class="light-about">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-6">
+                     <div class="ab-taking-text">
+                        <h2>{{about_section_1.title}}</h2>
+                        <p>{{about_section_1.discripion|safe}}</p> 
+
+                        {% comment %} <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn’t anything embarrassing </p>
+
+                        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. </p> {% endcomment %}
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="ab-taking-text pl-3">
+                        <figure><img src="/media/{{about_section_1.image}}"></figure>
+                     </div>
+                  </div>
+               </div>
+            </div>
+      </section>
+
+      <section class="dark-about">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-6">
+                     <div class="ab-taking-text pr-3">
+                        <figure><img src="/media/{{about_section_2.image}}"></figure>
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="ab-taking-text">
+                        <h2>{{about_section_2.title}} </h2>
+                        <p>{{about_section_2.discripion|safe}}</p> 
+
+                        {% comment %} <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn’t anything embarrassing</p> {% endcomment %}
+                     </div>
+                  </div>
+               </div>
+            </div>
+      </section>
+
+      <section class="meet-team-sec">
+         <div class="container">
+            <div class="main-heading">
+                <h2>Meet Our Team</h2>
+            </div>
+            <div class="row">
+               {% for i in team %}
+               <div class="col-md-3">
+                  <div class="our_team_bx">
+                     <figure><img src="/media/{{i.image}}"></figure>
+                     <h4>{{i.name}}</h4>
+                     <a href="javascript:;" title="">{{i.discripion|safe}}</a>
+                  </div>
+               </div>
+              {% endfor %}
+            </div>
+         </div>
+      </section>
+   </form>
+   </div>
+
+{% include 'footer.html' %}
+{% endblock content %}

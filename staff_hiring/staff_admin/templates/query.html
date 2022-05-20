@@ -1,0 +1,182 @@
+
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'base/header.html'%}
+<div class="admin-inner-panel">
+<div class="admin-inner-left">
+   {% include 'base/navbar.html' %}
+</div>
+<div class="admin-inner-right">
+<div class="card">
+<div class="card-body ">
+<h4 class="card-title">Query / List</h4>
+
+
+
+  <div class="loader text-center" style="margin:auto; display:none; position: absolute; left: 45%;top: 30%;">
+         <img src="{% static '/media/loader2.gif' %}"  width="30px" height="30px"/>
+      </div>
+
+ 
+<div class="table-responsive">
+
+<table class="table">
+<thead>
+   <tr>
+      <th>  Sr no.      </th>
+      <th>  Job Serial No.      </th>
+            <th>  Date   </th>
+
+      <th>   Applicant name     .</th>
+      <th>  Employer name     </th>
+     
+      <th>  Action      </th>
+   </tr>
+</thead>
+
+<tbody>
+   {% for i in q %}
+   <tr>
+      <td> 
+        {{forloop.counter}}
+      </td>
+       
+        <td>
+         {{i.timesheet.shift.serial_no}}
+      </td>
+      <td>
+         {{i.timesheet.date}}
+      </td>
+      <td>
+         {{i.timesheet.shift.applicant.fname}}
+      </td>
+      <td>
+         {{i.timesheet.shift.employee.fname}}
+      </td>
+    
+       <td>
+         <a class="btn btn-inverse-success btn-fw" href="/admin/view/query/{{i.id}}">View</a>
+         <a class="btn btn-inverse-danger btn-fw" href="/admin/delete_query/{{i.id}}">Delete</a>
+
+      </td>
+     
+   
+    
+      {% endfor %}
+
+      </tbody> 
+
+
+
+     
+ 
+      {% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

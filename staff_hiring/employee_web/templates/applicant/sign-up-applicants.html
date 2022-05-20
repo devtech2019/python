@@ -1,0 +1,531 @@
+{% extends 'basefile/base.html'%}
+
+{% load static %}
+{% block content %}
+   <div class="wrapper-inner bg-sky">
+    
+      <section class="forms_content_sec from-wrap ptb">
+         <div class="container">
+            <div class="head-line-sd">
+               <h2>Register yourself as a Staff</h2>
+            </div>
+            <div class="loader text-center" style="margin:auto; display:none; position: absolute; left: 45%;top: 30%;">
+         <img src="{% static '/media/loader2.gif' %}"  width="30px" height="30px"/>
+      </div>
+            <div class="form-box-out">
+               <form method="POST" id="app-signup">
+                 {% csrf_token %}
+                  <div class="row">
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">First Name <span class="text text-danger">*</span></label>
+                           <input type="text" id="FName"  data-rule-noSpace="true" data-rule-maxLength="30" data-rule-required="true" data-msg-required="This field is required." class="form-control" placeholder="Enter your first name">
+                            <input class="form-control" type="hidden" value="applicant" id="app" name="app">
+   
+                           <input class="form-control" type="hidden" id = "latitude" value="" name="latitude">
+                              <input class="form-control" type="hidden" id = "longitude" value="" name="longitude">
+
+                          </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">Last Name</label>
+                           <input type="text" id="LName" data-rule-noSpace="true" data-rule-maxLength="30" name="LName" class="form-control" placeholder="Enter your last name">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label  w-100" >Mobile Number <span class="text text-danger">*</span></label>
+                          <input style="width:133%"  type="tel" data-rule-required="true" data-rule-noSpace="true" data-rule-maxLength="30" data-msg-required="This field is required." name="phone" placeholder="Enter Your mobile number"  placeholder="Enter Mobile Number" id="phone_cus_register" class="form-control"
+                                    onblur="test()" pattern="[0-9]+"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength=10>
+                                <input  type="hidden" placeholder="123456789" id="phone1_cus_register" value="" name="phone">                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">Landline Number</label>
+                           <input type="tel" name="land_line" data-rule-noSpace="true" data-rule-minLength="8" data-rule-maxLength="15" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  id="land_line" class="form-control"   placeholder="Enter landline number">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                            <label class="form-label">Position Applied for <span class="text text-danger">*</span></label>
+                            <select id="position" name="position" data-rule-required="true"  data-msg-required="This field is required." class="form-select" aria-label="Default select example">
+                              <option disabled selected>Senior care assistant</option>
+                              {% for i in cat%}
+                              {% if i.soft_del_status == 0%}
+                              <option  value="{{i.id}}">{{i.name}}</option>
+                              {% endif %}
+                            {% endfor %}
+                            </select>
+                         </div>
+                       </div>
+                       <div class="col-md-3">
+                         <div class="form-group">
+                          <label class="form-label">Experience in years <span class="text text-danger">*</span></label>
+                          {% comment %} <input  id="experience" name="experience" data-rule-required="true" data-msg-required="This field is required." oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" type="number" min="0"  maxlength="2" class="form-control" placeholder="Enter Experience In Years"> {% endcomment %}
+                          <select id="year" name="Experience" data-rule-required="true" data-msg-required="This field is required." class="form-select" aria-label="Default select example">
+                              <option disabled selected>Experience</option>
+                           {% for i in l%}
+                              <option  value="{{i}}">{{i}}</option>
+                          {% endfor %}
+                            </select>
+                         </div>
+                       </div>
+                         <div class="col-md-3">
+                         <div class="form-group">
+                          <label class="form-label">Experience in months <span class="text text-danger">*</span></label>
+                          {% comment %} <input  id="experience" name="experience" data-rule-required="true" data-msg-required="This field is required." oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" type="number" min="0"  maxlength="2" class="form-control" placeholder="Enter Experience In Years"> {% endcomment %}
+                          <select id="month" name="Experience" data-rule-required="true" data-msg-required="This field is required." class="form-select" aria-label="Default select example">
+                              <option disabled selected>Experience</option>
+                                  {% for i in m%}
+                              <option  value="{{i}}">{{i}}</option>
+                              {% endfor %}
+                            </select>
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">Email <span class="text text-danger">*</span></label>
+                           <input id="email" name="email" data-rule-email="true" data-rule-required="true" data-rule-noSpace="true" data-rule-maxLength="30" data-msg-required="This field is required." type="text" class="form-control" placeholder="Enter your email">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">Password <span class="text text-danger">*</span></label>
+                           <input id="password" oninput="pass()" name="password" data-rule-noSpace="true" data-rule-minLength="6" data-rule-maxLength="15" data-rule-required="true" data-msg-required="This field is required." type="password" class="form-control" placeholder="Enter password">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">Confirm Password <span class="text text-danger">*</span></label>
+                           <input id="rePassword" data-rule-equalTo="#password"name="rePassword" data-rule-minLength="6" data-rule-maxLength="15"   data-rule-required="true" data-msg-required="This field is required." type="password" class="form-control" placeholder="Enter confirm password">
+                         </div>
+                       </div>
+                       <div class="col-md-12 inner-title">
+                            <h5>Address</h5>
+                       </div>
+                    <div class="col-md-6">
+                         <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">Post code <span class="text text-danger">*</span></label>
+                      <input data-rule-required="true" data-rule-noSpace="true" oninput="zipcode()"  data-msg-required="This field is required." placeholder="Enter your pin code" id="Postal_code"  class="form-control autocom" type="text" value="" name="Postal_code">
+                    </div>
+                       </div> 
+                        <div class="col-md-6" id="Address_div">
+                        <div class="form-group">
+                        <label for="exampleInputEmail2"  class="form-label">Select address</label>
+
+                                <select data-rule-required="true" data-msg-required="This field is required."  id="Address" onchange="select_city()" name="Address" class="form-select"
+                                    aria-label="Default select example">
+                                    <option selected disabled> Select Option </option>
+                                </select>       
+                         </div>
+                       </div>
+                       <div  class="col-md-6">
+                          <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">Country <span class="text text-danger">*</span></label>
+
+                            <input type="text" id="country" data-rule-noSpace="true" name="country" class="form-control" data-rule-maxLength="30" placeholder="Enter your country name">
+
+                          {% comment %} <select data-rule-required="true" data-msg-required="This field is required." onchange="select_country()" id="country" name="country" class="form-select"
+                              aria-label="Default select example">
+                              <option selected disabled> Select Option </option>
+                              {% for i in country %}
+                              <option value="{{i.id}}">{{i.name}}</option>
+                              {% endfor %}
+                  
+                          </select> {% endcomment %}
+                        </div>
+                      </div>
+                        {% comment %} <div  class="col-md-6">
+                          <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">State <span class="text text-danger">*</span></label>
+
+                          <input type="text" id="state" data-rule-noSpace="true" name="state" class="form-control" data-rule-maxLength="30" placeholder="Enter your state name"> {% endcomment %}
+
+                         {% comment %} <select data-rule-required="true" data-msg-required="This field is required." id="state" onchange="select_state_id()" name="state" class="form-select" aria-label="Default select example">
+                                    <option selected disabled> Select Option </option>
+                                    <option value="0"></option>
+                                </select> {% endcomment %}
+                        {% comment %} </div>
+                      </div> {% endcomment %}
+                    <div  class="col-md-6">
+                      <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">City <span class="text text-danger">*</span></label>
+
+                      <input data-rule-required="true" data-rule-noSpace="true" data-msg-required="This field is required." data-rule-maxLength="30" placeholder="Enter Your City Name" id="city" class="form-control" type="text" value="" name="city">                
+                          {% comment %} <select id="city" onchange="select_city_id()" name="city" class="form-select"
+                                    aria-label="Default select example">
+                                    <option selected disabled> Select Option </option>
+                                    <option value="0"></option>
+                                </select> {% endcomment %}
+                        </div>
+                      </div>
+                       
+                       <div  class="col-md-6">
+                      <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">Address <span class="text text-danger">*</span></label>
+
+                      <input data-rule-required="true" data-rule-noSpace="true" data-msg-required="This field is required." placeholder="Enter your House No. Road name" id="add" class="form-control" type="text" value="" name="Address">                
+                          {% comment %} <select id="city" onchange="select_city_id()" name="city" class="form-select"
+                                    aria-label="Default select example">
+                                    <option selected disabled> Select Option </option>
+                                    <option value="0"></option>
+                                </select> {% endcomment %}
+                        </div>
+                      </div>
+                      <div  class="col-md-6">
+                      <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">Address2</label>
+
+                      <input  placeholder="Enter your address " data-rule-noSpace="true" id="add2" class="form-control" type="text" value="" name="city">                
+                          {% comment %} <select id="city" onchange="select_city_id()" name="city" class="form-select"
+                                    aria-label="Default select example">
+                                    <option selected disabled> Select Option </option>
+                                    <option value="0"></option>
+                                </select> {% endcomment %}
+                        </div>
+                      </div>
+                       {% comment %} <div class="col-md-6">
+                         <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">Address</label>
+                            <input  placeholder="indra nagar jaipur" data-rule-required="true" data-msg-required="This field is required." id="autocom" class="form-control"
+                                    type="text" value="" name="address" >                         </div>
+                       </div> {% endcomment %}
+                       
+                       {% comment %} <div class="col-md-6">
+                         <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">City</label>
+                           <input type="text" class="form-control" placeholder="Enter city">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">State</label>
+                           <input type="text" class="form-control" placeholder="Enter state">
+                         </div>
+                       </div> {% endcomment %}
+                      
+                       {% comment %} <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">Address</label>
+                            <input data-rule-required="true" data-msg-required="This field is required."  placeholder="indra nagar jaipur" id="autocom" class="form-control"
+                                    type="text"  value="" name="address">                         </div>
+                       </div> {% endcomment %}
+                      
+                  
+                       <div class="col-md-12">
+                           <div class="form-check i-accept">
+                             <input name="Term-Condition" data-rule-required="true" data-msg-required="This field is required." class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                             <label class="form-check-label" for="flexCheckDefault">
+                               I accept <a href="{% url 'termcondition' %}"> Term & Condition </a>
+                             </label>
+                           </div>
+
+                           <div class="text-center mt-4">
+                               <button onclick="AppsendData()" type="button" class="btn" >Submit</button>
+                           </div>
+                       </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </section>
+
+      <!-- Modal -->
+         {% comment %} <div class="modal fade first-modal" id="informationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+           <div class="modal-dialog modal-dialog-centered">
+             <div class="modal-content">
+               <div class="modal-header">
+                <!--  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body company-information">
+                   <h6>Would you like to enter company information</h6>
+                   <div class="d-flex">
+                      <a href="/applicant/vaccination/" type="submit" class="btn btn-outline">Yes</a>
+                      <a href="/applicant/vaccination/" type="submit" class="btn">No</a>
+                   </div>
+               </div>
+             </div>
+           </div>
+         </div> {% endcomment %}
+      <!-- Modal -->
+
+   </div>
+   
+<script>
+  let Postal_code =0;
+  function zipcode(){
+    Postal_code = $('#Postal_code').val()
+    console.log(Postal_code)
+
+    let fetchRes = fetch(
+  `https://maps.googleapis.com/maps/api/geocode/json?address=${Postal_code}&sensor=true&key=AIzaSyAlljhS4LLf_864PqbvXtDGXver091jLiI&callback=initMap&libraries=places&v=weekly`);
+        fetchRes.then(res =>
+            res.json()).then(d => {
+              console.log(d.results, "ccccccccccccccccc")
+              
+              let data = d.results[0].postcode_localities 
+              let option='<option selected disabled >Select Option</option>';
+              for(let a of data){
+                option +=  "<option value="+a+">" + a +"</option>"
+              }
+              $('#Address').html(option);
+              
+              console.log(d.results[0].address_components[3].long_name ,"ccccccccccccccccc")
+               $('#country').val(d.results[0].address_components[3].long_name)
+               $('#state').val(d.results[0].address_components[2].long_name)
+             $('#city').val(d.results[0].address_components[1].long_name)   
+            })
+
+  }
+</script>
+<script>
+  function select_city(){
+  let Address = $('#Address').val()
+
+  $('#add').val(Address)
+  $('#Address_div').hide()
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlljhS4LLf_864PqbvXtDGXver091jLiI&callback=initMap&libraries=places&v=weekly" async></script>
+
+<script>
+    function initMap()
+    {
+      var input = document.getElementById('autocom');
+      var options =     {
+              types: ['geocode']
+              
+          
+          };
+        var input= document.getElementById('autocom')
+        autocomplete = new google.maps.places.Autocomplete(input, options);
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var place = autocomplete.getPlace();
+        
+        let lat = place.geometry.location.lat()
+        let long = place.geometry.location.lng()
+        console.log(lat,long )
+        $('#latitude').val(lat);
+        $('#longitude').val(long);
+       
+      
+            //alert("This function is working!");
+            //alert(place.name);
+           // alert(place.address_components[0].long_name);
+
+        });
+       //var place = autocomplete.getPlace();
+        //console.log(autocomplete ,'dddddd')
+        //document.getElementById('autocom').value = place.geometry.location.lat();
+
+    }
+    
+   
+</script>
+<script>
+  function AppsendData(){
+  
+    let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    let slug = $('#slug').val();
+      if(!$('#app-signup').valid()){
+      return false;
+    }
+    let Fname = $('#FName').val();
+    if(!$('#app-signup').valid()){
+      return false;
+    }
+    let Lname = $('#LName').val();
+    if(!$('#app-signup').valid()){
+      return false;
+    }
+    let mob_num = $('#phone1_cus_register').val();
+    if(!$('#app-signup').valid()){
+      return false;
+    }
+    let land_line = $('#land_line').val();
+    if(!$('#app-signup').valid()){
+      return false;
+    }
+    let country = $('#country').val();
+   
+    let state = $('#state').val();
+   
+
+    let city = $('#city').val();
+   
+
+    let postal_code = $('#Postal_code').val();
+    
+    let position = $('#position').val();
+    let experience = $('#experience').val();
+    let email = $('#email').val();
+    let password = $('#password').val();
+    let rePassword = $('#rePassword').val();
+    let latitude = $('#latitude').val();
+    let longitude = $('#longitude').val();
+    let address = $('#add').val();
+    let address2 = $('#add2').val();
+    let year = $('#year').val();
+
+    let month = $('#month').val();
+
+    
+    let user_type = $('#app').val();
+    $('.loader').show();
+
+     $.ajax({
+          type: "POST",
+          url: "/app_lat_lng/",
+          headers: { 'X-CSRFToken': csrftoken },
+          data:
+        {
+          FName:Fname,
+          LName:Lname,
+          mob_num:mob_num,
+          land_line:land_line,
+          position:position,
+          experience:experience,
+          email:email,
+          password:password,
+          year:year,
+          month:month,
+          rePassword:rePassword,
+          user_type:user_type,
+          country:country,
+          state:state,
+          city:city,
+          postal_code:postal_code,
+          address:address,
+          address2:address2,
+          user_type:user_type
+     },
+      success:function(res){
+          console.log(res.message)
+          toastr.success(res.message);
+          window.location.href="/applicant/otp-verify/" + res.slug
+          $('.loader').hide();
+
+
+          //$('#informationModal').modal('show');
+
+        },
+        error:function(res){
+          console.log(res.responseJSON.message)
+          toastr.error(res.responseJSON.message);
+          $('.loader').hide();
+
+
+        }
+  });
+
+
+
+
+  }
+</script>
+<script>
+ function select_country() {
+        let p = $('#country' ).val();
+
+        let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        console.log(p)
+        
+        $('#select_id').submit();
+        $.ajax({
+            type: "POST",
+            url: "/admin/emp_country_ajax/",
+            headers: { 'X-CSRFToken': csrftoken },
+            data:
+            {
+                select_country: p,
+
+
+            },
+            // success: function (res) {
+            //     console.log(res.message)
+            //     toastr.success(res.message);
+
+            // },
+
+            success: function(res){
+                option = ""
+                if(jQuery.isEmptyObject(res.result)){
+                    option += "<option required value='0'>No  data Found</option>";
+
+                }else{
+                    option += '<option selected disabled >Select Option</option>';
+                    res.result.forEach(item => {
+                        
+                        option += '<option value=' + item.id + '>' + item.name + '</option>';
+                    });
+                }
+                
+                $("#state").html(option);
+            }
+
+        });
+
+    }
+
+</script>
+<script>
+
+function pass(){
+  let p = 
+}
+
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+
+  <script>
+  var K = {
+  44: ["GB", "GG", "IM", "JE"]
+    }
+  var c = "{{users.0.country_code}}".replace("+", "");
+  
+
+  const phoneInputField = document.querySelector("#phone_cus_register");
+  const phoneInput = window.intlTelInput(phoneInputField, {
+    initialCountry: K[c] ? K[c][0] : 'gb',
+    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+
+  });
+
+  function test() {
+      var number = $('#phone_cus_register').val();
+      var setPhone = $('#phone1_cus_register').val('')
+      if (number) {
+        var countryData = phoneInput.getSelectedCountryData();
+        // console.log(countryData);
+        var code = countryData['dialCode'];
+
+        $("input[name='phone[phoneInput]'").val(number);
+        var full = '+' + code + ' ' + number;
+        var setPhone = $('#phone1_cus_register').val(full)
+      }
+    }
+</script>
+
+<script>
+  $(document).ready(function () {
+    var pho = document.getElementById('phone1_cus_register').value;
+    if (!(pho == '')) {
+      var myArr = pho.split(" ");
+      console.log(myArr[1]);
+
+      document.getElementById('phone_cus_register').value = myArr[1];
+    }
+  });
+</script>
+
+
+
+{% include 'footer.html' %}
+{% endblock content%}
+
+

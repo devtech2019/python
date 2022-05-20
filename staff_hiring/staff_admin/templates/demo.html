@@ -1,0 +1,364 @@
+{% load static %}
+<html lang="en">
+  
+</html>
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+
+   <li class="nav-item {% if request.path == '/admin/employer/' %} active {% endif %} {% if request.path == '/admin/applicant/' %} active {% endif %} ">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
+               aria-controls="ui-basic">
+                <i class="mdi mdi-google-physical-web" style="padding-right:7px; font-size: 20px;"></i>
+                <span class="menu-title ">Website</span>
+
+            </a>
+            <div class="collapse {% if request.path == '/admin/employer/' %} show {% endif %} {% if request.path == '/admin/applicant/' %} show {% endif %}"
+                 id="ui-basic">
+                <!-- <ul class="nav flex-column sub-menu  ">
+                  <li class="nav-item"> <a class="nav-link"  href="/admin/userdata/">User's</a></li>
+
+                </ul> -->
+
+                <ul class="nav flex-column sub-menu  "  >
+                    <li style="list-style-type:none;" class="nav-item">
+                        <a class="nav-link {% if request.path == '/admin/employer/' %} active {% endif %}" href="/admin/employer/">
+                            <i class="icon-user" style=" padding-right:7px; font-size: 20px;"></i>Employer 
+                        </a>
+                    </li>
+                </ul>
+                
+              
+            
+                <ul class="nav flex-column sub-menu  ">
+                    <li style="list-style-type:none;" class="nav-item">
+                        <a class="nav-link  {% if request.path == '/admin/applicant/' %} active {% endif %} " href="/admin/applicant/">
+                            <i class="icon-user" style=" list-style-type: none; padding-right:7px; font-size: 20px;"></i>
+                            Applicant </a>
+                    </li>
+
+                </ul>
+                <ul>
+                <li style="list-style-type: none;"class="nav-item {% if request.path == '/admin/dashboard/'  %} active {% endif %}">
+                    <a class="nav-link {% if request.path == '/admin/dashboard/'  %} active {% endif %} " href="/admin/dashboard/">
+                        <i style="font-size: 20px;" class="mdi mdi-view-dashboard"></i>
+                         <span style="margin-left: 5px;" class="menu-title">Dashboard</span>
+                    </a>
+                 </li>
+   
+                </ul>
+                <ul>
+                     <li style="list-style-type: none;" class="nav-item {% if request.path == '/admin/subadmin/' %} active {% endif %}">
+                        <a class="nav-link" href="{% url 'subadmin' %}">
+                    
+                            <i style="font-size: 20px;" class="mdi mdi mdi-account-check"></i>
+                            <span style="margin-left: 5px;" class="menu-title">Sub Admin</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul>
+                {% if perms.staff_admin.view_job_category %}
+
+                <li style="list-style-type: none;"  class="nav-item  {% if request.path == '/admin/category/'  %} active {% endif %} ">
+                    <a class="nav-link " href="/admin/category/">
+
+                        <i style="font-size: 20px;"  class="icon-briefcase" ></i>
+                        <span style="margin-left:5px;" class="menu-title">Job Category</span>
+                    </a>
+                </li>
+                {% endif %}
+                </ul>
+                <ul>
+                     {% if perms.staff_admin.view_pages%}
+
+                <li style="list-style-type: none;" class="nav-item  {% if request.path == '/admin/Cms_Pages/'  %} active {% endif %} ">
+                    <a class="nav-link " href='/admin/Cms_Pages/'>
+
+                        <i style="font-size: 20px;"  class="mdi  mdi-cube-outline"></i>
+                        <span style="margin-left:5px;" class="menu-title">Pages</span>
+                    </a>
+                </li>
+                  {% endif %}
+            </ul>
+            <ul>
+                 {% comment %} {% if perms.staff_admin.view_qr_code %} {% endcomment %}
+
+            <li style="list-style-type: none;" class="nav-item {% if request.path == '/admin/reports/'  %} active {% endif %}">
+                <a class="nav-link " href="{% url 'reports_list' %}">
+                    <i style="font-size: 20px;" class="mdi mdi-file-pdf-box"></i>
+                    <span style="margin-left:5px;" class="menu-title">Reports</span>
+                </a>
+             
+            </li>
+           {% comment %} {% endif %}  {% endcomment %}
+            </ul>
+    
+        <ul>
+ 
+                {% if perms.staff_admin.view_global_setting %}
+             <li style="list-style-type: none;" class="nav-item {% if request.path == '/admin/global/add'  %} active {% endif %} ">
+            <a class="nav-link"
+               href="/admin/global/edit/global-setting">
+                
+                <i style="font-size: 20px;" class="mdi mdi-settings"></i>
+                <span  style="margin-left:5px;" class="menu-title">Global Settings</span>
+            </a>
+        </li>
+         {% endif %}
+            </ul>
+              <ul>
+                    <li style="list-style-type: none;" class="nav-item {% if request.path == '/admin/aboutus'  %} active {% endif %} ">
+            <a class="nav-link"
+               href="/admin/aboutus/">
+                
+                <i style="font-size: 20px;" class="mdi mdi-application"></i>
+                <span  style="margin-left:5px;" class="menu-title">About Us</span>
+            </a>
+        </li>
+ 
+            </ul>
+            <ul>
+            <li style="list-style-type: none; " class="nav-item {% if request.path == '/admin/team'  %} active {% endif %} ">
+                        <a class="nav-link"
+                        href="/admin/team/">
+                            
+                            <i style="font-size: 20px;" class="mdi mdi-human-greeting"></i>
+                            <span  style="margin-left:5px;" class="menu-title"> Team </span>
+                        </a>
+                    </li>
+ 
+            </ul>
+                
+            </div>
+       </li>
+
+    
+
+        <li class="nav-item ">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic2" aria-expanded="false"
+               aria-controls="ui-basic">
+                <i class="icon-user" style="padding-right:7px; font-size: 20px;"></i>
+                <span class="menu-title ">Common</span>
+
+            </a>
+            <div class="collapse"
+                 id="ui-basic2">
+               <ul class="nav flex-column sub-menu  " >
+                   
+                  <li style="list-style-type: none !important;"  class="nav-item"> <a class="nav-link"  href="/admin/manage/shift/">Manage Shift</a></li>
+
+                </ul> 
+            <ul>
+                {% if perms.staff_admin.view_email_templates %}
+             <li style="list-style:none;" class="nav-item">
+                    <a class="nav-link"
+                    href="/admin/email/">
+                        
+                <i style="font-size: 20px;" class="mdi mdi-email-variant"></i>
+                <span style="margin-left:5px;" class="menu-title">Template Management</span>
+            </a>
+        </li>
+         {% endif %}
+
+            </ul>
+
+                <ul class="nav flex-column sub-menu  ">
+                   <li style="list-style-type:none; " class="nav-item {% if request.path == '/admin/contact/'  %} active {% endif %}">
+                        <a class="nav-link"
+                        href="{% url 'contact' %}">
+                            
+                            <i style="font-size: 20px;" class="mdi mdi-contact-mail"></i>
+                            <span style="margin-left:5px;"  class="menu-title">Inquiry</span>
+                        </a>    
+                    </li>
+
+                </ul>
+                </div>
+        </li>
+     <li class="nav-item ">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic3" aria-expanded="false"
+               aria-controls="ui-basic">
+                <i class="mdi mdi-application" style="padding-right:7px; font-size: 20px;"></i>
+                <span class="menu-title ">Applicantion</span>
+
+            </a>
+            <div class="collapse"
+                 id="ui-basic3">
+                <!-- <ul class="nav flex-column sub-menu  ">
+                  <li class="nav-item"> <a class="nav-link"  href="/admin/userdata/">User's</a></li>
+
+                </ul> -->
+
+                <ul class="nav flex-column sub-menu  ">
+                    <li class="nav-item {% if request.path == '/admin/global/add'  %} active {% endif %} ">
+                    <a class="nav-link" href="/admin/introduction/">
+                
+                <i style="font-size: 20px;" class="mdi mdi-application"></i>
+                <span  style="margin-left:5px;" class="menu-title">App Intro</span>
+                    </a>
+                    </li>
+
+                </ul>
+                </div>
+        </li>
+        
+             
+    </ul>
+</nav>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+                {% comment %} {% if perms.staff_admin.view_user %}
+
+        <li class="nav-item {% if request.path == '/admin/employer/' %} active {% endif %} {% if request.path == '/admin/applicant/' %} active {% endif %} ">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
+               aria-controls="ui-basic">
+                <i class="icon-user" style="padding-right:7px; font-size: 20px;"></i>
+                <span class="menu-title ">User management</span>
+
+            </a>
+            <div class="collapse {% if request.path == '/admin/employer/' %} show {% endif %} {% if request.path == '/admin/applicant/' %} show {% endif %}"
+                 id="ui-basic">
+                <!-- <ul class="nav flex-column sub-menu  ">
+                  <li class="nav-item"> <a class="nav-link"  href="/admin/userdata/">User's</a></li>
+
+                </ul> -->
+
+                <ul class="nav flex-column sub-menu  ">
+                    <li class="nav-item"><a
+                            class="nav-link {% if request.path == '/admin/employer/' %} active {% endif %}"
+                            href="/admin/employer/">Employer </a></li>
+
+                </ul>
+                
+              
+            
+                <ul class="nav flex-column sub-menu  ">
+                    <li class="nav-item"><a
+                            class="nav-link  {% if request.path == '/admin/applicant/' %} active {% endif %} "
+                            href="/admin/applicant/">Applicant </a></li>
+
+                </ul>
+            </div>
+        </li>
+                        {% endif %}
+
+      {% endcomment %}
+
+
+       
+        {% comment %} <li class="nav-item {% if request.path == '/admin/category/'  %} active {% endif %}">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic3" aria-expanded="false"
+               aria-controls="ui-basic3">
+                <i class="icon-briefcase" style="padding-right:7px; font-size: 20px;"></i>
+                <span class="menu-title ">Category management</span>
+
+            </a>
+            
+            <div class="collapse {% if request.path == '/admin/category/'  %} show {% endif %} " id="ui-basic3">
+                <ul class="nav flex-column sub-menu  ">
+                    <li class="nav-item"><a
+                            class="nav-link  "
+                            > </a></li>
+
+                </ul>
+            </div>
+      </li> {% endcomment %}
+
+        {% comment %} <li class="nav-item nav-category   ">CMS PAGES</li>
+        <li class="nav-item {% if request.path == '/admin/Cms_Pages/'  %} active {% endif %}  {% if request.path == '/admin/global_setting/'  %} active {% endif %}  {% if request.path == '/admin/email/'  %} active {% endif %} ">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic1" aria-expanded="false"
+               aria-controls="ui-basic">
+                <i class=""></i>
+                <i class="menu-icon mdi mdi-account-circle-outline" style="padding-right:7px; font-size: 20px;"></i>
+                <span class="menu-title ">Cms Pages</span>
+
+            </a>
+             {% endcomment %}
+      
+
+           
+             
+         
+                            {% comment %} {% comment %} {% comment %} {% if perms.staff_admin.view_qr_code %}
+
+                <li class="nav-item ">
+                    <a class="nav-link {% if request.path == '/admin/qr_code/'  %} active {% endif %}" href="
+                        {% url 'qr_code' %}">
+                        <i style="font-size: 20px;" class="mdi mdi-qrcode-scan"></i>
+                        <span style="margin-left:5px;" class="menu-title">Qr code</span>
+                    </a>
+                
+                </li>
+
+                    {% endif %} 
+
+      
+       
+                {% if perms.staff_admin.view_training %}
+
+                <li class="nav-item  {% if request.path == '/admin/training/'  %} active {% endif %} ">
+                    <a class="nav-link " href="{% url 'training' %}">
+
+                        <i style="font-size: 20px;"  class="mdi  mdi-cube-outline"></i>
+                        <span style="margin-left:5px;" class="menu-title">Training management</span>
+                    </a>
+                </li>
+                {% endif %}
+                    {% comment %} {% if perms.staff_admin.view_chatmessage %} {% endcomment %}
+
+        {% comment %} <li class="nav-item {% if request.path == '/admin/chat/'  %} active {% endif %}">
+            <a class="nav-link"
+               href="{% url 'chat_view' %}">
+               
+                <i style="font-size: 20px;" class="mdi mdi-qqchat"></i>
+                <span style="margin-left:5px;" class="menu-title">Chat with us</span>
+            </a>
+        </li>
+        {% endif %} {% endcomment %}
+            
+       
+               
+              
+                
+    

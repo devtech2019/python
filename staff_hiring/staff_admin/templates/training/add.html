@@ -1,0 +1,106 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'base/header.html'%}
+
+<div class="admin-inner-panel">
+    <div class="admin-inner-left">
+        {% include 'base/navbar.html' %}
+    </div>
+    <div class="admin-inner-right">
+        {% for message in messages %}
+        <div class="alert alert-primary">
+            {{message}}
+        </div>
+        {% endfor %}
+         <form action="" id="tranings_form" method="POST" >
+
+                    {% csrf_token %}
+
+
+                    <div class="card" style="width:95%;">
+                        <div class="card-body">
+                            <h4 class="card-title">Add Training</h4>
+
+                            <div class="col-md-12">
+
+                                <input class="form-control" type="hidden" value="" name="id">
+
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Training Name </label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input  required class="form-control" id="training_name"type="text" placeholder="John" value="" name="training_name">
+                                    </div>
+                                </div>
+                                     <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                       Select MultiPle User </label>
+                                    <div class="col-lg-10 col-xl-10 stretch-card">
+                                         
+                                 {% comment %} <div class="form-group "> {% endcomment %}
+                                   
+
+                                <select name="training-user[]" class="js-example-basic-multiple w-100" multiple="multiple">
+                                                    {% for i in userdata %}
+                                                     {% if i.roll == 'applicant' and i.soft_del_status == 0 %}
+                                                    <option value="{{i.id}}">{{i.fname}}</option> 
+                                                        {% endif %}
+                                                    {% endfor %}
+                                
+                                </select>
+                  {% comment %} </div> {% endcomment %}
+                  
+
+                                                   
+                                               </div>
+                                            </div> 
+                                
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                       Status </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                
+                                            <select id=""required name="status" class="form-select" aria-label="Default select example">
+                                                <option selected disabled> Select Option </option>
+
+                                                <option value="0">Enable</option>
+
+                                                <option value="1">Disable</option>
+                                            </select>                                   
+                                                    </div>
+                                                                                    
+
+                                                    </div>
+                                                                                        
+                                                                                
+                                                                                
+                            
+
+                            </div>
+                              <button type="submit" class="btn btn-inverse-success btn-fw">Submit</button>
+                            <a href="/admin/training/" class="btn btn-inverse-dark btn-fw">Cancel</a>
+
+
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </head>
+
+    <script>
+        setTimeout(() => {
+            $('.alert').fadeOut('fast');
+        }, 3000);
+    </script>
+
+    {% endblock content %}
+
+
+

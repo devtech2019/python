@@ -1,0 +1,140 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container-fluid">
+
+    {% include 'base/header.html'%}
+    <!-- partial:partials/_settings-panel.html -->
+
+
+    <div class="row ">
+        <div class="col-md-2" style="margin-top:95px ;">
+            {% include 'base/navbar.html' %}
+
+        </div>
+        <div class="col-md-10" style="margin-top:120px ;">
+            <div class="card">
+                <div class="card-body ">
+                    <h4 class="card-title"> Employer Reports Table</h4>
+                    <table class="table table-striped" style="margin-top: 30px;">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Sr No.
+                                </th>
+                                <th>
+                                    Title
+                                </th>
+
+                                <th>
+                                    Details
+                                </th>
+                                <th>
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    Number Of Employer
+                                </td>
+                               
+                                <!-- <td>
+                                            {{total_emp_count_details.email}}
+                                        </td>
+                                         -->
+                                <td>
+                                    {{count_emp}}
+                                </td>
+                                
+                                <td>
+                                    <a class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                                        href="{% url 'employer_user_data' %}">View</a>
+                                    <a class="btn btn-info btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                                        href="{% url 'emp_pdf' %}">Generate Pdf</a>
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </br>
+        </br>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title"> Applicant Reports Table</h4>
+                    <table class="table table-striped" style="margin-top: 30px;">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Sr No.
+                                </th>
+                                <th>
+                                    Title
+                                </th>
+                                <th>
+                                    Details
+                                </th>
+                                <th>
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+
+                                <td>
+                                    2
+                                </td>
+                                <td>
+                                    Number Of Applicant
+                                </td>
+
+                                <td>
+                                    {{count_app}}
+                                </td>
+
+
+                                <td>
+                                    <a class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                                        href="{% url 'applicant_user_data' %}">View</a>
+                                    <a class="btn btn-info btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                                        href="{% url 'app_pdf' %}">Generate Pdf</a>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+</div>
+
+</div>
+</div>
+<script>
+    setTimeout(() => {
+        $('.alert').fadeOut('fast');
+    }, 3000);
+</script>
+
+
+
+{% endblock content %}

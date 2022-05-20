@@ -1,0 +1,84 @@
+Admin: https://foodorder.devtechnosys.tech/admin/dashboard
+ID: - lieatz@getnada.com
+PW- 12345678
+
+
+1. Admin/Dashboard/Customer/Customer Edit 
+	1.Mobile Number - Less than 8 digit number should not be accepted.
+	2.Profile Image - Should be accepted in .png .jpg .jpeg format only
+		(Case I : While Changing Profile Image(Valid / Invalid)at the time when Mobile Number is in 5 digit and click on Submit button then it shows alert below Mobile 			  number. Alert : Mobile Must Be Greater Than 8 Letters.
+		 Case II : While changing Profile Image(Valid / Invalid)at the time when Mobile Number is Greater than 8 digit and click on Submit button then the Profile 			   Image is accepted.  )
+
+2.Admin/Dashboard/Customer/Create Customer
+	1.Mobile Number - Less than 8 digit number should not be accepted.
+	2.Profile Image - Should be accepted in .png .jpg .jpeg format only
+	3.Email Addres  - If any Id(Email Id is deleted from admin Panel) then it should be accepted if uses again while creating a customer.
+			  (Case I : While Creating a new customer and uses the email addres which is already  saved in the admin panel then it shows alert : This Email Id is 				    already used which is correct.
+			   Case II :While Creating a new customer and uses the email addres which is already deleted from the admin panel then it shows alert : This Email Id 				            is already used which is incorrect .) 
+3.Restaurant : Dashboard/Restaurant Add
+		1. It should diplay an alert while filling a form and click on submit button if the values in the form is in valid.
+		  (Case : While entering invalid Values in the restaurant the form is not submitted which is correct but it also not showing an alert)
+		2. Payment Type should be multi selected.
+		3. Cuisine should be multi selected.
+		
+4.Restaurant :Dashboard/Restaurant/Restaurant Edit
+		1. Unable to enter any value(Character/Digit) in Average price for 1 people shows alert when submitting the form. Alert:Please enter average porice for 1 		           person. ---> Only it accept $ . 
+		2. It shows alert in location (which is taken from Google)when submitting the form . Alert : Location must be less the 100 letters which is incorrect.
+
+5.Dashboard/Driver/Driver add
+		1.It should diplay an alert while filling a form and click on submit button if the values in the form is in valid.
+		  (Case : While entering invalid Values in the restaurant the form is not submitted which is correct but it also not showing an alert)
+		2. Suggestion : Liscence, Vehicle Document ,ID Proof should also accept doc , pdf file.
+		3. It does not display any validation if user upload file more then 3 MB in Profile Image, Lisence, Vechicle Document , ID Proof
+
+6.Dashboard/Order Management 
+		1.Suggestion : The Search should be in top left corner with show enteries.
+7.Dashboard : The count of Customer , Restaurant , Driver on Dashboard should be same as the actual total count after deleting /editing the Customer , Restaurant , Driver.
+
+8.Global Setting 
+		Form : 1.Email : Email addres should be in proper format. 
+		       2.Google , Instagram , Twitter field should accept proper URL.
+				(Google , Instagram , Twitter field accepting any character value.)
+		       3.Copyright should be in proper Copyight format.
+		       4.It should diplay an alert while filling a form and click on submit button if the values in the form is in valid.
+
+9.Email Template : Query : What is the use of same repeated title in Email template.
+
+10.Menu Category Management : Suggestion : 1. If admin add any new category then the category  successful alert  should also display on the same page.
+
+11.Cuisine Management : Suggestion : 1. If admin add any new cuisine then the category  successful alert  should also display on the same page.
+
+12.App Banner Management : Suggestion : Title field should be validate to 55 Characters in case admin add more than 10 characters.
+			   Suggestion : Deleting any title of App Banner should display a succeful alert : the promocode is deleted successfully.
+
+13.Promocode/Promocode add : 1. Promocode start date/should be the current date or beyond  the current --- no previous date should be accepted.
+				Also the End date should be greater than the start date. 
+				
+			     2. There should be edit option in promocode which are added already.
+			     3. Suggestion : There should be two options of discount :	
+											1. Percent
+											2. Flat Off
+			        (Curently user / admin unable to know that what kind of discount he is adding.)
+			     		   : Also the Discount field should not be negative.
+			     4. Suggestion : Deleting any promocode should display a succeful alert : the promocode is deleted successfully.
+
+15. App Slider Management : Suggestion : 1. Deleting any title of App slider should display a succeful alert : the promocode is deleted successfully.
+
+16.Profile Update : Email should not be editable.
+ 
+17.Notification option is not working.
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+

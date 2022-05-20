@@ -1,0 +1,455 @@
+{% extends 'basefile/base.html' %}
+{% load static %}
+{% block content %}
+
+   <div class="wrapper-inner bg-sky">
+   
+      <section class="outer-table-space time-sheet-pr">
+            <div class="container">
+               <div class="table-dash-box time-sheet-tabs mg_shifts">
+                  <div class="table-heading-bx filter-time-sheet">
+                     <h2>Manage Shifts</h2>
+                     <div class="d-flex">
+                         <div class="form-group">
+                              <input type="search" class="form-control" placeholder="Search">
+                         </div>
+                         <div class="form-group">
+                              <label>Sort by</label>
+                              <div class="form-group-icon">
+                                  <input type="date" class="form-control" placeholder="10 Feb 2022">
+                                  <img src="images/date-icon.svg">
+                              </div>
+                         </div>
+                     </div>
+                  </div>
+
+                  <!-- ------tabing-time-sheet------ -->
+                     <ul class="nav nav-pills time-rw-navs" id="pills-tab" role="tablist">
+                       <li class="nav-item" role="presentation">
+                         <a href="/manage/shift/accept/" class="nav-link active" id="pills-accepted-tab" data-bs-toggle="pill" data-bs-target="#pills-accepted" type="button" role="tab" aria-controls="pills-accepted" aria-selected="true">Accepted</a>
+                       </li>
+                       <li class="nav-item" role="presentation">
+                         <button class="nav-link" id="pills-pending-tab" data-bs-toggle="pill" data-bs-target="#pills-pending" type="button" role="tab" aria-controls="pills-pending" aria-selected="false">Pending</button>
+                       </li>
+                       <li class="nav-item" role="presentation">
+                         <button class="nav-link" id="pills-completed-tab" data-bs-toggle="pill" data-bs-target="#pills-completed" type="button" role="tab" aria-controls="pills-completed" aria-selected="false">Completed</button>
+                       </li>
+                     </ul>
+                     <div class="tab-content" id="pills-tabContent">
+                       <div class="tab-pane fade show active" id="pills-accepted" role="tabpanel" aria-labelledby="pills-accepted-tab">
+                           <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Location</th>
+                                    <th>Shift Date</th>
+                                    <th>Shift Time</th>
+                                    <th>Staff Name</th>
+                                    <th>Position</th>
+                                    <th>Wages Multiplier</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="tb_input_box">
+                                    <tr class="day-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td><h5>Monserrat Abraham</h5></td>
+                                       <td>Abc</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="night-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>9 Feb 2022</td>
+                                       <td>7:30AM - 5:00PM</td>
+                                       <td>Smith Abraham</td>
+                                       <td>Sr. Developer</td>
+                                       <td>x1.5</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="day-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>5 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td><h5>Smith Jhone</h5></td>
+                                       <td>Abc</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="night-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>3 Feb 2022</td>
+                                       <td>9:30AM - 5:00PM</td>
+                                       <td>Deni Abraham</td>
+                                       <td>Sr. Developer</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="day-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>4 Feb 2022</td>
+                                       <td>7:30AM - 5:00PM</td>
+                                       <td><h5>Monserrat Abraham</h5></td>
+                                       <td>Abc</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="night-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>3 Feb 2022</td>
+                                       <td>9:30AM - 5:00PM</td>
+                                       <td>Deni Abraham</td>
+                                       <td>Developer</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="day-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>5 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td><h5>Smith Jhone</h5></td>
+                                       <td>Abc</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr class="night-shift">
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>3 Feb 2022</td>
+                                       <td>9:30AM - 5:00PM</td>
+                                       <td>Deni Abraham</td>
+                                       <td>Sr. Developer</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                </tbody>
+                              </table>
+                           </div>
+                       </div>
+                       <div class="tab-pane fade" id="pills-pending" role="tabpanel" aria-labelledby="pills-pending-tab">
+                           <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Location</th>
+                                    <th>Shift Date</th>
+                                    <th>Shift Time</th>
+                                    <th>Position</th>
+                                    <th>Wages Multiplier</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="tb_input_box">
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td>ABC</td>
+                                       <td>x1.25<span class="amend-files"><img src="images/amend-files.svg">Amend</span></td>
+                                       <td><span class="pending-ar">Pending</span></td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                                <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td>Sr. Developer</td>
+                                       <td>x1.5<span class="amend-files"><img src="images/amend-files.svg">Amend</span></td>
+                                       <td><span class="pending-ar">Pending</span></td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                                <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td>Manager</td>
+                                       <td>x1.75<span class="amend-files"><img src="images/amend-files.svg">Amend</span></td>
+                                       <td><span class="pending-ar">Pending</span></td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                                <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td>Lorem Ipsum</td>
+                                       <td>x1.15<span class="amend-files"><img src="images/amend-files.svg">Amend</span></td>
+                                       <td><span class="pending-ar">Pending</span></td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                                <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td>Sr. Developer</td>
+                                       <td>x1.25<span class="amend-files"><img src="images/amend-files.svg">Amend</span></td>
+                                       <td><span class="pending-ar">Pending</span></td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                                <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td>Manager</td>
+                                       <td>x1.75<span class="amend-files"><img src="images/amend-files.svg">Amend</span></td>
+                                       <td><span class="pending-ar">Pending</span></td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                                <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td>Lorem Ipsum</td>
+                                       <td>x1.45<span class="amend-files"><img src="images/amend-files.svg">Amend</span></td>
+                                       <td><span class="pending-ar">Pending</span></td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                                <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td>Sr. Developer</td>
+                                       <td>x1.75<span class="amend-files"><img src="images/amend-files.svg">Amend</span></td>
+                                       <td><span class="pending-ar">Pending</span></td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                                <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+
+                                </tbody>
+                              </table>
+                           </div>
+                       </div>
+                       <div class="tab-pane fade" id="pills-completed" role="tabpanel" aria-labelledby="pills-completed-tab">
+                           <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Location</th>
+                                    <th>Shift Date</th>
+                                    <th>Shift Time</th>
+                                    <th>Staff Name</th>
+                                    <th>Position</th>
+                                    <th>Wages Multiplier</th>
+                                    <th>Status</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="tb_input_box">
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td><span class="amend-files">-</span></td>
+                                       <td>ABC</td>
+                                       <td>x1.25</td>
+                                       <td><span class="unfilled-text">Unfilled</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td><span class="amend-files">Lorem Ipsum</span></td>
+                                       <td>Sr. Developer</td>
+                                       <td>x1.5</td>
+                                       <td><span class="completed-text">Completed</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td><span class="amend-files">-</span></td>
+                                       <td>Manager</td>
+                                       <td>x1.25</td>
+                                       <td><span class="unfilled-text">Unfilled</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td><span class="amend-files">-</span></td>
+                                       <td>Lorem Ipsum</td>
+                                       <td>x1.25</td>
+                                       <td><span class="unfilled-text">Unfilled</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td><span class="amend-files">-</span></td>
+                                       <td>Manager</td>
+                                       <td>x1.25</td>
+                                       <td><span class="unfilled-text">Unfilled</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td><span class="amend-files">Smith Johan</span></td>
+                                       <td>Sr. Developer</td>
+                                       <td>x1.5</td>
+                                       <td><span class="completed-text">Completed</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td><span class="amend-files">Monserrat Abraham</span></td>
+                                       <td>Lorem Ipsum</td>
+                                       <td>x1.25</td>
+                                       <td><span class="completed-text">Completed</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td><span class="amend-files">Monserrat Abraham</span></td>
+                                       <td>Lorem Ipsum</td>
+                                       <td>x1.25</td>
+                                       <td><span class="completed-text">Completed</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td><span class="amend-files">Lorem Ipsum</span></td>
+                                       <td>Manager</td>
+                                       <td>x1.25</td>
+                                       <td><span class="completed-text">Completed</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td>Montréal - H2S 2M6</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>11:20AM - 2:30PM</td>
+                                       <td><span class="amend-files">Lorem Ipsum</span></td>
+                                       <td>Manager</td>
+                                       <td>x1.25</td>
+                                       <td><span class="completed-text">Completed</span></td>
+                                    </tr>
+                                </tbody>
+                              </table>
+                           </div>
+                       </div>
+                     </div>
+                  <!-- ------tabing-time-sheet------ -->
+               </div>
+            </div>
+      </section>
+
+
+      <div class="modal fade time-mds" id="examplecancel" aria-hidden="true" aria-labelledby="examplecancelLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+          <!--     <h5 class="modal-title" id="examplecancelLabel">Modal 1</h5> -->
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                  <div class="cancel-shift">
+                     <h5>Are you sure to cancel the shift?</h5>
+                     <div class="approv-details-query">
+                        <a class="btn btn-outline" href="javascript:;" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Yes</a>
+                        <a class="btn" href="javascript:;" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">No</a>
+                     </div>
+                 </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade time-mds" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- <h5 class="modal-title" id="exampleModalToggleLabel2">Modal 2</h5> -->
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                 <div class="cancel-shift">
+                     <h5>Wages Multiplier</h5>
+                     <ul class="multiplier-list">
+                        <li class="active">
+                           <a href="javascript:;">x1.25</a>
+                        </li>
+                        <li>
+                           <a href="javascript:;">x1.5</a>
+                        </li>
+                        <li>
+                           <a href="javascript:;">x1.75</a>
+                        </li>
+                     </ul>
+                     <div class="approv-details-query">
+                        <a class="btn" href="javascript:;" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Submit</a>
+                     </div>
+                 </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+   </div>
+
+{% include "footer.html" %}
+{% endblock content %}

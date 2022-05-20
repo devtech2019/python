@@ -1,0 +1,149 @@
+{% extends 'basefile/base.html'%}
+{% load static %}
+{% block content %}
+{% for message in messages %}
+        <div class="alert alert-primary">
+            {{message}}
+        </div>
+        {% endfor %}
+<div class="wraper-inner">
+   <!--banner-section-->
+        <section class="innre-banner-home" id="index">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="common-banner-in">
+                                <img src="/media/{{section1.image}}">
+                                <div class="common-texts-in">
+                                    <h1>{{section1.title}}</h1>
+                                    <h6>{{section1.content|safe}}</h6>
+                                  {% if user.is_authenticated %}
+                                    {% else %}
+                                    <a class="btn" href="/client/sign-up">Get Started</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="common-banner-in">
+                                <img src="/media/{{section2.image}}">
+                                <div class="common-texts-in">
+                                    <h1>{{section2.title}}</h1>
+                                    <h6>{{section2.content|safe}}</h6>
+                                    {% if user.is_authenticated %}
+                                    {% else %}
+                                    <a class="btn" href="/applicant/sign-up">Get Started</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+   <!--banner-section-->
+
+   <!--Build best creative development-->
+        <section class="best-creative-sec">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="develop-team-img">
+                          <figure><img src="/media/{{section3.image}}"></figure>
+                          <img class="shape-1" src="{% static '/images/shape1.png' %}">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="develop-text">
+                            <h2>{{section3.title}}</h2>
+                            <h6>{{section3.text}}</h6>
+                            <p>{{section3.content|safe}}</p>
+                            <a class="btn" href="javascript:;">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row who-we-are">
+                    <div class="col-md-12">
+                        <div class="develop-text who-texts">
+                            <h2>{{section4.title}}</h2>
+                            <h6>{{section4.text}}</h6>
+                            <p>{{section4.content|safe}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+   <!--Build best creative development-->
+
+   <!--Our Features -->
+      <section class="our-features-sec">
+          <div class="container">
+            <div class="main-heading">
+                <h2>{{section5.title}}</h2>
+                <p>{{section5.content|safe}}</p>
+            </div>
+
+            <div class="row justify-content-between">
+                <div class="col-md-5">
+                    <div class="develop-team-bx">
+                        <img class="shape-3" src="/media/{{section6.image}}">
+                        <figure><img src="/media/{{section6.image}}"></figure>
+                        <img class="shape-blue" src="{% static 'images/shape-blue.svg' %}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="develop-text">
+                        <h2>{{section6.title}}</h2>
+                        <p>{{section6.text}}</p>
+
+                        <p>{{section6.content|safe}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-between">
+                <div class="col-md-6">
+                    <div class="develop-text">
+                        <h2>{{section7.title}}</h2>
+                        <p>{{section7.content|safe}}</p>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="develop-team-bx right">
+                        <img class="shape-3" src="/media/{{section7.image}}">
+                        <figure><img src="/media/{{section7.image}}"></figure>
+                        <img class="shape-blue" src="{% static 'images/shape-blue.svg' %}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-between">
+                <div class="col-md-5">
+                    <div class="develop-team-bx">
+                        <img class="shape-3" src="/media/{{section8.image}}">
+                        <figure><img src="/media/{{section8.image}}"></figure>
+                        <img class="shape-blue" src="{% static 'images/shape-blue.svg' %}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="develop-text">
+                    <h2>{{section8.title}}</h2>
+                        <p>{{section8.content|safe}}</p>
+                    </div>
+                </div>
+            </div>
+
+          </div>
+      </section>
+   <!--Our Features -->
+
+   <!--available all devices -->
+     {% include 'qrcode/qr_code.html' %}
+   <!--available all devices -->
+
+   <!--available all devices -->
+     {% include 'contactus.html' %}
+
+</div>
+{% include 'footer.html' %}
+{% endblock content%}

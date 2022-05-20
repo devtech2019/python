@@ -1,0 +1,56 @@
+
+<div class="query-details-profile">
+                        {% comment %} <figure><img src="images/query-profile.png"></figure> {% endcomment %}
+                        <figcaption>
+                            
+                           <h5>{{q.employee.fname}} {{q.employee.lname}}</h5>
+                           <h6>{{q.postion.name}}</h6>
+                           <p>{{q.timesheet.date}} <font>I</font> {{q.timesheet.time_in}} - {{q.timesheet.time_out}}</p>
+                        </figcaption>
+                     </div>
+                    
+                     <div class="query-details-text">
+                        <h4>Query About</h4>
+                        
+                        <p>{{details.0.name}}</p>
+                    
+                        {% comment %} <ul>
+                           <li>Name Of The Person Query : Joesph Abraham</li>
+                           <li>Position : Manager</li>
+                           <li>Date : 10 Feb 2022</li>
+                        </ul> {% endcomment %}
+
+                        <h4>Admin Reply</h4>
+                        <p>{{details.0.message|safe}}</p>
+                     </div>
+                    <form method="POST">
+                    {% csrf_token %}
+                     <input class="form-control" placeholder = "Please Enter Your reply here" id="emp_reply" name="emp_reply">
+                     <br>
+                      
+                    <div class="approv-details-query">
+                        <a class="btn" href="javascript:;">Approve</a>
+                        <a class="btn btn-outline" type="button" onclick="emp()" >Send</a>
+                     </div>
+                    </form>
+                
+                    <script>
+                        function emp(){
+                            let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                            let emp_reply = $('#emp_reply').val()
+                            $.ajax({
+                                type: "POST",
+                                headers: { 'X-CSRFToken': csrftoken }, 
+                                url: "/emp_reply/",
+                                data: {
+                                emp_reply:emp_reply
+
+                                },            
+                                success:function(res){ 
+                                    $('#emp_reply').trigger()
+                                console.log(res)       
+                                
+                                }
+                            }); 
+                        }
+                    </script>

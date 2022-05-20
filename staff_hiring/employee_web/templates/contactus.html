@@ -1,0 +1,106 @@
+
+{% load static %}
+{% comment %} {% include 'header-inner.html' %} {% endcomment %}
+ <section class="contact-sec" id="contact">
+    {% for message in messages %}
+        <div class="alert alert-primary">
+            {{message}}
+        </div>
+        {% endfor %}
+         <div class="border-top10"></div>
+            <div class="container">
+                <div class="main-heading">
+                  <h2>Contact Us</h2>
+                   <p>Best is the most porro quisquam est, qui dolorem are one. porro quis quam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non</p>
+                </div>
+
+                <div class="contact-questions">
+                    <form method="POST" class="contact-form" id="contact-form">
+                        {% csrf_token %}
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1" class="form-label">First name</label>
+                              <input type="text"  data-rule-required="true" data-msg-required="This field is required." id="fname" name="fname" class="form-control fname" placeholder="Enter your first name" >
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="exampleInputEmail2" class="form-label">Last name</label>
+                              <input type="text" data-rule-required="true" data-msg-required="This field is required."  id="lname" name="lname" class="form-control" placeholder="Enter your last name" >
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label for="exampleInputEmail3" class="form-label">Email address</label>
+                              <input  type="email" data-rule-required="true" data-msg-required="This field is required." id="email" name="email"  class="form-control" placeholder="Enter your email address" >
+                            </div>
+                          </div>
+                            <div class="col-md-12">
+                            <div class="form-group">
+                              <label for="exampleInputEmai4" class="form-label">Subject</label>
+                        <input  type="text" data-rule-required="true" data-msg-required="This field is required." id="sub" name="sub"  class="form-control" placeholder="Enter your Subject " >                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label for="exampleInputEmai4" class="form-label">Message</label>
+                              <textarea  type="text" data-rule-required="true" data-msg-required="This field is required."  id="message" name="message"  class="form-control" placeholder="Write you message here...."></textarea>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="text-center">
+
+                            <button onclick="Contact()" type="button" class="btn btn-submit"> Send Message </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+          </div>   
+      </section>
+
+<script>
+function Contact(){
+  if(!$('#contact-form').valid()){
+          return false;
+        }
+  let csrftoken =$('input[name="csrfmiddlewaretoken"]').val();
+  
+  let fname = $('#fname').val()
+   
+  let lname = $('#lname').val()
+  let email = $('#email').val()
+  let message = $('#message').val()
+  let sub = $('#sub').val()
+  console.log(sub)
+   
+  $.ajax({
+          type: "POST",
+          url: "/contact-us/",
+          headers: { 'X-CSRFToken': csrftoken },
+          data:
+        {
+          fname:fname,
+          lname:lname,
+          email:email,
+          message:message,
+          sub:sub
+         },
+         
+      success:function(res){
+          console.log(res.message)
+          toastr.success(res.message);
+          $('.contact-form').trigger("reset");
+
+},
+        error:function(res){
+          console.log(res.responseJSON.message)
+          toastr.error(res.responseJSON.message);
+
+        }
+  
+      }); 
+
+
+}
+</script>
+

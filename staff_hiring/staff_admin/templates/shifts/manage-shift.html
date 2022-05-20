@@ -1,0 +1,650 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+{% include 'base/header.html'%}
+<div class="admin-inner-panel">
+    <div class="admin-inner-left">
+        {% include 'base/navbar.html' %}
+    </div>
+    <div class="admin-inner-right">
+    <div class="card" >
+
+        <style>
+            td div img{
+                height: 20px!important;
+                }
+          </style>
+
+    <div class="card-body ">
+ 
+<div class="wrapper-inner bg-sky">
+   
+      <section class="outer-table-space time-sheet-pr">
+            <div class="container-fluid">
+               <div class="table-dash-box time-sheet-tabs mg_shifts">
+                  <div class="table-heading-bx filter-time-sheet">
+                   {% comment %} <div>
+                        <a href="/admin/post/create/"><h4>Post New Create</h4></a>
+                     </div> {% endcomment %}
+                     <h2>Manage Shifts</h2>
+                     
+                   
+                      {% comment %} {% csrf_token %} {% endcomment %}
+                    
+                     <div class="d-flex sort-by-sect">
+                        <form method="POST" >
+                           {% csrf_token %}
+                         <div class="form-group">
+                              <input type="search" oninput="Search()"  id="sorting" name="search" class="form-control" placeholder="Search">
+                         </div>
+                        </form>
+                         <form method="GET">
+                         <div class="form-group">
+                              <label>Sort by</label>
+                              <div class="form-group-icon">
+                                  <input type="date" id="sort" onchange="sorting()" name="manage-shift" class="form-control" placeholder="10 Feb 2022">
+                              </div>
+                         </div>
+                        </form>
+                     </div>
+                  </div>
+
+                  <ul class="nav nav-pills time-rw-navs" id="pills-tab" role="tablist">
+                       <li class="nav-item" role="presentation">
+                         <button class="nav-link active" id="pills-newpost-tab" data-bs-toggle="pill" data-bs-target="#pills-newpost" type="button" role="tab" aria-controls="pills-newpost" aria-selected="true" data-name='1'>newpost</button>
+                       </li>
+                        <li class="nav-item" role="presentation">
+                         <button class="nav-link " id="pills-accepted-tab" data-bs-toggle="pill" data-bs-target="#pills-accepted" type="button" role="tab" aria-controls="pills-accepted" aria-selected="false" data-name='2'>Accepted</button>
+                       </li>
+                       <li class="nav-item" role="presentation">
+                         <button class="nav-link" id="pills-pending-tab" data-bs-toggle="pill" data-bs-target="#pills-pending" type="button" role="tab" aria-controls="pills-pending" aria-selected="false" data-name='3'>Pending</button>
+                       </li>
+                       <li class="nav-item" role="presentation">
+                         <button class="nav-link" id="pills-completed-tab" data-bs-toggle="pill" data-bs-target="#pills-completed" type="button" role="tab" aria-controls="pills-completed" aria-selected="false" data-name='4'>Completed</button>
+                       </li>
+                     </ul> 
+                      <div class="tab-content" id="pills-tabContent"> 
+                     
+                        <div class="tab-pane fade show active" id="pills-newpost" role="tabpanel" aria-labelledby="pills-newpost-tab">
+                           <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Sr no.</th>
+                                    <th>Location</th>
+                                    <th>Shift Date</th>
+                                    <th>Shift Time</th>
+                                    <th>Staff Name</th>
+                                    <th>Position</th>
+                                    <th>Wages Multiplier</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                
+                              
+                                <tbody class="tb_input_box" id="newpost">
+                                   {% for i in new_post %}
+                                    <tr class="day-shift">
+                                      <th>{{forloop.counter}}</th>
+                                       {% if i.applicant.address %}
+                                      <td></td>
+                                       <td>{{i.applicant.address}}</td>
+                                       {% else %}
+                                       <td>No Data found </td>
+                                       {% endif %}
+                                       <td>{{i.date}}</td>
+                                       <td>{{i.in_time}} - {{i.out_time}}</td>
+                                        {% if i.applicant.fname %}
+                                       <td><h5>{{i.applicant.fname}}</h5></td>
+                                       {% else %}
+                                        <td>No Data found </td>
+                                       {% endif %}
+                                       <td>{{i.position.name}}</td>
+                                       <td>{{i.wages}}</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn btn-inverse-danger  btn-fw"  href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    {% endfor %}
+                                    
+                                    <div >
+                                    </div>
+                                    <div id="test">
+                                    </div>
+
+                                
+                                </tbody>
+                              </table>
+                           </div>
+                       </div> 
+                   
+                        <div class="tab-pane fade show " id="pills-accepted" role="tabpanel" aria-labelledby="pills-accepted-tab">
+                           <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Sr no.</th>
+
+                                    <th>Location</th>
+                                    <th>Shift Date</th>
+                                    <th>Shift Time</th>
+                                    <th>Staff Name</th>
+                                    <th>Position</th>
+                                    <th>Wages Multiplier</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                
+                              
+                                <tbody class="tb_input_box" id="accept">
+                                   {% for i in accepted_shift %}
+                                    <tr class="day-shift">
+                                     <th>{{forloop.counter}}</th>
+
+                                       <td>{{i.applicant.address}}</td>
+                                       <td>{{i.date}}</td>
+                                       <td>{{i.in_time}} - {{i.out_time}}</td>
+                                       <td><h5>{{i.applicant.fname}}</h5></td>
+                                       <td>{{i.position.name}}</td>
+                                       <td>{{i.wages}}</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn btn-inverse-danger  btn-fw"  href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    {% endfor %}
+                                    
+                                    <div >
+                                    </div>
+                                    <div id="test">
+                                    </div>
+
+                                
+                                </tbody>
+                              </table>
+                           </div>
+                       </div> 
+                       
+                    <div class="tab-pane fade" id="pills-pending" role="tabpanel" aria-labelledby="pills-pending-tab">
+                           <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Sr no.</th>
+                                    <th>Location</th>
+                                    <th>Shift Date</th>
+                                    <th>Shift Time</th>
+                                    <th>Staff Name</th>
+
+                                    <th>Position</th>
+                                    <th>Wages Multiplier</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="tb_input_box" id="pending">
+                                     {% for i in pending_shift %}
+                                    <tr>
+                                      <th>{{forloop.counter}}</th>
+                                       {% if i.applicant.address%}
+                                       <td>{{i.applicant.address}}</td>
+                                       {% else %}
+                                       <td> No applicant data </td>
+                                       {% endif %}
+                                       <td>{{i.date}}</td>
+                                       <td>{{i.in_time}} - {{i.out_time}}</td>
+                                       {% if i.applicant.fname %}
+                                        <td>{{i.applicant.fname}}</td>
+                                        {% else %}
+                                          <td> No applicant data </td>
+
+                                        {% endif %}
+
+                                       <td>{{i.position.name}}</td>
+                                       <td>{{i.wages}}</td>
+                                       
+                                    
+                                    
+                                       <td><span style="color:red" class="pending-ar">Pending</span></td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                                <a class="btn btn-inverse-danger  btn-fw" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    {% endfor %}
+                                    
+                                    <div id="test">
+                                    </div>
+
+
+                                </tbody>
+                              </table>
+                           </div>
+                       </div> 
+                      <div class="tab-pane fade" id="pills-completed" role="tabpanel" aria-labelledby="pills-completed-tab">
+                           <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                       <th>Sr no.</th>
+                                    <th>Location</th>
+                                    <th>Shift Date</th>
+                                    <th>Shift Time</th>
+                                    <th>Staff Name</th>
+                                    <th>Position</th>
+                                    <th>Wages Multiplier</th>
+                                    <th>Status</th>
+                                   <th>Action</th>
+
+                                  </tr>
+                                </thead>
+                                <tbody class="tb_input_box" id='complete'>
+                                   {% for i in completed_shift %}
+                                    <tr>
+                                    <th>{{forloop.counter}}</th>
+
+                                       <td>{{i.applicant.address}}</td>
+                                       <td>{{i.date}}</td>
+                                       <td>{{i.in_time}} - {{i.out_time}}</td>
+                                        <td>{{i.applicant.fname}}</td>
+                                       <td>{{i.position.name}}</td>
+                                       <td>{{i.wages}}</td>
+                                     
+                                       <td><span class="unfilled-text">Unfilled</span></td>
+                                       <td>
+                                       <div class="approv-ya-query">
+                                          <a class="btn btn-inverse-danger  btn-fw" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                       </div>
+                                       </td>
+                                    </tr>
+                                    {% endfor %}
+                                
+                                </tbody>
+                              </table>
+                           </div>
+                       </div> 
+                       <div id="test">
+                        </div> 
+                     
+                       {% comment %} <div id="test"></div> {% endcomment %}
+                     {% comment %} </div> {% endcomment %}        
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                  <!-- ------tabing-time-sheet------ -->
+                     {% comment %} <ul class="nav nav-pills time-rw-navs" id="pills-tab" role="tablist">
+                       <li class="nav-item" role="presentation">
+                         <button class="nav-link active" id="pills-accepted-tab" data-bs-toggle="pill" data-bs-target="#pills-accepted" type="button" role="tab" aria-controls="pills-accepted" aria-selected="true" data-name='1'>Accepted</button>
+                       </li>
+                       <li class="nav-item" role="presentation">
+                         <button class="nav-link" id="pills-pending-tab" data-bs-toggle="pill" data-bs-target="#pills-pending" type="button" role="tab" aria-controls="pills-pending" aria-selected="false" data-name='2'>Pending</button>
+                       </li>
+                       <li class="nav-item" role="presentation">
+                         <button class="nav-link" id="pills-completed-tab" data-bs-toggle="pill" data-bs-target="#pills-completed" type="button" role="tab" aria-controls="pills-completed" aria-selected="false" data-name='3'>Completed</button>
+                       </li>
+                     </ul> {% endcomment %}
+                     {% comment %} <div class="tab-content" id="pills-tabContent"> {% endcomment %}
+                     
+                       {% comment %} <div class="tab-pane fade show active" id="pills-accepted" role="tabpanel" aria-labelledby="pills-accepted-tab">
+                           <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Location</th>
+                                    <th>Shift Date</th>
+                                    <th>Shift Time</th>
+                                    <th>Staff Name</th>
+                                    <th>Position</th>
+                                    <th>Wages Multiplier</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                
+                              
+                                <tbody class="tb_input_box" id="accept">
+                                   {% for i in accepted_shift %}
+                                    <tr class="day-shift">
+                                       <td>{{i.applicant.address}}</td>
+                                       <td>{{i.date}}</td>
+                                       <td>{{i.in_time}} - {{i.out_time}}</td>
+                                       <td><h5>{{i.applicant.fname}}</h5></td>
+                                       <td>{{i.position.name}}</td>
+                                       <td>{{i.wages}}</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn btn-inverse-danger  btn-fw"  href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    {% endfor %}
+                                    
+                                    <div >
+                                    </div>
+
+                                
+                                </tbody>
+                              </table>
+                           </div>
+                       </div> {% endcomment %}
+                       
+                       {% comment %} <div class="tab-pane fade" id="pills-pending" role="tabpanel" aria-labelledby="pills-pending-tab">
+                           <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Location</th>
+                                    <th>Shift Date</th>
+                                    <th>Shift Time</th>
+                                    <th>Staff Name</th>
+
+                                    <th>Position</th>
+                                    <th>Wages Multiplier</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="tb_input_box" id="pending">
+                                     {% for i in pending_shift %}
+                                    <tr>
+                                       {% if i.applicant.address%}
+                                       <td>{{i.applicant.address}}</td>
+                                       {% else %}
+                                       <td> No applicant data </td>
+                                       {% endif %}
+                                       <td>{{i.date}}</td>
+                                       <td>{{i.in_time}} - {{i.out_time}}</td>
+                                       {% if i.applicant.fname %}
+                                        <td>{{i.applicant.fname}}</td>
+                                        {% else %}
+                                          <td> No applicant data </td>
+
+                                        {% endif %}
+
+                                       <td>{{i.position.name}}</td>
+                                       <td>{{i.wages}}</td>
+                                       
+                                    
+                                    
+                                       <td><span style="color:red" class="pending-ar">Pending</span></td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                                <a class="btn btn-inverse-danger  btn-fw" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    {% endfor %}
+                                    
+                                    <div id="test">
+                                    </div>
+
+
+                                </tbody>
+                              </table>
+                           </div>
+                       </div> {% endcomment %}
+                       {% comment %} <div class="tab-pane fade" id="pills-completed" role="tabpanel" aria-labelledby="pills-completed-tab">
+                           <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Location</th>
+                                    <th>Shift Date</th>
+                                    <th>Shift Time</th>
+                                    <th>Staff Name</th>
+                                    <th>Position</th>
+                                    <th>Wages Multiplier</th>
+                                    <th>Status</th>
+                                   <th>Action</th>
+
+                                  </tr>
+                                </thead>
+                                <tbody class="tb_input_box" id='complete'>
+                                   {% for i in completed_shift %}
+                                    <tr>
+                                       <td>{{i.applicant.address}}</td>
+                                       <td>{{i.date}}</td>
+                                       <td>{{i.in_time}} - {{i.out_time}}</td>
+                                        <td>{{i.applicant.fname}}</td>
+                                       <td>{{i.position.name}}</td>
+                                       <td>{{i.wages}}</td>
+                                     
+                                       <td><span class="unfilled-text">Unfilled</span></td>
+                                       <td>
+                                       <div class="approv-ya-query">
+                                          <a class="btn btn-inverse-danger  btn-fw" href="javascript:;" data-bs-toggle="modal" data-bs-target="#examplecancel">Cancel</a>
+                                       </div>
+                                       </td>
+                                    </tr>
+                                    {% endfor %}
+                                
+                                </tbody>
+                              </table>
+                           </div>
+                       </div> {% endcomment %}
+                        {% comment %} <div id="test">
+                        </div> {% endcomment %}
+                     
+                       {% comment %} <div id="test"></div> {% endcomment %}
+                     {% comment %} </div> {% endcomment %}
+                  <!-- ------tabing-time-sheet------ -->
+               </div>
+            </div>
+      </section>
+
+
+      <div class="modal fade time-mds" id="examplecancel" aria-hidden="true" aria-labelledby="examplecancelLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+                     <h3>Are you sure to cancel the shift?</h3>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                  <div class="cancel-shift">
+                     <div class="approv-details-query">
+                        <a class="btn btn-inverse-success btn-fw" href="/admin/manage/shift/" >Yes</a>
+                        <a class="btn btn-inverse-danger btn-fw"  href="javascript:;" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">No</a>
+                     </div>
+                 </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade time-mds" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+
+            <div class="modal-header">
+                                  <h3>Wages Multiplier</h3>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                 <div class="cancel-shift row">
+                     <ul class="multiplier-list" style="display:flex; list-style:none">
+                        <li class="active" style="margin:auto;">
+                           <a class="btn btn-inverse-info btn-fw" href="javascript:;" >x1.25</a>
+                        </li>
+                        <li style="margin:auto">
+                           <a class="btn btn-inverse-info btn-fw" href="javascript:;">x1.5</a>
+                        </li>
+                        <li style="margin:auto">
+                           <a class="btn btn-inverse-info btn-fw" href="javascript:;">x1.75</a>
+                        </li>
+                     </ul>
+                     <div class="approv-details-query" style="text-align:center" >
+                        <a class="btn btn-inverse-success btn-fw" href="javascript:void(0);" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Submit</a>
+                     </div>
+                 </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+   </div>
+    </div>
+
+<script>
+  setTimeout(() => {
+    $('.alert').fadeOut('fast');
+  }, 3000);
+</script>
+
+
+
+
+<script>
+   function Search(){
+      let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value; 
+      let s = $('#sorting').val();
+      let tab = $('.nav-link.active').attr('data-name');
+      console.log(tab,"dddddddddddddddddddddd")
+ 
+
+      console.log(s,"dddddddddddddddddddddd")
+       $.ajax({
+          type: "POST",
+          url: "/manage/shift/search/",
+          headers: { 'X-CSRFToken': csrftoken },
+
+          data:
+         {
+          s:s,
+          tab:tab,
+         },
+      success:function(res){        
+        
+        if(tab==1){
+         $('#accept').html(res);
+        }else if(tab==2){
+         $('#pending').html(res);
+        }else{
+         $('#complete').html(res);
+        }   
+          console.log(res);
+          console.log(res);
+          //console.log('success');
+          //toastr.success(res.message);
+         
+         
+         
+         
+            //$('#informationModal').modal('show');
+          
+
+        },
+        error:function(res){
+          console.log(res)
+          toastr.error(res.responseJSON.message);
+          
+        }
+  });
+ 
+
+   }
+</script>
+
+ <script>
+   
+    $(document).ready(function(){
+      $("#sorting").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("tbody tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+   function sorting(){
+
+      let sorts = $('#sort').val();
+      let tab = $('.nav-link.active').attr('data-name');
+
+      $.ajax({
+          type: "GET",
+          url: "/manage/shift/sorting/",
+          data:
+         {
+           tab:tab,
+          sorts:sorts,
+         },
+      success:function(res){        
+        if(tab==1){
+         $('#newpost').html(res);
+        }else if(tab==2){
+         $('#accept').html(res);
+        }else if(tab==3){
+         $('#pending').html(res);
+        }
+        else{
+         $('#complete').html(res);
+        }   
+          console.log(res);
+          //console.log('success');
+          //toastr.success(res.message);
+         
+         
+         
+         
+         
+         {% comment %} $('#test').html(res); {% endcomment %}
+          //$('#informationModal').modal('show');
+          
+
+        },
+        error:function(res){
+          console.log(res)
+          toastr.error(res.responseJSON.message);
+          
+        }
+  });
+   }
+</script> 
+{% endblock content %}
+ 

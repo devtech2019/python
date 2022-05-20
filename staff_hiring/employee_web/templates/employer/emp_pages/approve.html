@@ -1,0 +1,202 @@
+{% extends 'basefile/base.html' %}
+{% load static %}
+{% block content_css %}
+<style type="text/css">
+    /* 
+        Use :not with impossible condition so inputs are only hidden 
+        if pseudo selectors are supported. Otherwise the user would see
+        no inputs and no highlighted stars.
+    */
+    .rating input[type="radio"]:not(:nth-of-type(0)) {
+        /* hide visually */    
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+    .rating [type="radio"]:not(:nth-of-type(0)) + label {
+        display: none;
+    }
+    
+    label[for]:hover {
+        cursor: pointer;
+    }
+    
+    .rating .stars label:before {
+        content: "★";
+    }
+    
+    .stars label {
+        color: lightgray;
+    }
+    
+    .stars label:hover {
+        text-shadow: 0 0 1px #000;
+    }
+    
+    .rating [type="radio"]:nth-of-type(1):checked ~ .stars label:nth-of-type(-n+1),
+    .rating [type="radio"]:nth-of-type(2):checked ~ .stars label:nth-of-type(-n+2),
+    .rating [type="radio"]:nth-of-type(3):checked ~ .stars label:nth-of-type(-n+3),
+    .rating [type="radio"]:nth-of-type(4):checked ~ .stars label:nth-of-type(-n+4),
+    .rating [type="radio"]:nth-of-type(5):checked ~ .stars label:nth-of-type(-n+5) {
+        color: orange;
+    }
+    
+    .rating [type="radio"]:nth-of-type(1):focus ~ .stars label:nth-of-type(1),
+    .rating [type="radio"]:nth-of-type(2):focus ~ .stars label:nth-of-type(2),
+    .rating [type="radio"]:nth-of-type(3):focus ~ .stars label:nth-of-type(3),
+    .rating [type="radio"]:nth-of-type(4):focus ~ .stars label:nth-of-type(4),
+    .rating [type="radio"]:nth-of-type(5):focus ~ .stars label:nth-of-type(5) {
+        color: darkorange;
+    }
+</style>
+{% endblock content_css %}
+ 
+{% block content %}
+
+
+<div class="wrapper-inner bg-sky">
+   
+    <section class="outer-table-space">
+          <div class="container">
+             <div class="table-dash-box">
+                <div class="on-query-bx">
+
+                   <div class="row query-inputfill">
+                      <div class="col-md-3">
+                         <div class="query-profile">
+                            <figure>
+                               <img src="images/query-profile.png">
+                            </figure>
+                            <h5>{{obj.applicant.fname}} {{obj.applicant.lname}}</h5>
+                         </div>
+                      </div>
+                      <div class="col-md-9">
+                         <div class="row">
+                            <div class="col-sm-6">
+                               <div class="form-group">
+                                  <label class="form-label">Position Worked</label>
+                                  <input type="text" class="form-control"  value="{{obj.app_position.name}}">
+                               </div>
+                            </div>
+                            <div class="col-sm-6">
+                               <div class="form-group">
+                                    <label class="form-label">Date</label>
+                                    <div class="form-group-icon">
+                                        <input type="text" class="form-control"  value="{{obj.date}}">
+                                      {% comment %} <img src="images/date-icon.svg"> {% endcomment %}
+                                    </div>
+                               </div>
+                            </div>
+                            <div class="col-sm-6">
+                               <div class="form-group">
+                                  <label class="form-label">Time in</label>
+                                  <input type="text" class="form-control"  value={{obj.time_in}}>
+                               </div>
+                            </div>
+                            <div class="col-sm-6">
+                               <div class="form-group">
+                                  <label class="form-label">Time Out</label>
+                                  <input type="text" class="form-control"  value="{{obj.time_out}}">
+                               </div>
+                            </div>
+                            <div class="col-sm-6">
+                               <div class="form-group">
+                                  <label class="form-label">Break Time</label>
+                                  <input type="text" class="form-control"  value="{{obj.break_time}}">
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+
+                   <hr class="gry-bt-line">
+                   <form action="{% url 'approveFormSubmit' obj.id %}" method="POST">
+                    {% csrf_token %}
+                   <div class="row">
+                      <div class="col-md-12">
+                         <div class="provide-rating">
+                            <h6>Provide Rating</h6>
+                            <fieldset class="rating">
+                                {% comment %} <legend>rating</legend> {% endcomment %}
+                              
+                                <input id="demo-1" type="radio" name="demo" value="1"> 
+                                <label for="demo-1">1 star</label>
+                                <input id="demo-2" type="radio" name="demo" value="2">
+                                <label for="demo-2">2 stars</label>
+                                <input id="demo-3" type="radio" name="demo" value="3">
+                                <label for="demo-3">3 stars</label>
+                                <input id="demo-4" type="radio" name="demo" value="4">
+                                <label for="demo-4">4 stars</label>
+                                <input id="demo-5" type="radio" name="demo" value="5">
+                                <label for="demo-5">5 stars</label>
+                                
+                                <div class="stars">
+                                    <label for="demo-1" aria-label="1 star" title="1 star"></label>
+                                    <label for="demo-2" aria-label="2 stars" title="2 stars"></label>
+                                    <label for="demo-3" aria-label="3 stars" title="3 stars"></label>
+                                    <label for="demo-4" aria-label="4 stars" title="4 stars"></label>
+                                    <label for="demo-5" aria-label="5 stars" title="5 stars"></label>   
+                                </div>
+                                
+                            </fieldset>
+                             
+                             {% comment %} <ul class="list-ck-star">
+                               <li><input type="radio" id="star1" name="rate" value="1" ><i class="ri-star-line"></i></li>
+                               <li><input type="radio" id="star2" name="rate" value="2" ><i class="ri-star-line"></i></li>
+                               <li><input type="radio" id="star3" name="rate" value="3" ><i class="ri-star-line"></i></li>
+                               <li><input type="radio" id="star4" name="rate" value="4" ><i class="ri-star-line"></i></li>
+                               <li><input type="radio" id="star5" name="rate" value="5" ><i class="ri-star-line"></i></li>
+                            </ul>  {% endcomment %}
+                         </div>
+                      </div>
+                      <div class="col-md-12">
+                         <div class="form-group">
+                            <label class="form-label">Query About</label>
+                            <textarea type="text" class="form-control" placeholder="Write query" name="query"></textarea>
+                         </div>
+                      </div>
+                      <div class="col-md-4">
+                         <div class="form-group">
+                            <label class="form-label">Name of the Person</label>
+                            <input type="text" class="form-control" placeholder="Enter name" name="name">
+                         </div>
+                      </div>
+                      <div class="col-md-4">
+                         <div class="form-group">
+                            <label class="form-label">Position</label>
+                            <select class="form-select" aria-label="Default select example" name="position">
+                                {% for i in position %}
+                                    <option value="{{i.id}}" {% if i.name == approveView.position %}selected {% endif %}>{{i.name}}</option>
+                                {% endfor %}
+                                </select>
+                         </div>
+                      </div>
+                      <div class="col-md-4">
+                         <div class="form-group">
+                            <label class="form-label">Date</label>
+                            <div class="form-group-icon">
+                                <input type="date" class="form-control" placeholder=""  name="date">
+                                <img src="images/date-icon.svg">
+                            </div>
+                         </div>
+                      </div>
+                      <div class="col-md-12">
+                         <div class="text-left mt-1">
+                            <input type="submit" class="btn" value="Submit">
+                         </div>
+                      </div>
+                   </div>
+
+                </div>
+             </div>
+          </div>
+    </section>
+
+ </div>
+
+ {% endblock content %}

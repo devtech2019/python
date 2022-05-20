@@ -1,0 +1,567 @@
+{% extends 'basefile/base.html' %}
+{% load static %}
+{% block content %}
+
+   <div class="wrapper-inner bg-sky">
+   
+      <section class="outer-table-space time-sheet-pr">
+            <div class="container">
+               <div class="table-dash-box time-sheet-tabs">
+                  <div class="table-heading-bx filter-time-sheet">
+                     <h2>Time Sheet</h2>
+                     <div class="d-flex">
+                         <h5>Filter</h5>
+                         <div class="form-group">
+                              <div class="form-group-icon">
+                                  <input type="date" class="form-control" placeholder="10 Feb 2022">
+                                  <img src="images/date-icon.svg">
+                              </div>
+                         </div>
+                         <select class="form-select" aria-label="Default select example">
+                           <option selected="">Employer</option>
+                           <option value="1">Employer</option>
+                           <option value="2">Employer</option>
+                         </select>
+                         <select class="form-select" aria-label="Default select example">
+                           <option selected="">Rating</option>
+                           <option value="1">4.5</option>
+                           <option value="2">4.5</option>
+                           <option value="3">4.5</option>
+                         </select>
+                         <select class="form-select" aria-label="Default select example">
+                           <option selected="">Position</option>
+                           <option value="1">Position</option>
+                           <option value="2">7</option>
+                           <option value="3">9</option>
+                         </select>
+                     </div>
+                  </div>
+
+                  <!-- ------tabing-time-sheet------ -->
+                     <ul class="nav nav-pills time-rw-navs" id="pills-tab" role="tablist">
+                       <li class="nav-item" role="presentation">
+                         <button class="nav-link active" id="pills-submitted-tab" data-bs-toggle="pill" data-bs-target="#pills-submitted" type="button" role="tab" aria-controls="pills-submitted" aria-selected="true">Submitted</button>
+                       </li>
+                       <li class="nav-item" role="presentation">
+                         <button class="nav-link" id="pills-approved-tab" data-bs-toggle="pill" data-bs-target="#pills-approved" type="button" role="tab" aria-controls="pills-approved" aria-selected="false">Approved</button>
+                       </li>
+                       <li class="nav-item" role="presentation">
+                         <button class="nav-link" id="pills-query-tab" data-bs-toggle="pill" data-bs-target="#pills-query" type="button" role="tab" aria-controls="pills-query" aria-selected="false">Query</button>
+                       </li>
+                     </ul>
+                     <div class="tab-content" id="pills-tabContent">
+                       <div class="tab-pane fade show active" id="pills-submitted" role="tabpanel" aria-labelledby="pills-submitted-tab">
+                           <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Name of the Home</th>
+                                    <th>Staff Name</th>
+                                    <th>Position</th>
+                                    <th>Date</th>
+                                    <th>Time(In-Out)</th>
+                                    <th>Break Time </th>
+                                    <th>Hours Worked</th>
+                                    <th>Wages Multiplier</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="tb_input_box">
+                                    <tr>
+                                       <td>Lorem Ipsum</td>
+                                       <td>Smith Jone</td>
+                                       <td>Abc</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td>45 Min</td>
+                                       <td>9 Hours</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="click-on-approve.php">Approve</a>
+                                             <a class="btn btn-outline" href="click-on-query.php">Query</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Lorem Ipsum</td>
+                                       <td>Joesph</td>
+                                       <td>Developer</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td>45 Min</td>
+                                       <td>9 Hours</td>
+                                       <td>x1.5</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="click-on-approve.php">Approve</a>
+                                             <a class="btn btn-outline" href="click-on-query.php">Query</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Lorem Ipsum</td>
+                                       <td>Shoham</td>
+                                       <td>Manager</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td>45 Min</td>
+                                       <td>9 Hours</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="click-on-approve.php">Approve</a>
+                                             <a class="btn btn-outline" href="click-on-query.php">Query</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Lorem Ipsum</td>
+                                       <td>Denial Jhone</td>
+                                       <td>Developer</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td>45 Min</td>
+                                       <td>9 Hours</td>
+                                       <td>x1.75</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="click-on-approve.php">Approve</a>
+                                             <a class="btn btn-outline" href="click-on-query.php">Query</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Lorem Ipsum</td>
+                                       <td>Smith Jone</td>
+                                       <td>Manager</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td>45 Min</td>
+                                       <td>9 Hours</td>
+                                       <td>x1.5</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="click-on-approve.php">Approve</a>
+                                             <a class="btn btn-outline" href="click-on-query.php">Query</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Lorem Ipsum</td>
+                                       <td>Joeaph</td>
+                                       <td>Lorem</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td>45 Min</td>
+                                       <td>9 Hours</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="click-on-approve.php">Approve</a>
+                                             <a class="btn btn-outline" href="click-on-query.php">Query</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Lorem Ipsum</td>
+                                       <td>Smith Jone</td>
+                                       <td>Abc</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td>45 Min</td>
+                                       <td>9 Hours</td>
+                                       <td>x1.75</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="click-on-approve.php">Approve</a>
+                                             <a class="btn btn-outline" href="click-on-query.php">Query</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Lorem Ipsum</td>
+                                       <td>Lorem Jone</td>
+                                       <td>Manager</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td>45 Min</td>
+                                       <td>9 Hours</td>
+                                       <td>x1.15</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="click-on-approve.php">Approve</a>
+                                             <a class="btn btn-outline" href="click-on-query.php">Query</a>
+                                          </div>
+                                       </td>
+                                    </tr> 
+                                </tbody>
+                              </table>
+                           </div>
+                       </div>
+                       <div class="tab-pane fade" id="pills-approved" role="tabpanel" aria-labelledby="pills-approved-tab">
+                           <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Image</th>
+                                    <th>Name Of The Home</th>
+                                    <th>Staff Name</th>
+                                    <th>Positon</th>
+                                    <th>Date</th>
+                                    <th>Time(In-Out)</th>
+                                    <th>Break Time</th>
+                                    <th>Hours Worked</th>
+                                    <th>Wages Multiplier</th>
+                                    <th>Ratings</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="tb_input_box">
+                                    <tr>
+                                       <td>
+                                          <div class="approve-img">
+                                             <figure><img src="images/ellipse-1.png"></figure>
+                                          </div>
+                                       </td>
+                                       <td>Lorem Ipsum</td>
+                                       <td>Smith Jhone</td>
+                                       <td>ABC</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td>45 Min</td>
+                                       <td>8 Hours</td>
+                                       <td>x1.25</td>
+                                       <td> <span class="rating_approve"><i class="ri-star-fill"></i>4.5</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td>
+                                          <div class="approve-img">
+                                             <figure><img src="images/ellipse-2.png"></figure>
+                                          </div>
+                                       </td>
+                                       <td>Lorem Ipsum</td>
+                                       <td>Joesph</td>
+                                       <td>ABC</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td>85 Min</td>
+                                       <td>9 Hours</td>
+                                       <td>x1.75</td>
+                                       <td> <span class="rating_approve"><i class="ri-star-fill"></i>4.5</span></td>
+                                    </tr> 
+                                    <tr>
+                                       <td>
+                                          <div class="approve-img">
+                                             <figure><img src="images/ellipse-3.png"></figure>
+                                          </div>
+                                       </td>
+                                       <td>Lorem Ipsum</td>
+                                       <td>Shoham</td>
+                                       <td>ABC</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td>65 Min</td>
+                                       <td>4 Hours</td>
+                                       <td>x1.15</td>
+                                       <td> <span class="rating_approve"><i class="ri-star-fill"></i>4.5</span></td>
+                                    </tr> 
+                                    <tr>
+                                       <td>
+                                          <div class="approve-img">
+                                             <figure><img src="images/ellipse-1.png"></figure>
+                                          </div>
+                                       </td>
+                                       <td>Lorem Ipsum</td>
+                                       <td>Smith Jhone</td>
+                                       <td>ABC</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td>65 Min</td>
+                                       <td>4 Hours</td>
+                                       <td>x1.15</td>
+                                       <td> <span class="rating_approve"><i class="ri-star-fill"></i>4.5</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td>
+                                          <div class="approve-img">
+                                             <figure><img src="images/ellipse-4.png"></figure>
+                                          </div>
+                                       </td>
+                                       <td>Lorem Ipsum</td>
+                                       <td>Allegra</td>
+                                       <td>ABC</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td>15 Min</td>
+                                       <td>6 Hours</td>
+                                       <td>x1.65</td>
+                                       <td> <span class="rating_approve"><i class="ri-star-fill"></i>4.5</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td>
+                                          <div class="approve-img">
+                                             <figure><img src="images/ellipse-5.png"></figure>
+                                          </div>
+                                       </td>
+                                       <td>Lorem Ipsum</td>
+                                       <td>Smith Jhone</td>
+                                       <td>ABC</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td>35 Min</td>
+                                       <td>9 Hours</td>
+                                       <td>x1.65</td>
+                                       <td> <span class="rating_approve"><i class="ri-star-fill"></i>4.5</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td>
+                                          <div class="approve-img">
+                                             <figure><img src="images/ellipse-4.png"></figure>
+                                          </div>
+                                       </td>
+                                       <td>Lorem Ipsum</td>
+                                       <td>Enya</td>
+                                       <td>ABC</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td>15 Min</td>
+                                       <td>6 Hours</td>
+                                       <td>x1.65</td>
+                                       <td> <span class="rating_approve"><i class="ri-star-fill"></i>4.5</span></td>
+                                    </tr>
+                                </tbody>
+                              </table>
+                           </div>
+                       </div>
+                       <div class="tab-pane fade" id="pills-query" role="tabpanel" aria-labelledby="pills-query-tab">
+                           <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Name of the Home</th>
+                                    <th>Staff Name</th>
+                                    <th>Position</th>
+                                    <th>Date</th>
+                                    <th>Time(In-Out)</th>
+                                    <th>Break Time </th>
+                                    <th>Hours Worked</th>
+                                    <th>Wages Multiplier</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="tb_input_box">
+                                    <tr>
+                                       <td>Lorem Ipsum</td>
+                                       <td>Smith Jone</td>
+                                       <td>Abc</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td>45 Min</td>
+                                       <td>9 Hours</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampledetails">View Query</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Lorem Ipsum</td>
+                                       <td>Joesph</td>
+                                       <td>Developer</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td>45 Min</td>
+                                       <td>9 Hours</td>
+                                       <td>x1.5</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampledetails1">View Query</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Lorem Ipsum</td>
+                                       <td>Shoham</td>
+                                       <td>Manager</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td>45 Min</td>
+                                       <td>9 Hours</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampledetails">View Query</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Lorem Ipsum</td>
+                                       <td>Denial Jhone</td>
+                                       <td>Developer</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td>45 Min</td>
+                                       <td>9 Hours</td>
+                                       <td>x1.75</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampledetails1">View Query</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Lorem Ipsum</td>
+                                       <td>Smith Jone</td>
+                                       <td>Manager</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td>45 Min</td>
+                                       <td>9 Hours</td>
+                                       <td>x1.5</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampledetails">View Query</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Lorem Ipsum</td>
+                                       <td>Joeaph</td>
+                                       <td>Lorem</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td>45 Min</td>
+                                       <td>9 Hours</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampledetails">View Query</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Lorem Ipsum</td>
+                                       <td>Smith Jone</td>
+                                       <td>Abc</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td>45 Min</td>
+                                       <td>9 Hours</td>
+                                       <td>x1.75</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampledetails1">View Query</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td>Lorem Ipsum</td>
+                                       <td>Lorem Jone</td>
+                                       <td>Manager</td>
+                                       <td>10 Feb 2022</td>
+                                       <td>9:30AM - 7:00PM</td>
+                                       <td>45 Min</td>
+                                       <td>9 Hours</td>
+                                       <td>x1.15</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampledetails">View Query</a>
+                                          </div>
+                                       </td>
+                                    </tr> 
+                                </tbody>
+                              </table>
+                           </div>
+                       </div>
+                     </div>
+                  <!-- ------tabing-time-sheet------ -->
+               </div>
+            </div>
+      </section>
+
+
+      <!-- Modal 1-->
+      <div class="modal fade time-mds" id="exampledetails" tabindex="-1" aria-labelledby="exampledetailsLabel" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-center" id="exampleModalLabel">Query Details</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                 <div class="query-details-md">
+                     <div class="query-details-profile">
+                        <figure><img src="images/query-profile.png"></figure>
+                        <figcaption>
+                           <h5>Smith Jhone</h5>
+                           <h6>Manager</h6>
+                           <p>10 Feb 2022  <font>I</font> 9:30AM - 7:00PM</p>
+                        </figcaption>
+                     </div>
+                     <div class="query-details-text">
+                        <h4>Query About</h4>
+                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form,</p>
+                        <ul>
+                           <li>Name Of The Person Query : Joesph Abraham</li>
+                           <li>Position : Manager</li>
+                           <li>Date : 10 Feb 2022</li>
+                        </ul>
+
+                        <h4>Admin Reply</h4>
+                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form,</p>
+                     </div>
+                     <div class="approv-details-query">
+                        <a class="btn" href="javascript:;">Approve</a>
+                        <a class="btn btn-outline" href="javascript:;">Query</a>
+                     </div>
+                 </div>
+            </div>
+          </div>
+         </div>
+      </div>
+
+      <!-- Modal 2-->
+      <div class="modal fade time-mds" id="exampledetails1" tabindex="-1" aria-labelledby="exampledetails1Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-center" id="exampleModalLabel">Query Details</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                 <div class="query-details-md">
+                     <div class="query-details-profile">
+                        <figure><img src="images/query-profile.png"></figure>
+                        <figcaption>
+                           <h5>Smith Jhone</h5>
+                           <h6>Manager</h6>
+                           <p>10 Feb 2022  <font>I</font> 9:30AM - 7:00PM</p>
+                        </figcaption>
+                     </div>
+                     <div class="query-details-text">
+                        <h4>Query About</h4>
+                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form,</p>
+                        <ul>
+                           <li>Name Of The Person Query : Joesph Abraham</li>
+                           <li>Position : Manager</li>
+                           <li>Date : 10 Feb 2022</li>
+                        </ul>
+
+                        <h4>Admin Reply</h4>
+                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form,</p>
+                     </div>
+                     <div class="approv-details-query">
+                        <h5><i class="ri-checkbox-circle-line"></i> Resolved</h5>
+                     </div>
+                 </div>
+            </div>
+          </div>
+         </div>
+      </div>
+
+
+   </div>
+
+{% include "footer.html" %}
+{% endblock content %}

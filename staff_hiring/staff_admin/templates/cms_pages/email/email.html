@@ -1,0 +1,250 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+
+{% include 'base/header.html'%}
+
+
+ <div class="admin-inner-panel">
+    <div class="admin-inner-left">
+        {% include 'base/navbar.html' %}
+    </div>
+    <div class="admin-inner-right">
+             <div class="card" style="width:98%;">
+
+          <div class="card-body ">
+            <h4 class="card-title">Email / List</h4>
+        
+                {% comment %} <a href="/admin/email/add/"
+                        class="btn btn-inverse-dark btn-fw"
+                        style="text-align: right; margin-left: 1300px;"> Create  </a> {% endcomment %}
+ <div class="table-responsive">
+  <table class="table">
+
+   <thead>
+                                    <tr>
+                                        <th>
+                                            Sr No.
+                                        </th>
+                                        <th>
+                                             Name
+                                        </th>
+                                        <th>
+                                            Subject
+                                        </th>
+                                        <th>
+                                         Content
+                                     
+                                        </th>
+                                    {% if perms.staff_admin.change_email_templates or perms.staff_admin.delete_email_templates %}
+                                        <th>
+                                        Action
+                                    </th>
+{% endif %}
+
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for i in email %}
+                         
+                                     {% if i.soft_del_status == 0 %}
+
+                                    <tr>
+
+                                        <td>
+                                            {{ forloop.counter }}
+                                        </td>
+                                        <td>
+                                            {{i.name}}
+
+                                        </td>
+                                        <td>
+                                            {{i.sub}}
+                                        </td>
+                                        <td>
+
+
+                                            {{i.content|safe}}
+                                        </td>
+                                       
+                                        <td>
+                                                                                {% if perms.staff_admin.change_email_templates %}
+
+                                            <a class="btn btn-inverse-success btn-fw"
+                                                href="/admin/email/edit/{{i.slug}}">Edit</a>
+                                            {% endif %}
+
+                                            <!-- <a class="btn btn-danger btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                                                href="/admin/del_email_tem/{{i.slug}}"
+                                                onclick="return confirm('Are you sure you want to delete this item')">Delete</a> -->
+                                        </td>
+
+
+                                    </tr>
+                                    {% else %}
+                                    {% endif %}
+                                    {% endfor %}
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} 
+
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2" style="margin-top:95px ;">
+            {% include 'base/navbar.html' %}
+
+        </div>
+        <div class="col-md-10" style="margin-top:120px ;">
+            <div class="card">
+
+                <div class="card-body">
+                    <h4 class="card-title">Email Templates Table</h4>
+                    {% if messages %}
+
+                    <div class="table-responsive">
+                        {% for message in messages %}
+                        {% if message.tags == 'success'%}
+                        <div class="alert alert-success">
+                            {{message}}
+                            {% elif message.tags == 'error' %}
+                            <div class="alert alert-danger">
+                                {{message}}
+                                {% endif %}
+                            </div>
+
+                            {% endfor %}
+                            {% endif %}
+                                    {% comment %} {% if perms.staff_admin.add_email_templates %}
+                            <a href="/admin/email/add/"
+                                class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                                style="text-align: right; margin-left: 1300px;"> Email Templates </a>
+{% endif %} {% endcomment %}
+                            {% comment %} <table class="table table-striped" style="margin-top: 30px;">
+
+
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Sr No.
+                                        </th>
+                                        <th>
+                                             Name
+                                        </th>
+                                        <th>
+                                            Subject
+                                        </th>
+                                        <th>
+                                         Content
+                                     
+                                        </th>
+                                    {% if perms.staff_admin.change_email_templates or perms.staff_admin.delete_email_templates %}
+                                        <th>
+                                        Action
+                                    </th>
+{%endif %}
+
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for i in email %}
+                         
+                                     {% if i.soft_del_status == 0 %}
+
+                                    <tr>
+
+                                        <td>
+                                            {{ forloop.counter }}
+                                        </td>
+                                        <td>
+                                            {{i.name}}
+
+                                        </td>
+                                        <td>
+                                            {{i.sub}}
+                                        </td>
+                                        <td>
+
+
+                                            {{i.content}}
+                                        </td>
+                                       
+                                        <td>
+                                                                                {% if perms.staff_admin.change_email_templates %}
+
+                                            <a class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                                                href="/admin/email/edit/{{i.slug}}">Edit</a>
+                                            {% endif %}
+
+                                            <!-- <a class="btn btn-danger btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u "
+                                                href="/admin/del_email_tem/{{i.slug}}"
+                                                onclick="return confirm('Are you sure you want to delete this item')">Delete</a> -->
+                                        </td>
+
+
+                                    </tr>
+                                    {% else %}
+                                    {% endif %}
+                                    {% endfor %}
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div> {% endcomment %}
+<script>
+    setTimeout(() => {
+        $('.alert').fadeOut('fast');
+    }, 3000);
+</script>
+
+
+
+
+    {% endblock content %}

@@ -1,0 +1,184 @@
+.error{
+    color: red;
+}
+
+.menu-title:hover{
+ 
+    color: darkblue;
+
+}
+
+#toast-container > .toast-success {
+    content: "\f00C";
+    margin-top: 110px;
+    background-color:green;
+    font-size: 15px;
+}
+/* .iti__flag{
+    margin-top:-20px;
+}
+.iti__arrow{
+   margin-top:-20px;  
+} */
+
+.iti__flag-container {
+    height: 32px;
+}
+
+
+.admin-inner-panel {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 97px;
+}
+
+.admin-inner-panel .admin-inner-left {
+    max-width: 300px;
+}
+
+.admin-inner-panel .admin-inner-right {
+    width: calc(100% - 300px);
+    padding: 20px;
+}
+
+/* .admin-inner-panel .admin-inner-left .sidebar {
+    width: 100%;
+    min-width: 300px;
+    height: 100%;
+} */
+
+.ml-auto { margin-left: auto;}
+.form-control, .asColorPicker-input, .dataTables_wrapper select, .select2-container--default .select2-selection--single, .select2-container--default .select2-selection--single .select2-search__field, .typeahead, .tt-query, .tt-hint { height: 42px;}
+.search-form-in { display: flex;}
+.search-form-in input,.search-form-in .btn { margin-left: 10px;} 
+.iti { display: block;}
+.navbar .navbar-brand-wrapper .navbar-brand img {     max-width: 152px; }
+.table td .badge.form-select  { padding-right: 30px;}
+
+@media screen and (max-width: 991px) {
+.admin-inner-panel .admin-inner-left {}
+
+.admin-inner-panel .admin-inner-left .sidebar {
+    min-width: 220px;
+    width: auto;
+    right: -240px;
+}
+
+.admin-inner-panel .admin-inner-left .sidebar.active {
+    right: 0;
+}
+
+.admin-inner-panel .admin-inner-right {
+    width: 100%;
+}
+}
+.multiselect {
+  width: 200px;
+}
+
+.selectBox {
+  position: relative;
+}
+
+.selectBox select {
+  width: 100%;
+  font-weight: bold;
+}
+
+.overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#checkboxes {
+  display: none;
+  border: 1px #dadada solid;
+}
+
+#checkboxes label {
+  display: block;
+}
+
+#checkboxes label:hover {
+  background-color: #1e90ff;
+}
+
+* {box-sizing: border-box}
+body {font-family: "Lato", sans-serif;}
+
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+
+.tab-content {
+    border: none;}
+    .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #4dbebd;
+    background-color: #d6efee;
+}
+ .nav-pills .nav-link{color: #4dbebd;}
+ .sort-by-sect{position: relative;}
+ .sort-by-sect label{ position: absolute;top: -30px;}
+ .d-flex.sort-by-sect form{margin: 0px 5px;}
+ .sidebar .nav.sub-menu .nav-item::before {
+    background: transparent;
+}
+.sidebar{position: fixed; height: 100%; padding: 5px 5px 5px 0px; left: 0;}
+.sidebar .nav.sub-menu{padding: 0.25rem 0 0 2.00rem;}
+
+.sidebar,.navbar .navbar-brand-wrapper{background-color: #3c3c3c;}
+nav .navbar-toggler{background-color: #fff; padding: 5px;}
+.sidebar .nav .nav-item .nav-link{color: #fff;}
+.sidebar .nav .nav-item .nav-link i{font-size: 16px; margin-right: 5px;}
+.sidebar .nav .nav-item .nav-link .menu-title{font-size: 14px; font-weight: 600;}
+
+.sidebar-icon-only .sidebar .nav .nav-item .nav-link i{color: #333;}
+.sidebar-icon-only .sidebar .nav.sub-menu{padding: 0;}
+.dashboard-bg{padding-left: 215px;}
+
+@media only screen and (max-width: 768px) {
+  .dashboard-bg{padding-left: 0;}
+}
+
+
+
+
+
+
+

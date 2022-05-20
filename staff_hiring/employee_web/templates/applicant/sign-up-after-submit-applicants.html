@@ -1,0 +1,468 @@
+{% extends 'basefile/base.html'%} {% load static %} {% block content %}
+<div class="wrapper-inner bg-sky">
+  <!-- {% comment %} {% for message in messages %}
+  <div class="alert alert-primary container">{{message}}</div>
+  {% endfor %} {% endcomment %} -->
+  <section class="forms_content_sec from-wrap ptb">
+    <div class="container">
+      <div class="head-line-sd">
+        <h2>Staff</h2>
+      </div>
+      <div class="form-box-out p-0">
+        <form
+          method="POST"
+          enctype="multipart/form-data"
+          id="app-vaccination-form"
+        >
+          {% csrf_token %}
+          <div class="row space-p0 va_info_line">
+            <div class="col-md-12 inner-title">
+              <h5>Other Information</h5>
+            </div>
+            <div class="col-md-8">
+              <div class="form-group">
+                <label class="form-label">Vaccination</label>
+                <select
+                  data-rule-required="true"
+                  data-msg-required="This field is required."
+                  id="Vaccination"
+                  name="Vaccination"
+                  class="form-select"
+                  aria-label="Default select example"
+                  onchange="vaccin()"
+                >
+                  <option selected disabled>Select Option</option>
+                  <option value="Fully Vaccinated">Fully Vaccinated</option>
+                  <option value="Not Vaccinated">Not Vaccinated</option>
+                  <option value="Partially">
+                    Partially Vaccinated
+                  </option>
+                </select>
+              </div>
+              <div class="form-group" id="Booster" style="display:none">
+                <label class="form-label">Booster</label>
+                <input
+                  data-rule-required="true"
+                  data-msg-required="This field is required."
+                  id="booster"
+                  name="booster"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter booster"
+                  data-rule-required="true"
+                  data-rule-noSpace="true"
+                />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group upload_applicant">
+                <div class="add-files">
+                  <input
+                    data-rule-required="true"
+                    data-msg-required="This field is required."
+                    name="image"
+                    class="form-control-file"
+                    accept="image/*" 
+                    type='file' 
+                    id="imgInp"
+                    />
+                    
+                  <h6>
+                    <img id="blah" height="100px" width="100px" src="{% static 'images/upload.svg' %}" /><span
+                      >Photo of Applicant</span
+                    >
+                  </h6>
+                </div>
+                <h5>ID No. Candidate 10</h5>
+              </div>
+            </div>
+          </div>
+          <div class="row space-p1">
+            <!-- <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Applicant Name</label>
+                <input
+                  data-rule-required="true"
+                  data-msg-required="This field is required."
+                  type="text"
+                  disabled
+                  name="applicant_name"
+                  class="form-control"
+                  value="{{user_name}}"
+                  placeholder="Enter applicant name"
+                />
+              </div>
+            </div> -->
+            <!-- <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">City</label>
+                <input data-rule-required="true" data-msg-required="This field is required." id="city" type="text"
+                  name="city" class="form-control" placeholder="Enter city" />
+              </div>
+            </div> -->
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Date of Birth</label>
+                <div class="form-group-icon">
+                  <input
+                    data-rule-required="true"
+                    data-msg-required="This field is required."
+                    id="date_of_birth"
+                    type="date"
+                    name="date_of_birth"
+                    class="form-control"
+                    placeholder=""
+                    max="{{date|date:'Y-m-d'}}"
+                  />
+                  <img src="{% static 'images/date-icon.svg' %}" />
+                </div>
+              </div>
+            </div>
+            <!-- {% comment %}
+            <div class="col-md-6">
+              <label class="form-label">Position</label>
+
+              <select
+                id="position"
+                name="position"
+                data-rule-required="true"
+                data-msg-required="This field is required."
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option disabled selected>Senior care assistant</option>
+                {% for i in cat%} {% if i.soft_del_status == 0%}
+                <option value="{{i.id}}">{{i.name}}</option>
+                {% endif %} {% endfor %}
+              </select>
+            </div>
+            {% endcomment %} -->
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Mnc pin</label>
+                <input
+                  data-rule-required="true"
+                  data-msg-required="This field is required."
+                  id="nmc_pin"
+                  type="text"
+                  name="nmc_pin"
+                  class="form-control"
+                  placeholder="Enter Mnc pin"
+                  data-rule-noSpace="true"
+                />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Social Care Was Registration</label>
+                <div class="recitations-flex">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      onchange="sectionshow()"
+                      name="flexCheckyes"
+                      type="radio"
+                      value="True"
+                      id="flexCheckyes"
+                    />
+                    <label class="form-check-label" for="flexCheckyes">
+                      Yes
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      onchange="sectionshow()"
+                      name="flexCheckyes"
+                      type="radio"
+                      value="False"
+                      id="flexCheckno"
+                    />
+                    <label class="form-check-label" for="flexCheckno">
+                      No
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="section" class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Enhance DBS No.</label>
+                  <input
+                    type="number"
+                    data-rule-required="true"
+                    data-msg-required="This field is required."
+                    data-rule-noSpace="true"
+                    id="DBC"
+                    name="DBC"
+                    class="form-control"
+                    placeholder="Enter enhance DBC no."
+                    data-rule-maxLength="12"
+
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">If Yes Recitations</label>
+                  <input
+                    type="text"
+                    data-rule-required="true"
+                    data-msg-required="This field is required."
+                    id="recitations_desc"
+                    name="recitations_desc"
+                    class="form-control"
+                    placeholder="Lorem"
+                    data-rule-noSpace="true"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Enhance DBS Issues Date</label>
+                  <div class="form-group-icon">
+                    <input
+                      data-rule-required="true"
+                      data-msg-required="This field is required."
+                      id="DBC_Issues_Date"
+                      name="DBC_Issues_Date"
+                      type="date"
+                      class="form-control"
+                      placeholder=""
+                      max="{{date|date:'Y-m-d'}}"
+
+                    />
+                    <img src="{% static 'images/date-icon.svg' %}" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">DBS Status</label>
+                  <input
+                    name="DBC_status"
+                    data-rule-required="true"
+                    data-msg-required="This field is required."
+                    id="DBC_status"
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter DBC status"
+                    data-rule-noSpace="true"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="checkes-sec">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="flexCheckyesrt"
+                      value="WorkCheckes"
+                      id="flexCheckyesrt"
+                    />
+                    <label class="form-check-label" for="flexCheckyesrt">
+                      Right To Work Checkes
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="checkes-sec">
+                  <div class="form-check">
+                    <input
+                      data-rule-required="true"
+                      data-msg-required="This field is required."
+                      class="form-check-input"
+                      type="radio"
+                      name="flexCheckyespre"
+                      value="PreferenceCheckes"
+                      id="flexCheckyespre"
+                    />
+                    <label class="form-check-label" for="flexCheckyespre">
+                      Preference Checkes
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="form-label">Emergency Contact Number</label>
+                  <input
+                    data-rule-required="true"
+                    data-msg-required="This field is required."
+                    data-rule-noSpace="true"
+                    type="number"
+                    id="emergency"
+                    name="emergency"
+                    class="form-control"
+                    placeholder="Enter emergency contact number"
+                    data-rule-minLength="8"
+                    data-rule-maxLength="15"
+                  />
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group-rating">
+                  <div class="c-rate-note">
+                    <h6>Current Rating</h6>
+                    <ul class="check-rating">
+                      <li>
+                       
+                        <a href="javascript:;"> <i class="ri-star-line"></i></a>
+                      </li>
+                      <li>
+                        <a href="javascript:;"> <i class="ri-star-line"></i></a>
+                      </li>
+                      <li>
+                        <a href="javascript:;"> <i class="ri-star-line"></i></a>
+                      </li>
+                      <li>
+                        <a href="javascript:;"> <i class="ri-star-line"></i></a>
+                      </li>
+                      <li>
+                        <a href="javascript:;"> <i class="ri-star-line"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="reviews-note">
+                    <h6>(0 Reviews)</h6>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12 inner-title">
+                <h5>Training Information</h5>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Training</label>
+                  <select
+                    data-rule-required="true"
+                    id="training"
+                    data-msg-required="This field is required."
+                    name="training"
+                    class="form-select"
+                    aria-label="Default select example"
+                  >
+                    <option disabled selected>Select training</option>
+
+                    {% for i in training %} {% if i.soft_del_status == 0%}
+                    <option value="{{i.id}}">{{i.training_name}}</option>
+                    {% endif %} {% endfor %}
+                  </select>
+                </div>
+                <button type="button" class="btn">+ Add More</button>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Date</label>
+                  <div class="inline-from-to">
+                    <div class="form-group-icon">
+                      <input
+                        data-rule-required="true"
+                        id="training_start"
+                        data-msg-required="This field is required."
+                        type="date"
+                        name="training_start"
+                        class="form-control"
+                        placeholder="From"
+                      />
+                      <img src="{% static 'images/date-icon.svg' %}" />
+                    </div>
+                    <div class="form-group-icon">
+                      <input
+                        data-rule-required="true"
+                        id="training_end"
+                        data-msg-required="This field is required."
+                        type="date"
+                        name="training_end"
+                        class="form-control"
+                        placeholder="To"
+                      />
+                      <img src="{% static 'images/date-icon.svg' %}" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="text-center mt-4">
+                <button onclick="vaccination()" type="submit" class="btn">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+{% comment %} Vaccination {% endcomment %}
+<script>
+  function vaccin(){
+    if ($('#Vaccination').val()=="Partially")
+    {
+      $('#Booster').css("display","block")
+    }else{
+       $('#Booster').css("display","none")
+       $('#booster').val("")
+    }
+
+  }
+</script>
+<script>
+  sectionshow();
+  function vaccination() {
+    let first_dose = $("#first_dose").val();
+    let image = $("#image").val();
+    console.log(image, "fffffffffffff");
+  
+  
+}
+
+</script>
+<script>
+  imgInp.onchange = evt => {
+  const [file] = imgInp.files
+  if (file) {
+    blah.src = URL.createObjectURL(file)
+  }
+  }
+</script>
+<script>
+  function sectionshow() {
+    let btn = $('input[name="flexCheckyes"]:checked').val();
+
+    if (btn == "True") {
+      $('input[name="DBC"]').prop("disabled", false);
+      $('input[name="recitations_desc"]').prop("disabled", false);
+      $('input[name="DBC_Issues_Date"]').prop("disabled", false);
+      $('input[name="DBC_status"]').prop("disabled", false);
+      $('input[name="flexCheckyesrt"]:checked').prop("disabled", false);
+      $('input[name="flexCheckyespre"]:checked').prop("disabled", false);
+      $('input[name="emergency"]').prop("disabled", false);
+      $('select[name="training"]').prop("disabled", false);
+      $('input[name="training_start"]').prop("disabled", false);
+      $('input[name="training_end"]').prop("disabled", false);
+    } else {
+      $('input[name="DBC"]').prop("disabled", true);
+      $('input[name="recitations_desc"]').prop("disabled", true);
+      $('input[name="DBC_Issues_Date"]').prop("disabled", true);
+      $('input[name="DBC_status"]').prop("disabled", true);
+      $('input[name="flexCheckyesrt"]').prop("disabled", true);
+      $('input[name="flexCheckyespre"]').prop("disabled", true);
+      $('input[name="emergency"]').prop("disabled", true);
+      $('select[name="training"]').prop("disabled", true);
+      $('input[name="training_start"]').prop("disabled", true);
+      $('input[name="training_end"]').prop("disabled", true);
+    }
+  }
+</script>
+
+{% include 'footer.html' %} {% endblock content%}

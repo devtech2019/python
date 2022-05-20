@@ -1,0 +1,868 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'base/header.html'%}
+
+<body style="background:#f4f5f7">
+    <div class="admin-inner-panel">
+        <div class="admin-inner-left">
+            {% include 'base/navbar.html' %}
+        </div>
+        <div class="admin-inner-right">
+            <form action="" id="formss" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="card" style="width:95%;">
+                    <div class="card-body">
+
+                        <h4 class="card-title">Generate Pdf Applicant Details</h4>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <input class="form-control" id="slug" type="hidden" value="{{users.0.slug}}"
+                                    name="slug">
+                                <input class="form-control" type="hidden" value="{{users.0.latitude}}" name="latitude"
+                                    id="latitude">
+                                <input class="form-control" type="hidden" value="{{users.0.longitude}}" name="longitude"
+                                    id="longitude">
+                                <input class="form-control" type="hidden" value="{{users.0.id}}" id="id" name="id">
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        First Name </label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input readonly class="form-control" type="text" value="{{users.0.fname}}"
+                                            name="FName">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Last Name </label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input readonly class="form-control" type="text" value="{{users.0.lname}}"
+                                            name="LName">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Email </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input readonly class="form-control" type="email" value="{{users.0.email}}"
+                                            name="email">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Mobile Number </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input readonly type="tel" value="{{users.0.mobile_number}} " name="ee"
+                                            placeholder="Enter Mobile Number" id="phone_cus_register"
+                                            class="form-control" onblur="test()" pattern="[0-9]+"
+                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                            maxlength=14>
+                                        <input type="hidden" hidden name="co11" id="co11" value="">
+                                        <input readonly type="text" id="phone1_cus_register" value="" name="phone"
+                                            hidden>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Job Position </label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <select disabled onchange="job_position()" id="job" name="job"
+                                            class="form-select" aria-label="Default select example">
+                                            <option disabled selected disabled> Select Option </option>
+                                            {% for i in job %}
+                                            {% if i.soft_del_status == 0%}
+                                            <option disabled {% if i.id == users.0.position_id %} selected {% endif %}
+                                                value="{{i.id}}">{{i.name}}</option>
+                                            {% endif %}
+                                            {% endfor %}
+
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Experince (Year & month ) </label>
+                                    <div class="col-lg-5 col-xl-5">
+                                        <input readonly class="form-control" placeholder=" 2 year" type="text"
+                                            value="{{users.0.exp_year }}" name="year">
+                                    </div>
+                                    <div class="col-lg-5 col-xl-5">
+                                        <input readonly class="form-control" placeholder=" 2 month" type="text"
+                                            value="{{users.0.exp_month }}" name="month">
+                                    </div>
+
+                                </div>
+
+                                {% comment %} <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Country </label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <select onchange="select_country()" id="country" name="country"
+                                            class="form-select" aria-label="Default select example">
+                                            {% for i in country %}
+                                            <option {% if i.id == users.0.country.id %}selected{% endif %}
+                                                value="{{i.id}}">{{i.name}}</option>
+
+                                            {% endfor %}
+                                        </select>
+
+                                    </div>
+
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        State </label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <select id="state" onchange="select_state_id()" name="state" class="form-select"
+                                            aria-label="Default select example">
+                                            <option disabled> Select Option </option>
+
+                                            {% for i in state %}
+                                            <option {% if i.id == users.0.state_id %}selected{% endif %}
+                                                value="{{i.id}}">{{i.name}}</option>
+                                            {% endfor %}
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        City </label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <select id="city" onchange="select_city_id()" name="city" class="form-select"
+                                            aria-label="Default select example">
+                                            <option disabled> Select Option </option>
+                                            {% for i in city %}
+                                            <option {% if i.id == users.0.city_id %}selected{% endif %}
+                                                value="{{i.id}}">{{i.name}}</option>
+                                            {% endfor %}
+
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Postal Code </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input onchange="select_postal_code()" placeholder="indra nagar jaipur"
+                                            id="Postal_code" class="form-control" type="text"
+                                            value="{{users.0.post_code}}" name="Postal_code">
+                                    </div>
+                                </div> {% endcomment %}
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Address </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input readonly placeholder="indra nagar jaipur" id="autocom"
+                                            class="form-control" type="text" value="{{users.0.address}}" name="address">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input class="form-control" type="hidden" value="{{users.0.roll}}" name="app">
+                                    </div>
+                                </div>
+                                <h4 class="card-title">Additional Details</h4>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Price </label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input id="price" placeholder="" id="" class="form-control" type="number"
+                                            value="{{users.0.price}}" name="price">
+
+                                    </div>
+                                </div>
+
+
+                                <h4 class="card-title">Applicant Vaccination Form Details </h4>
+
+                                {% if data.vaccination_status == True%}
+
+                                <input type="hidden" name="id" id="ids" value="{{data.id}}">
+
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Vaccination </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <select data-rule-required="true" id="Vaccination"
+                                            data-msg-required="This field is required." name="Vaccination"
+                                            class="form-select" aria-label="Default select example">
+                                            <option disabled selected>Select trainy</option>
+                                            <option {% if data.vaccinated == "Fully Vaccinated" %} selected {% endif %}
+                                                value="Fully Vaccinated">Fully Vaccinated</option>
+                                            <option {% if data.vaccinated == "Not Vaccinated" %} selected {% endif %}
+                                                value="Not Vaccinated">Not Vaccinated</option>
+                                            <option {% if data.vaccinated == "Partially Vaccinated" %} selected
+                                                {% endif %} value="Partially Vaccinated">Partially Vaccinated</option>
+
+
+                                        </select>
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        image </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input data-rule-required="true" data-msg-required="This field is required."
+                                            id="image" name="image" type="file" class="form-control-file"
+                                            id="exampleFormControlFile1">
+                                        <img src="/media{{data.image.url}}/" width="50px" height='50px'>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Booster Dose </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <!-- {% comment %} {{data.booster_dose|date:"Y-m-d"}} {% endcomment %} -->
+                                        <input data-rule-required="true" value="{{data.booster_dose}}"
+                                            data-msg-required="This field is required." id="booster_dose"
+                                            name="first_dose" type="date" class="form-control" placeholder="">
+
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Applicant Name </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input data-rule-required="true" readonly
+                                            data-msg-required="This field is required." type="text"
+                                            name="applicant_name" class="form-control" value="{{users.0.fname}}"
+                                            placeholder="Enter applicant name">
+                                    </div>
+                                </div>
+                                <!-- {% comment %} <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        City</label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input data-rule-required="true" value="{{data.city}}"
+                                            data-msg-required="This field is required." id="city" type="text"
+                                            name="city" class="form-control" placeholder="Enter city">
+
+                                    </div>
+                                </div> {% endcomment %} -->
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Date Of Birth</label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input data-rule-required="true" value="{{data.dob|date:"Y-m-d"}}"
+                                            data-msg-required="This field is required." id="dob" name="dob" type="date"
+                                            class="form-control" placeholder="">
+
+                                    </div>
+                                </div>
+                                <!-- {% comment %} <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Position Role</label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input data-rule-required="true" value="{{data.position}}"
+                                            data-msg-required="This field is required." id="position" type="text"
+                                            name="position" class="form-control" placeholder="Enter position role">
+
+                                    </div>
+                                </div> {% endcomment %} -->
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        NMC pin</label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input data-rule-required="true" value="{{data.Mnc_pin}}"
+                                            data-msg-required="This field is required." id="nmc_pin" type="text"
+                                            name="nmc_pin" class="form-control" placeholder="Enter NMC pin">
+
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">Social Care Was Recitations</label>
+                                    <div class="col-lg-10 col-xl-10 row">
+                                        <div class="form-check col-1">
+                                            <input class="form-check-input" {% if data.recitation == True %} checked
+                                                {% endif %}name="flexCheck" type="radio" value="True" id="flexCheckyes">
+                                            <label class="form-check-label" for="flexCheckyes"> Yes </label>
+                                        </div>
+                                        <div class="form-check col-1">
+                                            <input class="form-check-input" {% if data.recitation == False %} checked
+                                                {% endif %} name="flexCheck" type="radio" value="False"
+                                                id="flexCheckno">
+                                            <label class="form-check-label" for="flexCheckno"> No </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Enhance DBC No</label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input type="text" value="{{data.enhance_dbc}}" data-rule-required="true"
+                                            data-msg-required="This field is required." id="DBC" name="DBC"
+                                            class="form-control" placeholder="Enter enhance DBC no.">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        If Yes Recitations </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input type="text" value="{{data.recitation_desc}}" data-rule-required="true"
+                                            data-msg-required="This field is required." id="recitations_desc"
+                                            name="recitations_desc" class="form-control" placeholder="Lorem">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Enhance DBC Issues Date </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input data-rule-required="true" value="{{data.enhance_dbc_issue|date:"Y-m-d"}}"
+                                            data-msg-required="This field is required." id="DBC_Issues_Date"
+                                            name="DBC_Issues_Date" type="date" class="form-control" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        DBC Status </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input name="DBC_status" value="{{data.dbc_status}}" data-rule-required="true"
+                                            data-msg-required="This field is required." id="DBC_Status" type="text"
+                                            class="form-control" placeholder="Enter DBC status">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Right To Work Checkes</label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input {% if data.work_checkes == "WorkCheckes" %} checked {% endif %}
+                                            class="form-check-input" type="radio" name="flexCheckyespre"
+                                            value="WorkCheckes" id="flexCheckyespre">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Preference Checkes </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input {% if data.work_checkes == "PreferenceCheckes" %} checked {% endif %}
+                                            data-rule-required="true" data-msg-required="This field is required."
+                                            class="form-check-input" type="radio" name="flexCheckyespre"
+                                            value="PreferenceCheckes" id="flexCheckyespre">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Emergency Contact Number </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input data-rule-required="true" value="{{data.emergency_no}}"
+                                            data-msg-required="This field is required." type="text" id="emergency"
+                                            name="emergency" class="form-control"
+                                            placeholder="Enter emergency contact number">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Training Information </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <select data-rule-required="true" id="training"
+                                            data-msg-required="This field is required." name="training"
+                                            class="form-select" aria-label="Default select example">
+                                            <option disabled selected>Select trainy</option>
+
+                                            {% for i in training %}
+                                            {% if i.soft_del_status == 0%}
+                                            <option {% if training.id == i.training.id %} selected {% endif %}
+                                                value="{{i.id}}">{{i.training_name}}</option>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Training Start Date </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input data-rule-required="true" id="training_start"
+                                            value="{{data.training_start_date|date:"Y-m-d"}}"
+                                            data-msg-required="This field is required." type="date"
+                                            name="training_start" class="form-control" placeholder="From">
+
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Training End Date </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input data-rule-required="true" id="training_end"
+                                            value="{{data.training_end_date|date:"Y-m-d"}}"
+                                            data-msg-required="This field is required." type="date" name="training_end"
+                                            class="form-control" placeholder="From">
+
+                                    </div>
+                                </div>
+                                {% else %}
+                                <!-- CREATE  VACCINATION FOR -->
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Vaccination </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <select data-rule-required="true" id="Vaccination"
+                                            data-msg-required="This field is required." name="Vaccination"
+                                            class="form-select" aria-label="Default select example">
+                                            <option disabled selected>Select trainy</option>
+                                            <option value="Fully Vaccinated">Fully Vaccinated</option>
+                                            <option value="Not Vaccinated">Not Vaccinated</option>
+                                            <option value="Partially Vaccinated">Partially Vaccinated</option>
+
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        image </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input data-rule-required="true" data-msg-required="This field is required."
+                                            id="image" name="image" type="file" class="form-control-file"
+                                            id="exampleFormControlFile1">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Booster Dose </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input data-rule-required="true" data-msg-required="This field is required."
+                                            id="booster_dose" name="first_dose" type="date" class="form-control"
+                                            placeholder="">
+
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Applicant Name </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input data-rule-required="true" readonly
+                                            data-msg-required="This field is required." type="text"
+                                            name="applicant_name" class="form-control" value="{{users.0.fname}}"
+                                            placeholder="Enter applicant name">
+                                    </div>
+                                </div>
+                                <!-- {% comment %} <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        City</label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input data-rule-required="true" data-msg-required="This field is required."
+                                            id="city" type="text" name="city" class="form-control"
+                                            placeholder="Enter city">
+
+                                    </div>
+                                </div> {% endcomment %} -->
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Date Of Birth</label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input data-rule-required="true" data-msg-required="This field is required."
+                                            id="dob" name="dob" type="date" class="form-control" placeholder="">
+
+                                    </div>
+                                </div>
+                                <!-- {% comment %} <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Position Role</label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input data-rule-required="true" data-msg-required="This field is required."
+                                            id="position" type="text" name="position" class="form-control"
+                                            placeholder="Enter position role">
+
+                                    </div>
+                                </div> {% endcomment %} -->
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        NMC pin</label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input data-rule-required="true" data-msg-required="This field is required."
+                                            id="nmc_pin" type="text" name="nmc_pin" class="form-control"
+                                            placeholder="Enter NMC pin">
+
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Social Care Was Recitations</label>
+                                    <div class="col-lg-10 col-xl-10 row">
+                                        <div class="form-check">
+                                            <input class="form-check-input" onclick="show()" name="flexCheck"
+                                                type="radio" value="True" id="flexCheckyes">
+                                            <label class="form-check-label" for="flexCheckyes"> Yes </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" onclick="show()" name="flexCheck"
+                                                type="radio" value="False" id="flexCheckno">
+                                            <label class="form-check-label" for="flexCheckno"> No </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Enhance DBC No</label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input type="text" data-rule-required="true"
+                                            data-msg-required="This field is required." id="DBC" name="DBC"
+                                            class="form-control" placeholder="Enter enhance DBC no.">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        If Yes Recitations </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input type="text" data-rule-required="true"
+                                            data-msg-required="This field is required." id="recitations_desc"
+                                            name="recitations_desc" class="form-control" placeholder="Lorem">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Enhance DBC Issues Date </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input data-rule-required="true" data-msg-required="This field is required."
+                                            id="DBC_Issues_Date" name="DBC_Issues_Date" type="date" class="form-control"
+                                            placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        DBC Status </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input name="DBC_status" data-rule-required="true"
+                                            data-msg-required="This field is required." id="DBC_Status" type="text"
+                                            class="form-control" placeholder="Enter DBC status">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Right To Work Checkes</label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input class="form-check-input" type="radio" name="flexCheckyespre"
+                                            value="WorkCheckes" id="flexCheckyespre">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Preference Checkes </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input data-rule-required="true" data-msg-required="This field is required."
+                                            class="form-check-input" type="radio" name="flexCheckyespres"
+                                            value="PreferenceCheckes" id="flexCheckyespres">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Emergency Contact Number </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input data-rule-required="true" data-msg-required="This field is required."
+                                            type="text" id="emergency" name="emergency" class="form-control"
+                                            placeholder="Enter emergency contact number">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Training Information </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <select data-rule-required="true" id="training"
+                                            data-msg-required="This field is required." name="training"
+                                            class="form-select" aria-label="Default select example">
+                                            <option disabled selected>Select trainy</option>
+
+                                            {% for i in training %}
+                                            {% if i.soft_del_status == 0%}
+                                            <option value="{{i.id}}">{{i.training_name}}</option>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Training Start Date </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input data-rule-required="true" id="training_start"
+                                            data-msg-required="This field is required." type="date"
+                                            name="training_start" class="form-control" placeholder="From">
+
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Training End Date </label>
+                                    <div class="col-lg-10 col-xl-10">
+                                        <input data-rule-required="true" id="training_end"
+                                            data-msg-required="This field is required." type="date" name="training_end"
+                                            class="form-control" placeholder="From">
+
+                                    </div>
+                                </div>
+                                {% endif %}
+
+                            </div>
+                        </div>
+
+                        <a type="" onclick="app_pdf()" class="btn btn-inverse-success btn-fw">Generate Pdf</a>
+                        <a href="/admin/applicant/" class="btn btn-inverse-dark btn-fw">Back</a>
+                    </div>
+                </div>
+
+            </form>
+
+
+            <script>
+                function app_pdf() {
+                    let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                    let id = $('#id').val()
+
+                    let price = $('#price').val()
+                    let Vaccination = $('#Vaccination').val()
+                    let image = $('#image').val()
+                    console.log(image, "gggggggggggggggggggggg")
+                    let booster_dose = $('#booster_dose').val()
+                    // {% comment %} let city = $('#city').val() {% endcomment %}
+                let dob = $('#dob').val()
+                // {% comment %} let position = $('#position').val() {% endcomment %}
+                let nmc_pin = $('#nmc_pin').val()
+                let flexCheck = $('input:radio[name=flexCheck]:checked').val()
+                console.log(flexCheck, 'fffffffffffffffffffffffffffffff')
+
+                let Enhance_DBC_No = $('#DBC').val()
+                let Yes_Recitations = $('#recitations_desc').val()
+                let DBC_Issues_Date = $('#DBC_Issues_Date').val()
+                let DBC_Status = $('#DBC_Status').val()
+                let Work_Checkes = $("input:radio[name=flexCheckyespre]:checked").val()
+                console.log(Work_Checkes, 'ddddddddddddd')
+
+                let Emergency = $('#emergency').val()
+                let training = $('#training').val()
+                let training_start = $('#training_start').val()
+                let training_end = $('#training_end').val()
+
+
+                let slug = $('#slug').val()
+                // {% comment %} console.log(image, Emergency, training, training_start, training_end) {% endcomment %}
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/applicant_pdf/" + slug,
+                    headers: { 'X-CSRFToken': csrftoken },
+                    data:
+                    {
+                        ids: id,
+                        price: price,
+                        slug: slug,
+                        Vaccination: Vaccination,
+                        img: image,
+                        booster_dose: booster_dose,
+                        dob: dob,
+                        nmc_pin: nmc_pin,
+                        flexCheck: flexCheck,
+                        Enhance_DBC_No: Enhance_DBC_No,
+                        Yes_Recitations: Yes_Recitations,
+                        DBC_Issues_Date: DBC_Issues_Date,
+                        DBC_Status: DBC_Status,
+                        Work_Checkes: Work_Checkes,
+                        Emergency: Emergency,
+                        training: training,
+                        training_start: training_start,
+                        training_end: training_end
+
+
+
+                    },
+                    // success: function (res) {
+                    //     console.log(res.message)
+                    //     toastr.success(res.message);
+
+                    // },
+
+                    success: function (res) {
+                        toastr.success(res.message);
+                        window.location.href = "/admin/applicant_user_data_pdf/" + slug
+                        console.log(res.message)
+                        console.log(ids, "ddddddddddddddddddddddddddddd")
+
+                    }
+
+                });
+        
+
+    }
+            </script>
+            <!-- {% comment %}
+            <script>
+                function show() {
+                    alert("doneeeeeeeeeeeeeeeeeeeeee")
+                }
+            </script> {% endcomment %}
+
+            {% comment %} -->
+
+            <script>
+                function select_country() {
+                    let p = $('#country').val();
+
+                    let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                    console.log(p)
+
+                    $('#select_id').submit();
+                    $.ajax({
+                        type: "POST",
+                        url: "/admin/emp_country_ajax/",
+                        headers: { 'X-CSRFToken': csrftoken },
+                        data:
+                        {
+                            select_country: p,
+
+
+                        },
+                        // success: function (res) {
+                        //     console.log(res.message)
+                        //     toastr.success(res.message);
+
+                        // },
+
+                        success: function (res) {
+                            option = ""
+                            if (jQuery.isEmptyObject(res.result)) {
+                                option += "<option selected disabled value='0'>No  data Found</option>";
+
+                            } else {
+                                option += '<option selected disabled >Select Option</option>';
+                                res.result.forEach(item => {
+                                    option += '<option value=' + item.id + '>' + item.name + '</option>';
+                                });
+                            }
+
+                            $("#state").html(option);
+                        }
+
+                    });
+
+                }
+            </script>
+            <script>
+                function select_postal_code() {
+                    let u = $('#Postal_code').val();
+
+                    let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                    console.log(u)
+
+                    $('#select_id').submit();
+                    $.ajax({
+                        type: "POST",
+                        url: "/admin/emp_postal_code_ajax/",
+                        headers: { 'X-CSRFToken': csrftoken },
+                        data:
+                        {
+                            postal_code: u
+
+
+                        },
+                        success: function (res) {
+                            console.log(res.location)
+                            $("#address").val(res.location[0]);
+                        }
+
+                    });
+
+                }
+            </script>
+
+            <!-- <script>
+                function select_state_id() {
+                    let v = $('#state').val();
+                    let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                    console.log(v);
+                    $('#select_id').submit();
+                    $.ajax({
+                        type: "POST",
+                        url: "/admin/emp_state_city_ajax/",
+                        headers: { 'X-CSRFToken': csrftoken },
+                        data:
+                        {
+                            state_value: v
+
+
+                        },
+                        success: function (res) {
+                            option = ""
+                            if (jQuery.isEmptyObject(res.result)) {
+                                option += "<option selected disabled value='0'>No  data Found</option>";
+
+                            } else {
+                                option += '<option selected disabled >Select Option</option>';
+                                res.result.forEach(item => {
+                                    option += '<option value=' + item.id + '>' + item.name + '</option>';
+                                });
+                            }
+
+                            $("#city").html(option);
+                        }
+
+                    });
+                }
+                function select_city_id() {
+                    let c = $('#city').val();
+                    console.log(c)
+                }
+            </script> {% endcomment %} -->
+            <script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlljhS4LLf_864PqbvXtDGXver091jLiI&callback=initMap&libraries=places&v=weekly"
+                async></script>
+
+            <script>
+                function initMap() {
+                    var input = document.getElementById('autocom');
+                    var options = {
+                        types: ['geocode']
+
+
+                    };
+                    var input = document.getElementById('autocom')
+                    autocomplete = new google.maps.places.Autocomplete(input, options);
+                    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                        var place = autocomplete.getPlace();
+
+                        let lat = place.geometry.location.lat()
+                        let long = place.geometry.location.lng()
+                        console.log(lat, long)
+                        $('#latitude').val(lat);
+                        $('#longitude').val(long);
+
+
+                        //alert("This function is working!");
+                        //alert(place.name);
+                        // alert(place.address_components[0].long_name);
+
+                    });
+                    //var place = autocomplete.getPlace();
+                    //document.getElementById('autocom').value = place.geometry.location.lat();
+
+
+                }
+
+
+            </script>
+            <script>
+                setTimeout(() => {
+                    $('.alert').fadeOut('fast');
+                }, 3000);
+            </script>
+            {% endblock content %}

@@ -1,0 +1,103 @@
+{% extends 'base/base.html' %} {% load static %} {% block content %} {% comment %}
+fdafae {% endcomment %} {% include 'base/header.html'%}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-2" style="margin-top: 95px">
+      {% include 'base/navbar.html' %}
+    </div>
+
+    <div class="col-lg-10" style="margin-top: 120px">
+      <div class="card" style="width:95%;">
+        <div class="card-body">
+          {% if messages %}
+
+          <div class="table-responsive">
+            {% for message in messages %} {% if message.tags == 'success'%}
+            <div class="alert alert-success">
+              {{message}} {% elif message.tags == 'error' %}
+              <div class="alert alert-danger">{{message}} {% endif %}</div>
+
+              {% endfor %} {% endif %}
+              <form
+                action=""
+                id="formss"
+                method="POST"
+                enctype="multipart/form-data"
+              >
+                {% csrf_token %}
+
+                <div class="col-md-9">
+                  <input
+                    class="form-control"
+                    type="hidden"
+                    value="{{u.id}}"
+                    name="id"
+                  />
+
+                  <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">
+                      Profile Pic
+                    </label>
+                    <div class="col-lg-9 col-xl-9">
+                      <input
+                        id="imgInp"
+                        name="img"
+                        value="/media/{{u.image}}"
+                        type="file"
+                      />
+                      <img
+                        src="/media/{{u.image}}"
+                        style="height: 140px"
+                        alt=""
+                        accept='image/*'
+                        default="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.w3schools.com%2Fhowto%2Fhowto_css_image_avatar.asp&psig=AOvVaw2rbwwUa8b8iFk78lr_0m2E&ust=1645271373376000&source=images&cd=vfe&ved=0CAgQjRxqFwoTCKDaptCXifYCFQAAAAAdAAAAABAD"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">
+                      Username
+                    </label>
+                    <div class="col-lg-9 col-xl-9">
+                      <input
+                        required
+                        class="form-control"
+                        type="text"
+                        value="{{u.username}}"
+                        name="username"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">
+                      Email
+                    </label>
+                    <div class="col-lg-9 col-xl-9">
+                      <input
+                        required
+                        class="form-control"
+                        type="email"
+                        value="{{u.email}}"
+                        name="email"
+                      />
+                    </div>
+                   
+                  </div>
+                   <button  type="submit" class="btn btn-inverse-success btn-fw">Submit</button>
+                </div>
+               
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      setTimeout(() => {
+        $(".alert").fadeOut("fast");
+      }, 3000);
+    </script>
+    {% endblock content%}
+  </div>
+</div>

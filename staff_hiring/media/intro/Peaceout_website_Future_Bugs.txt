@@ -1,0 +1,8 @@
+1.Home--->  Contact us---> Form ----> The mail sent to the registered mail ID is not displaying the message and the email of the user .
+also on stretching the message box, the image on the side is also getting stretched. Only the message box should be allowed to enlarge. 
+The alert message is gramatically incorrrect. It should be "Your query has been sent. Our team will contact you ", instead of "Your query has sent ".
+
+
+
+2.Home--->Connect with us---> Both the icons for facebook and twitter are not working. 
+

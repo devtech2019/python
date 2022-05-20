@@ -1,0 +1,116 @@
+{% extends 'basefile/base.html'%}
+
+{% load static %}
+{% block content %}
+   <div class="wrapper-inner bg-sky">
+    
+      <section class="forms_content_sec from-wrap ptb">
+         <div class="container">
+            <div class="head-line-sd">
+               <h2>My Profile</h2>
+            </div>
+            <div class="form-box-out">
+               <form method="POST" >
+                 {% csrf_token %}
+                  <div class="row">
+                       <div class="col-md-12">
+                         <div class="form-group">
+                           <label class="form-label">Name of the home</label>
+                          <input type="hidden" name="slug" value="{{user.slug}}" class="form-control" placeholder="Maureen Biologist.">
+
+                           <input type="text" name="Cname" value="{{user.company}}" class="form-control" placeholder="Maureen Biologist.">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">First Name </label>
+                           <input type="text" name="Fname" value="{{user.fname}}" class="form-control" placeholder="Smith">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">Last Name</label>
+                           <input type="text" name="Lname"  value="{{user.lname}}" class="form-control" placeholder="Jhone">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">Contact/ Mobile number</label>
+                           <input type="text" name="mob_num" value="{{user.mobile_number}}" class="form-control" placeholder="+91 23456 345">
+                         </div>
+                       </div>
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label class="form-label">Email Address</label>
+                           <input type="email" name="email" readonly  value="{{user.email}}" class="form-control" placeholder="smith@gmail.com">
+                         </div>
+                       </div>
+                       <div class="col-md-12 inner-title">
+                            <h5>Address</h5>
+                       </div>
+
+                      
+
+                       <div class="col-md-6">
+                         <div class="form-group">
+                           <label for="exampleInputEmail2" class="form-label">Address</label>
+                           <input id="autocom" type="text" name="address" value="{{user.address}}" class="form-control" placeholder="483 beechwood drive">
+                         </div>
+                       </div>
+
+                       
+
+                       <div class="col-md-12 company-info-sec">
+                           <div class="form-check i-accept">
+                               <a href="/client/company-profile/{{user.slug}}"> Company Information</a>
+                           </div>
+
+                           <div class="text-center mt-4">
+                               <button type="submit" class="btn">Update</button>
+                           </div>
+                       </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </section>
+
+   </div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlljhS4LLf_864PqbvXtDGXver091jLiI&callback=initMap&libraries=places&v=weekly" async></script>
+
+<script>
+    function initMap()
+    {
+      var input = document.getElementById('autocom');
+      var options =     {
+              types: ['geocode']
+              
+          
+          };
+        var input= document.getElementById('autocom')
+        autocomplete = new google.maps.places.Autocomplete(input, options);
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+        var place = autocomplete.getPlace();
+        
+        let lat = place.geometry.location.lat()
+        let long = place.geometry.location.lng()
+        console.log(lat,long )
+        $('#latitude').val(lat);
+        $('#longitude').val(long);
+       
+      
+            //alert("This function is working!");
+            //alert(place.name);
+           // alert(place.address_components[0].long_name);
+
+        });
+       //var place = autocomplete.getPlace();
+        //console.log(autocomplete ,'dddddd')
+        //document.getElementById('autocom').value = place.geometry.location.lat();
+
+    }
+    
+   
+</script>
+{% include 'footer.html' %}
+{% endblock content%}

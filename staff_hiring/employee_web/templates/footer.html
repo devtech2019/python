@@ -1,0 +1,69 @@
+{% load static %}
+<footer>
+  <div class="footer-menu">
+    <div class="container">
+      <div class="row footer-content">
+        <div class="col-md-5">
+          <a class="footer-logo" href="/">
+            <img src="{% static 'employe_web/images/logo-white.svg' %}" />
+          </a>
+        </div>
+        <div class="col-md-3">
+          <div class="footer-content">
+            <h3>Company</h3>
+            <ul>
+              <li><a href="/about">About us</a></li>
+              <li><a href="/#contact">Contact Us </a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="footer-content">
+            <h3>Get in touch</h3>
+            <ul class="footer-social">
+              <li class="facebook-bg">
+                <a href="javascript:;"
+                  ><img src="{%static 'employe_web/images/fb.svg' %}"
+                /></a>
+              </li>
+              <li class="linkedin-bg">
+                <a href="javascript:;"
+                  ><img src="{%static 'employe_web/images/youthube.svg' %}"
+                /></a>
+              </li>
+              <li class="twitter-bg">
+                <a href="javascript:;"
+                  ><img src="{%static 'employe_web/images/twitter.svg' %}"
+                /></a>
+              </li>
+              <li class="instagram-bg">
+                <a href="javascript:;"
+                  ><img src="{%static 'employe_web/images/insta.svg' %}"
+                /></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="copyright-text">
+            <p>
+              Copyright © 2021 <span>Care Net Staff</span>. All right reserved.
+            </p>
+            <ul>
+              <li><a href="/term-and-condition/">Terms and conditions</a></li>
+              <li><a href="javascript:;">Privacy policy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+{% comment %} {% include 'js.html' %} {% endcomment %}

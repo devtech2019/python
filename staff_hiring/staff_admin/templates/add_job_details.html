@@ -1,0 +1,91 @@
+
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'base/header.html'%}
+
+ 
+<div class="container-fluid ">
+<div class="row">
+
+<div class="col-lg-2" style="margin-top:97px ;">
+{% include 'base/navbar.html' %}
+</div>
+
+<div class="col-lg-10" style="margin-top:120px ;">
+
+
+<form action="" id="addjobs" method="POST">
+
+{% csrf_token %}
+
+
+<div class="card">
+    <div class="card-body" >
+        <div class="col-md-6">
+                <h4 class="card-title">Add Job Type</h4>
+
+            <input class="form-control" type="hidden" value="" name="id" >
+
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">
+                    Job Title	</label>
+                <div class="col-lg-9 col-xl-9">
+
+                    <input placeholder="Python Developer"  id="Name" class="form-control" type="text" value="" name="name" >
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">
+                    Limit	</label>
+                <div class="col-lg-9 col-xl-9">
+
+                    <input placeholder=" 20" id="limit" class="form-control" type="number" value="" name="limit" >
+                </div>
+            </div>
+          
+          
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">
+                   is_active	</label>
+                            <div class="col-xl-9 col-lg-9">
+                
+                    {% csrf_token %}
+                    <select id="status_check" name="status" class="form-select status" aria-label="Default select example"
+                        onchange="">
+                        <option selected disabled> Select Option </option>
+                
+                        <option value="1">Activate</option>
+                
+                        <option value="0">Deactivate</option>
+                    </select>
+                
+                
+                
+                
+                
+                            </div>
+               
+            </div>
+            
+         
+        </div>	
+        <div class="kt-form__actions"style="margin-left: 350px; margin-top: 40px;">
+                                                                                
+            <button class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u">Submit</button>
+                
+            
+        </div>
+        
+    
+</div>
+</div>
+
+</form> 
+</div>
+</div>
+</div>
+
+
+{% endblock content %}

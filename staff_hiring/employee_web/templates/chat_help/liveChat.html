@@ -1,0 +1,157 @@
+{% extends 'basefile/base.html' %}
+{% load static %}
+{% block content %}
+
+   <div class="wrapper-inner bg-sky">
+   
+      <section class="view-query-wrap">
+            <div class="container">
+               <div class="head-line-sd">
+                  <h2>Chat Support</h2>
+               </div>
+               <div class="view-query-accodion">
+                  <div class="head-query">
+                     {% comment %} <figure><img src="images/team4.png"></figure> {% endcomment %}
+                     <figcaption>
+                        {% comment %} <h3>Smith Jhone</h3>
+                        <h6>Manager</h6> {% endcomment %}
+                        {% comment %} <ul>
+                           <li>10 Feb 2022 </li>
+                           <li>9:30AM - 7:00PM</li>
+                        </ul> {% endcomment %}
+                     </figcaption>
+                  </div>
+
+                  <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                 <div class="accordion-text-collapse">
+                                   <h3>{{user.fname}} {{user.lname}}
+               
+                                   </h3>
+                                   {% comment %} <h6>{{user.position.name}}</h6> {% endcomment %}
+                                </div>
+                                {% comment %} <span class="timer_flex">10 Feb 2022</span> {% endcomment %}
+                              </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="height:500px;width:100%;overflow-y: scroll;" >
+                              <div class="accordion-body items-inner-accordion">
+                                 {% for i in msg %}
+                                 <ul class="left_msg_sec">
+                                    {% if user.id != i.send_id.id %}
+                                    <li class="left_msg">
+                                       <article>
+                                          <p>{{i.content}}</p>
+                                          
+                                       </article>
+                                    </li>
+                                    <div style="text-align: left;">
+                                       {{i.date_added}}
+                                       </div>
+                                    {% else %}
+                                    <li class="right_msg">
+                                       <article>
+                                          <p id="chat-msg">{{i.content}}</p>
+                                          
+                                       </article>
+                                       
+                                    </li>
+                                    <div style="text-align: right;">
+                                    {{i.date_added}}
+                                    </div>
+                                    {% endif %}
+                                 </ul>
+                                 {% endfor %}
+                              </div>
+                            </div>
+                        </div>
+                        
+                     </div>
+                     <div class="chat-textarea">
+                        <div class="form-group">
+                           <textarea class="form-control" placeholder="Write a message....."  name="msg" id="chat-message-input"></textarea>
+                        </div>
+                        <input type="text" name="room" id="room" value="{{room_id}}"  hidden >
+                        <button class="btn btn-green waves-effect waves-light" id="chat_message_submit" type="button" onclick="sendMessage({{sender}},{{reciver}})" ><i class="mdi mdi-send">Submit</i></button>
+                      </div>>
+               </div>
+               
+            </div>
+      </section>
+
+   </div>
+   <script>
+      let message_data=[];
+      var roomName=$('#room').val();
+      {% comment %} $(document).ready(function(){
+         
+          roomName=$('#room').val();
+          console.log(roomName)
+         }); {% endcomment %}
+         
+          
+          let chatSocket;
+          var ws_scheme = window.location.protocol == 'https:' ? 'wss' : 'ws';
+          
+          chatSocket = new WebSocket(
+             ws_scheme+'://'
+             + window.location.host
+             + '/ws/chat/'
+             + roomName
+             + '/'
+             );
+             
+
+             chatSocket.onmessage = function(e){
+               const data = JSON.parse(e?.data);
+         
+               console.log(data.content,'********')
+               let msg=`<li class="right_msg"><article><p id="chat-msg">${data.content}</p>
+               </article></li>`
+               console.log(msg)
+                  
+               $('.right_msg:last').after(msg)
+               
+            };
+         
+         
+         
+         function sendMessage(send,recieve){
+            sender=send
+            reciever=recieve            
+            var messageInputDom = document.getElementById('chat-message-input');
+            var message = messageInputDom.value;
+            chatSocket.send(JSON.stringify({
+               'message': message,
+               'sender':sender,
+               'reciever':reciever
+            }));
+            messageInputDom.value = '';
+            
+            
+            
+            
+         }
+     
+         
+        if(chatSocket){
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        }
+        }
+        
+       
+   
+   </script>
+    <script>
+         $(document).ready(function() {
+                 $('#collapseOne').scrollTop($('#collapseOne')[0].scrollHeight);
+            
+         });
+     </script>  
+{% endblock content %}
+
+
+
+

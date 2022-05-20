@@ -1,0 +1,133 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'base/header.html'%}
+
+<div class="container-fluid ">
+    <div class="row">
+        <div class="col-lg-2" style="margin-top:95px ;">
+
+            {% include  'base/navbar.html' %}
+        </div>
+
+        <div class="col-lg-10" style="margin-top:120px ;">
+            <div class="card">
+                <div class="card-body">
+                        <form action="" id="editglobal" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">General</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Social</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+                           
+
+                                   <h4 class="card-title">Edit Global Setting</h4>
+                                   <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label">
+                                           Meta Name </label>
+                                        <div class="col-lg-9 col-xl-9">
+                                        {% comment %} <input class="form-control" type="hidden" value="{{userdata.0.id}}" name="id"> {% endcomment %}
+
+                                            <input class="form-control" type="text" value="{{global_setting.name}}" name="name">
+                                        </div>
+                                    </div>
+                                   
+
+
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label">
+                                            Email </label>
+                                        <div class="col-lg-9 col-xl-9">
+                                            <input class="form-control" type="email" value="{{global_setting.email}}" name="email">
+                                        </div>
+                                    </div>
+                                 
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label">
+                                            Meta Discription </label>
+                                        <div class="col-lg-9 col-xl-9">
+                                            <textarea value="" name="editor">{{global_setting.discripion}}</textarea>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-inverse-success btn-fw">Submit</button>
+                                    <a href="/admin/global/edit/global-setting" class="btn btn-light">Cancel</a>
+                            
+
+                          </div>
+                           <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                   <h4 class="card-title">Edit Global Setting</h4>
+                                   <div class="form-group row">
+                                      <label class="col-xl-3 col-lg-3 col-form-label">
+                                            Facebook Link </label>
+                                        <div class="col-lg-9 col-xl-9">
+
+                                            <input class="form-control" type="text" value="{{global_setting.facebook_link}}" name="facebook">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label">
+                                            Instagram Link </label>
+                                        <div class="col-lg-9 col-xl-9">
+
+                                            <input class="form-control" type="text" value="{{global_setting.instagram_link}}" name="instagram">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label">
+                                            Twitter Link </label>
+                                        <div class="col-lg-9 col-xl-9">
+
+                                            <input class="form-control" type="text" value="{{global_setting.twitter_link}}" name="twitter">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label">
+                                            Linkdin Link </label>
+                                        <div class="col-lg-9 col-xl-9">
+
+                                            <input class="form-control" type="text" value="{{global_setting.linkdin_link}}" name="linkdin">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label">
+                                            pintrest Link </label>
+                                        <div class="col-lg-9 col-xl-9">
+
+                                            <input class="form-control" type="text" value="{{global_setting.pintrest_link}}" name="pintrest">
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-inverse-success btn-fw">Submit</button>
+                                    <a href="/admin/global/edit/global-setting" class="btn btn-light">Cancel</a>
+                                </form>
+
+                           </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+        <script>
+            CKEDITOR.replace('editor');
+        </script>
+        <script>
+  setTimeout(() => {
+    $('.alert').fadeOut('fast');    
+  }, 3000);
+</script>
+
+
+        {% endblock content%}

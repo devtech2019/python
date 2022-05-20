@@ -1,0 +1,42 @@
+.business-chat{padding: 20px 30px;}
+.user-chat{display: flex;}
+.user-chat figure{width: 45px;min-width: 45px;height: 45px;border-radius: 50%;overflow: hidden;margin-bottom: 0px;margin-right: 10px;}
+.user-chat figure img{width: 100%;height: 100%;object-position: center;object-fit: cover;}
+.user-chat figcaption h4{font-size: 16px;font-weight: 600;color: #313131;}
+.user-chat figcaption p{font-size: 13px;font-weight: 500;color: #757575;margin-bottom: 0px;}
+.user-chat{border-bottom: 1px solid #f2f2f2;padding: 20px 15px;}
+.chat-list{background-color: #fff; border-radius: 10px;height: 100%;}
+.search-icons{position: relative;width: 100%;}
+.user-chat .form-inline{width: 100%;}
+.search-icons i{position: absolute;top: 20px;left: 30px;color: #bcbcbc;}
+.search-icons .form-control {width: 100%;border: 1px solid #ddd;border-radius: 4px;height: 56px;background-color: #f6f6f6;padding-left: 50px;margin-right: 0px !important;}
+.search-icons ::placeholder{color: #bcbcbc;font-size: 14px;font-weight: 600;}
+.chat-infobox{background-color: #fff;width: 100%;border-radius: 10px;height: 100%;}
+.user-chats{display: flex; align-items: center;padding: 20px;border-bottom: 1px solid #f2f2f2;}
+.user-chats figure{width: 55px;min-width: 55px;height: 55px;border-radius: 50%;border-width: 1px;border-color: rgb( 226, 226, 226 );overflow: hidden;margin-bottom: 0px;margin-right: 10px;}
+.user-chats figure img{width: 100%;height: 100%;object-position: center;object-fit: cover;}
+.user-chats figcaption h4{font-size: 16px;font-weight: 600;color: #313131;margin-bottom: 0px;}
+.user-chats figcaption p{font-size: 13px;font-weight: 500;color: #757575;margin-bottom: 0px;}
+.user-chating-box{padding: 20px;overflow: auto;height: 420px;}
+.left-chat{padding-bottom: 60px;}
+.left-chat-in{display: flex;align-items: flex-end;}
+.left-chat-in figure{width: 50px;min-width: 50px;height: 50px;border-radius: 50%;overflow: hidden;margin-bottom: 0px;margin-right: 20px;}
+.left-chat-in figure img{width: 100%;height: 100%;object-position: center;object-fit: cover;}
+.left-chat-in figcaption{border-radius: 10px;padding: 20px;border: 1px solid #eeeeee;position: relative;}
+.left-chat-in figcaption p{font-size: 14px;font-weight: 400;color: #757575;margin-bottom: 0px;}
+.left-chat-in figcaption span{position: absolute;bottom: -25px;left: 0; font-size: 13px;font-weight: 300; color: #757575;font-style: italic}
+.right-chat{direction: rtl;padding-bottom: 60px;}
+.right-chat .left-chat-in figure{margin-right: 0px;margin-left: 20px;}
+.right-chat .left-chat-in figcaption{background-color: #024dcb;}
+.right-chat .left-chat-in figcaption p{color: #fff;direction: initial;}
+.right-chat .left-chat-in figcaption span{direction: initial;}
+.chat-more{overflow: auto;height: 425px;}
+.chat-textarea{display: flex;align-items: center;padding: 20px;}
+.chat-textarea .form-group{width: 100%;margin-bottom: 0px;}
+.chat-textarea .form-group ::placeholder{font-size: 14px;color: #84858a;font-weight: 500;}
+.chat-textarea textarea{height: 65px;}
+.chat-textarea .btn{width: 67px;min-width: 67px;height: 67px;border-radius: 50%;margin-left: 15px; background-color: #024dcb;display: flex;justify-content: center;align-items: center;}
+.chat-textarea .btn i{color: #fff;font-size: 30px;}
+.chat-more .user-chat:hover{background: #e5fdf5; cursor: pointer;}
+.status-p{font-size: 14px !important;color: #024dcb !important;font-weight: 400 !important;}
+.sta-ppd{padding-top: 20px;}

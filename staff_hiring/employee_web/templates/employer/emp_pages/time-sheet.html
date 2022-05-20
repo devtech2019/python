@@ -1,0 +1,354 @@
+{% extends 'basefile/base.html' %}
+{% load static %}
+ 
+{% block content %}
+
+   <div class="wrapper-inner bg-sky">
+   
+      <section class="outer-table-space time-sheet-pr">
+            <div class="container">
+               <div class="table-dash-box time-sheet-tabs">
+                  <div class="table-heading-bx filter-time-sheet">
+                     <h2>Time Sheet</h2>
+                     <div class="d-flex">
+                         <h5>Filter</h5>
+                         <div class="form-group">
+                              <div class="form-group-icon">
+                                  <input type="date" class="form-control form-data" placeholder="10 Feb 2022" id="date_id"  name="date" >
+                                  <img src="images/date-icon.svg">
+                              </div>
+                         </div>
+                         <select class="form-select form-data" aria-label="Default select example" id="user_id"  name="user" >
+                            <option selected="0">User<option>
+                           {% for i in user %}
+                                    <option value="{{i.id}}">{{i.fname}}</option>
+                           {% endfor %}
+                         </select>
+                         <select class="form-select form-data" aria-label="Default select example" id="rate" name="rating" >
+                           <option selected="0">Rating</option>
+                           <option value="5">5</option>
+                           <option value="4">4</option>
+                           <option value="3">3</option>
+                           <option value="2">2</option>
+                           <option value="1">1</option>
+                         </select>
+                         <select class="form-select form-data" aria-label="Default select example"  id="position_id"  name="position">
+                           <option selected="0" disabled>Position</option>
+                           {% for i in position %}
+                           {% if i.soft_del_status == 0%}
+                                    <option value="{{i.id}}">{{i.name}}</option>
+                           {% endif %}
+                                    {% endfor %}
+                         </select>
+                        <div class="form-group">
+                           <div class="form-group-icon">
+                              <button type="submit" class="btn btn-outline" onclick="timeSheet()">Submit<button>                           
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <div class="form-group-icon">
+                              <button  class="btn btn-outline" onclick="location.reload(true);">ClearAll<button>
+                           </div>
+                        </div>
+
+                        
+                     </div>
+                  </div>
+
+                  <!-- ------tabing-time-sheet------ -->
+                     <ul class="nav nav-pills time-rw-navs" id="pills-tab" role="tablist">
+                       <li class="nav-item" role="presentation">
+                         <button class="nav-link active" id="pills-submitted-tab" data-bs-toggle="pill" data-bs-target="#pills-submitted" type="button"  role="tab" aria-controls="pills-submitted" aria-selected="true" data-name="1">Submitted</button>
+                       </li>
+                       <li class="nav-item" role="presentation">
+                         <button class="nav-link" id="pills-approved-tab" data-bs-toggle="pill" data-bs-target="#pills-approved" type="button" role="tab" aria-controls="pills-approved" aria-selected="false" data-name="2">Approved</button>
+                       </li>
+                       <li class="nav-item" role="presentation">
+                         <button class="nav-link" id="pills-query-tab" data-bs-toggle="pill" data-bs-target="#pills-query" type="button" role="tab" aria-controls="pills-query" aria-selected="false" data-name="3">Query</button>
+                       </li>
+                     </ul>
+                     <div class="tab-content" id="pills-tabContent">
+                       <div class="tab-pane fade show active" id="pills-submitted" role="tabpanel" aria-labelledby="pills-submitted-tab">
+                           <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Name of the Home</th>
+                                    <th>Staff Name</th>
+                                    <th>Position</th>
+                                    <th>Date</th>
+                                    <th>Time(In-Out)</th>
+                                    <th>Break Time </th>
+                                    <th>Hours Worked</th>
+                                    <th>Wages Multiplier</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="tb_input_box" id="submit">
+                                 {% for i in submit %}
+                                    <tr>
+                                       <td>{{i.shift.employee.company}}</td>
+                                       <td>{{i.applicant.fname}} {{i.applicant.lname}}</td>
+                                       <td>{{i.app_position.name}}</td>
+                                       <td>{{i.date}}</td>
+                                       <td>{{i.time_in}} - {{i.time_out}}</td>
+                                       <td>{{i.break_time}}</td>
+                                       <td>9 Hours</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="{% url 'approveFormSubmit' i.id %}">Approve</a>
+                                             <a class="btn btn-outline" href="{% url 'querySubmit' i.id %}">Query</a>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                    {% endfor %}
+                                    
+                                </tbody>
+                              </table>
+                           </div>
+                       </div>
+                       <div class="tab-pane fade" id="pills-approved" role="tabpanel" aria-labelledby="pills-approved-tab">
+                           <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Image</th>
+                                    <th>Name Of The Home</th>
+                                    <th>Staff Name</th>
+                                    <th>Positon</th>
+                                    <th>Date</th>
+                                    <th>Time(In-Out)</th>
+                                    <th>Break Time</th>
+                                    <th>Hours Worked</th>
+                                    <th>Wages Multiplier</th>
+                                    <th>Ratings</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="tb_input_box" id="approve"> 
+                                   {% for i in approve %}
+                                    <tr>
+                                       <td>
+                                          <div class="approve-img">
+                                             <figure>
+                                                {% for j in get_img %}
+                                                {% if j.user_id == i.applicant_id%}
+                                                      <img src="{{j.image.url}}">
+
+                                                {% endif %}
+                                                {% endfor %}
+                                             </figure> 
+                                          </div>
+                                       </td>
+                                        {% comment %} <td>{{i.applicant_id}}</td> {% endcomment %}
+                                       <td>{{i.shift.employee.company}}</td>
+                                       <td>{{i.shift.applicant.fname}} {{i.shift.applicant.lname}}</td>
+                                       <td>{{i.app_position.name}}</td>
+                                       <td>{{i.date}}</td>
+                                       <td>{{i.time_in}}- {{i.time_out}}</td>
+                                       <td>{{i.break_time}}</td>
+                                    
+                                       <td>{{i.t}}</td>
+                                     
+                                       <td>x{{i.shift.wages}}</td>
+                                       <td> <span class="rating_approve"><i class="ri-star-fill"></i>{{i.rating}}</span></td>
+                                    </tr>
+                                    {% endfor %}
+                                   
+                                </tbody>
+                              </table>
+                           </div>
+                       </div>
+                       
+                       <div class="tab-pane fade" id="pills-query" role="tabpanel" aria-labelledby="pills-query-tab">
+                           <div class="table-responsive">
+                              <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th>Name of the Home</th>
+                                    <th>ID</th>
+                                    <th>Staff Name</th>
+                                    <th>Position</th>
+                                    <th>Date</th>
+                                    <th>Time(In-Out)</th>
+                                    <th>Break Time </th>
+                                    <th>Hours Worked</th>
+                                    <th>Wages Multiplier</th>
+                                    <th>Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody class="tb_input_box" id="query">
+                                   {% for i in query %}
+                                    <tr>
+                                       <td>{{i.shift.employee.company}}</td>
+                                       <td>{{i.id}}</td>
+                                       <td>{{i.shift.employee.fname}} {{i.shift.employee.lname}}</td>
+                                       <td>{{i.position}}</td>
+                                       <td>{{i.position}}</td>
+                                       <td>{{i.time_in}} - {{i.time_out}}</td>
+                                       <td>{{i.break_time}}</td>
+                                       <td>9 Hours</td>
+                                       <td>x1.25</td>
+                                       <td>
+                                          <form method="POST">
+                                          {% csrf_token %}
+                                          <div class="approv-ya-query">
+                                             <a class="btn" href="/admin_reply_in_view_query/{{i.id}}"  >View Query</a>
+                                             {% comment %} onclick="query({{i.id}})" {% endcomment %}
+                                          </div>
+                                    </form>
+
+                                       </td>
+                                    </tr>
+                                    {% endfor %}
+                                    
+                                </tbody>
+                              </table>
+                           </div>
+                       </div>
+                     </div>
+
+                  <!-- ------tabing-time-sheet------ -->
+                  
+               </div>
+            </div>
+      </section>
+
+
+      <!-- Modal 1-->
+      <div class="modal fade time-mds" id="exampledetails" tabindex="-1" aria-labelledby="exampledetailsLabel" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-center" id="exampleModalLabel">Query Details</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                 <div class="query-details-md">
+                     
+                 </div>
+            </div>
+          </div>
+         </div>
+      </div>
+
+      <!-- Modal 2-->
+      {% comment %} <div class="modal fade time-mds" id="exampledetails1" tabindex="-1" aria-labelledby="exampledetails1Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-center" id="exampleModalLabel">Query Details</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                 <div class="query-details-md">
+                     <div class="query-details-profile">
+                        <figure><img src="images/query-profile.png"></figure>
+                        <figcaption>
+                           <h5>Smith Jhone</h5>
+                           <h6>Manager</h6>
+                           <p>10 Feb 2022  <font>I</font> 9:30AM - 7:00PM</p>
+                        </figcaption>
+                     </div>
+                     <div class="query-details-text">
+                        <h4>Query About</h4>
+                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form,</p> {% endcomment %}
+                        {% comment %} <ul>
+                           <li>Name Of The Person Query : Joesph Abraham</li>
+                           <li>Position : Manager</li>
+                           <li>Date : 10 Feb 2022</li>
+                        </ul> {% endcomment %}
+{% comment %} 
+                        <h4>Admin Reply</h4>
+                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form,</p>
+                     </div>
+                     <div class="approv-details-query">
+                        <h5><i class="ri-checkbox-circle-line"></i> Resolved</h5>
+                     </div>
+                 </div>
+            </div>
+          </div>
+         </div>
+      </div>
+
+
+   </div> {% endcomment %}
+   <script>
+      function timeSheet(){
+         var date=document.getElementById('date_id').value;
+         var position=document.getElementById('position_id').value;
+         var rate=document.getElementById('rate').value;
+         var user=document.getElementById('user_id').value;
+         
+         var tab = $('.nav-link.active').attr('data-name');
+         console.log(date,position,rate,user,tab,'----------------')
+         $.ajax({
+            type: "GET",
+            url: "/timesheet_filter/",
+            data: {"tab" :tab,'user':user,'rate':rate,'position':position,'date':date},            
+            success:function(res){ 
+               console.log(res)       
+               if(tab==1){
+                $('#submit').html(res);
+                
+               }else if(tab==2){
+                $('#approve').html(res);
+                
+               }else if(tab==3){
+                $('#query').html(res);
+                
+               }
+            }
+         });
+   
+      }
+
+      {% comment %} $('.form-data').on('change', function() {
+         let x=$(this).val()
+         let tab = $('.nav-link active').attr('data-name');
+         print(tab,'================')
+      }) {% endcomment %}
+
+      
+
+     
+   </script>
+            {% comment %} l  {% endcomment %}
+
+               {% comment %} {% endcomment %}
+
+   <script>
+      function query(id){
+         let csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+         id = id
+         alert(id)
+         console.log(id)
+            $.ajax({
+            type: "POST",
+            headers: { 'X-CSRFToken': csrftoken }, 
+            url: "/admin_reply_in_view_query/" + id,
+            data: {
+               id:id
+
+            },            
+            success:function(res){ 
+               {% comment %} $('.query-details-md').html(res) {% endcomment %}
+               {% comment %} windows.location.href="/admin/admin_reply_in_view_query/" {% endcomment %}
+               console.log(res)       
+            
+            }
+         });
+
+         
+      }
+
+   </script>
+   {% endblock content %}
+
+   {% block jquery %}
+   
+   
+   
+   
+   
+   {% endblock jquery %}%}

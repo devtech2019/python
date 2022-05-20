@@ -1,0 +1,98 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'base/header.html'%}
+<div class="admin-inner-panel">
+    <div class="admin-inner-left">
+        {% include 'base/navbar.html' %}
+    </div>
+    <div class="admin-inner-right">
+        {% for message in messages %}
+        <div class="alert alert-primary">
+            {{message}}
+        </div>
+        {% endfor %}
+
+   <form action="" id="formss" method="POST">
+
+                    {% csrf_token %}
+
+
+                    <div class="card" style="width:95%;">
+                        <div class="card-body">
+                            <h4 class="card-title">Edit Training</h4>
+
+                            <div class="col-md-12">
+
+                                <input class="form-control" type="hidden" value="{{obj.id}}" name="id">
+
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Training Name </label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <input required  class="form-control"   type="text" placeholder="John" value="{{obj.training_name}}"
+                                            name="training_name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        
+                                        User </label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                    <select name="userlist[]" class="js-example-basic-multiple w-100" multiple="multiple">
+                                    {% for i in userdata %}
+                                     {% if i.roll == 'applicant' and i.soft_del_status == 0 %}
+                                    <option value="{{i.id}}" {% if i.id in user_list %} selected {% endif %}>{{i.fname}}</option> 
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                                
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">
+                                        Status </label>
+                                    <div class="col-lg-10 col-xl-10">
+
+                                        <select required id="" name="status" class="form-select"
+                                            aria-label="Default select example">
+                                            <option  selected disabled> Select Option </option>
+                                            
+                                            <option value="0" {% if obj.Status == 0 %} selected {% endif %} >Enable</option>
+
+                                            <option value="1" {% if obj.Status == 1 %} selected {% endif %}>Disable</option>
+                                        
+                                        </select>
+                                    </div>
+
+
+                                </div>
+
+
+
+
+
+                            </div>
+                          <button type="submit" class="btn btn-inverse-success btn-fw">Submit</button>
+              <a href="/admin/training/" class="btn btn-inverse-dark btn-fw">Cancel</a>
+
+
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </head>
+    <script>
+    </script>
+    <script>
+        setTimeout(() => {
+            $('.alert').fadeOut('fast');
+        }, 3000);
+    </script>
+    {% endblock content %}

@@ -1,0 +1,46 @@
+/*--------------------------------------------------------------------------------------*/
+/*General-Css-Here
+/*--------------------------------------------------------------------------------------*/
+
+  /*-----Noe Display fonts face----*/
+     
+  /*-----Noe Display fonts face----*/
+
+
+  /*--------------------------------------------------------------------------------------*/
+  /*Header-Css-Here
+  /*--------------------------------------------------------------------------------------*/
+  
+  /*--------------------------------------------------------------------------------------*/
+  /*main-banner
+  /*--------------------------------------------------------------------------------------*/
+  
+
+  /* ---home page---- */
+  
+
+  /*------*/
+  
+  
+  
+  
+  .table-dash-box{background: #fff;box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);border-radius: 10px;padding: 25px;}
+  .table-heading-bx {display: flex;width: 100%;justify-content: space-between;align-items: center;padding-bottom: 20px;}
+  .table-heading-bx h2{font-size: 24px;color: #323234;font-weight: 700;margin-bottom: 0px;}
+  .table-heading-bx .form-group.d-flex .form-label{font-size: 14px;font-weight: 600;color: #323234;margin-right: 25px;}
+  .table-heading-bx .form-group.d-flex {min-width: 350px;justify-content: flex-end;align-items: baseline;margin-bottom: 0px;}
+  .table-heading-bx .form-group.d-flex .form-select{max-width: 158px;}
+  .table-dash-box .table thead ,tbody tr th{font-size: 14px;font-weight: 600;color: #323234;}
+  .table-dash-box .table thead tr:first-child th{min-width:45px;}
+  .tb_input_box .form-group{margin-bottom: 0px;}
+  .tb_input_box tr td:last-child .form-group{max-width: 300px;min-width: 300px;}
+  .table-dash-box .table > :not(caption) > * > * {padding: 10px;vertical-align: middle;}
+  .tb_input_box .form-group select.form-select{min-width: 120px;}
+  .table-dash-box .table-responsive-md .btn{min-width: 148px;}
+  .table-dash-box tbody, td, tfoot, th, thead, tr {border-color: #E7E7E7 !important;}
+
+ 
+
+  /* Rounded sliders */
+  
+  /* Rounded sliders */

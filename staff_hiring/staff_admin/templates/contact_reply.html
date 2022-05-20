@@ -1,0 +1,115 @@
+
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'base/header.html'%}
+
+ 
+<div class="admin-inner-panel">
+    <div class="admin-inner-left">
+        {% include 'base/navbar.html' %}
+    </div>
+    <div class="admin-inner-right">
+        {% comment %} {% for message in messages %}
+        <div class="alert alert-primary">
+            {{message}}
+        </div>
+        {% endfor %} {% endcomment %}
+<form action="" id="formss" method="POST"  onsubmit="process(event)" >
+
+{% csrf_token %}
+
+
+<div class="card" style="width:95%;">
+    <div class="card-body" >
+        <h4 class="card-title">Inquire Management / Reply </h4>        
+
+        <div class="col-md-12">
+
+            <input class="form-control" type="hidden" value="" name="id" >
+
+            <div class="form-group row">
+                <label class="col-xl-2 col-lg-2 col-form-label">
+                    Name </label>
+                <div class="col-lg-10 col-xl-10">
+            
+                    <input  readonly class="form-control" type="text" placeholder="John" value="{{reply.First_name}}  {{reply.Last_name}}" name="FName">
+                </div>
+            </div>
+            {% comment %} <div class="form-group row">
+                <label class="col-xl-2 col-lg-2 col-form-label">
+                    Last Name </label>
+                <div class="col-lg-10 col-xl-10">
+            
+                    <input class="form-control" type="text" placeholder="John" value="{{reply.Last_name}}" name="LName">
+                </div>
+            </div> {% endcomment %}
+            <div class="form-group row">
+                <label class="col-xl-2 col-lg-2 col-form-label">
+                   Email	</label>
+                <div class="col-lg-10 col-xl-10">
+                    <input readonly class="form-control" placeholder="" type="email" value="{{reply.email}}" name="email" >
+                </div>
+            </div>
+                 <div class="form-group row">
+                <label class="col-xl-2 col-lg-2 col-form-label">
+                   Message	</label>
+                <div class="col-lg-10 col-xl-10">
+                    <input readonly  class="form-control" placeholder="" type="text" value="{{reply.message}}" name="message" >
+                </div>
+            </div>
+                 <div class="form-group row">
+                <label class="col-xl-2 col-lg-2 col-form-label">
+                   Subject	</label>
+                <div class="col-lg-10 col-xl-10">
+                    <input readonly class="form-control" placeholder="" type="text" value="{{reply.sub}}" name="sub" >
+                </div>
+            </div>
+       <div class="form-group row">
+                <label class="col-xl-2 col-lg-2 col-form-label">
+                   Reply	</label>
+                <div class="col-lg-10 col-xl-10">
+                              
+                           <textarea onkeyup="editor()" id="editor" class="editor" name="content"></textarea>
+
+                                    </div>               
+                                 </div>
+            
+                        
+            
+               
+        <button type="submit" class="btn btn-inverse-success btn-fw">Submit</button>
+              <a href="/admin/contact/" class="btn btn-inverse-dark btn-fw">Cancel</a>
+        
+        
+    
+</div>
+</div>
+
+</form> 
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+
+
+</head>
+
+   <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('editor');
+      
+   
+    </script>
+
+
+{% endblock content %}

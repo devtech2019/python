@@ -1,0 +1,97 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'base/header.html'%}
+
+<div class="container-fluid ">
+    <div class="row">
+        <div class="col-lg-2" style="margin-top:95px ;">
+
+            {% include  'base/navbar.html' %}
+        </div>
+
+        <div class="col-lg-10" style="margin-top:120px ;">
+            <div class="card">
+                <div class="card-body">
+                <h4 class="card-title">Web App Intro / Edit</h4>
+
+                    {% if messages %}
+
+                    <div class="table-responsive">
+                        {% for message in messages %}
+                        {% if message.tags == 'success'%}
+                        <div class="alert alert-success">
+                            {{message}}
+                            {% elif message.tags == 'error' %}
+                            <div class="alert alert-danger">
+                                {{message}}
+                                {% endif %}
+                            </div>
+
+                            {% endfor %}
+                            {% endif %}
+                            <form action="" id="editglobal" method="POST" enctype="multipart/form-data">
+
+                                {% csrf_token %}
+
+
+
+                                <div class="col-md-9">
+
+                                    {% comment %} <input class="form-control" type="hidden" value="{{userdata.0.id}}" name="id"> {% endcomment %}
+
+
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label">
+                                            Title </label>
+                                        <div class="col-lg-9 col-xl-9">
+                                            <input class="form-control" type="hidden" value="{{intro.slug}}" name="slug">
+
+                                            <input class="form-control" type="text" value="{{intro.title}}" name="title">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label"> Profile Pic </label>
+                                        <div class="col-lg-9 col-xl-9">
+
+                                             <input id="imgInp" name="img" value="#"
+                                                type="file">
+                                            <img src="/media/{{intro.image}}" style="height:140px" alt="">
+                                        </div>
+                                    </div>
+                                       <div class="form-group row">
+                                        <label class="col-xl-3 col-lg-3 col-form-label">
+                                            Discription </label>
+                                        <div class="col-lg-9 col-xl-9">
+                                            <textarea value="" name="editor">{{intro.textarea}}</textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                 <button type="submit" class="btn btn-inverse-success btn-fw">Submit</button>
+                                    <a href="/admin/introduction/" class="btn btn-light">Cancel</a>
+
+
+
+
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+       <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+        <script>
+            CKEDITOR.replace('editor');
+        </script>
+<script>
+  setTimeout(() => {
+    $('.alert').fadeOut('fast');
+  }, 3000);
+</script>
+        {% endblock content%}
